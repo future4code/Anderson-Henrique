@@ -1,0 +1,12 @@
+
+label,input {
+    display: inline-block;
+    width: 200px;
+
+}
+input{
+    width:600px;
+}
+label{
+    text-align: center;
+}

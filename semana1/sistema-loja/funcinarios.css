@@ -1,0 +1,13 @@
+.box {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+img {
+  /* border-radius: 50%; */
+  width: 200px;
+  
+}
+.box>img{
+    border-radius: 10%;
+}
