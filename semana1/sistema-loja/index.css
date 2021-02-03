@@ -1,3 +1,4 @@
+
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* min-width: 800px; */
@@ -18,6 +19,11 @@ body {
 }
 .top {
     margin-top: 24px;
+    /* margin: auto; */
+}
+.top>p, .main {
+    margin: auto;
+    text-align: center;
 }
 
 h1 {
@@ -51,7 +57,29 @@ footer {
 a {
     text-decoration:none;
     color: cadetblue;
+    border-right: 2px solid white;
+    padding-right: 8px;
+}
+.header>a{
+    border-right: none;
 }
 a:hover{
     filter: brightness(1.7);
+}
+
+table {
+    border-collapse: collapse;
+}
+tr:nth-of-type(odd){
+    background-color: white;
+}
+tr:nth-of-type(even){
+    background-color:rgb(124, 145, 124);
+}
+th{
+    background-color: orange;
+}
+
+footer div a {
+    border-right: none;
 }
