@@ -1,0 +1,57 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* min-width: 800px; */
+    background-color: thistle;
+
+}
+.header {
+    background-color:black;
+    color: rgba(255, 255, 255, 0.897);
+    width: 100%;
+    text-align: center;
+}
+.centralize {
+    display: inline-block;
+    margin:auto;
+    width: 60%;
+    text-align: center;
+}
+.top {
+    margin-top: 24px;
+}
+
+h1 {
+    display: inline-block;
+   padding-right: 24px;
+}
+.main {
+    margin: 24px 0;   
+}
+
+.sony {
+    width: 36px;
+}
+.icon {
+    width: 40px;
+}
+li {
+    font-size: 16px;
+    line-height: 24px;
+    list-style: none;
+    margin-top: 16px;
+}
+
+footer {
+    height: 100px;
+    background-color: rgb(77, 21, 114);
+    margin:auto;
+    text-align: center;
+    color: wheat;
+}
+a {
+    text-decoration:none;
+    color: cadetblue;
+}
+a:hover{
+    filter: brightness(1.7);
+}
