@@ -141,3 +141,6 @@ td button {
 tr>td:nth-of-type(2){
     text-align: center;
 }
+table img {
+    width: 50px;
+}
