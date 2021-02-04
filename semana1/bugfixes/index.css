@@ -84,7 +84,13 @@ td button:active ,comprar-voltar{
 
 #container-de-descricao>ol {
     padding: 15px 0px;
+
 }
+div ol div  li {
+    margin-left: 43%;
+    text-align: left;   
+}
+
 
 #container-para-comprar {
     background-color: #e7eb90;
