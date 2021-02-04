@@ -4,9 +4,16 @@ label,input {
     width: 200px;
 
 }
+
 input{
     width:600px;
 }
+
 label{
     text-align: center;
 }
+
+button{
+    margin-left: 400px;
+}
+

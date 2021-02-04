@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="cadastroVendas.css">
+    <title>Cadastro de Vendas</title>
+</head>
+
+<body>
+    <div class="header">
+        <img class="sony" src="img/sony.jpg" alt="">
+        <a href="index.html">
+            <h1>SONY GAMES</h1>
+        </a>
+        <div class="centralize"><a href="index.html">Página Inicial</a>
+            <a href="ctrl-estoque.html">Controle de Estoque</a>
+            <a href="add-produto.html">Adicionar Produto</a>
+            <a href="funcionarios.html">Funcionários</a>
+            <a href="cadastroVendas.html">Cadastrar Vendas</a>
+            <a href="historicoVendas.html">Historico de Vendas</a>
+        </div>
+
+    </div>
+
+    <div>
+        <p>Cadastro de Vendas</p>
+    </div>
+    <div>
+        <form action="#">
+            <label for="seller" class="sellerName">Nome do vendedor: </label>
+            <!-- <input type="s" name="seller" id="seller"> -->
+            <select name="" id="sellerName">
+
+                <option value="Anderson" selected>Anderson Aquino </option>
+                <option value="Tabata">Tabata Oliveira</option>
+                <option value="Sergio">Sergio Grosjean</option>
+                <option value="Nicole">Nicole Ferreira</option>
+                <option value="Jorge">Jorge Suzuki</option>
+                <option value="Fernando">Fernando Silva</option>
+            </select>
+            <table>
+                <thead>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Forma de Pagamento</th>
+                </thead>
+                <tbody>
+                    <form action="#">
+                    <tr>
+                        <td>PS5</td>
+                        <td>
+                            <select name="ps5" id="ps5">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="cash1">Dinheiro </label> <input type="radio" value="cash1" name="payment1"
+                                id="cash1">
+                            <label for="card1">Cartao</label> <input type="radio" name="payment1" value="card1" id="card1">
+                            <label for="none1">Não comprado </label> <input type="radio" value="none" name="payment1"
+                                id="none1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PS4</td>
+                        <td>
+                            <select name="ps4" id="ps4">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="cash2">Dinheiro </label> <input type="radio" value="cash2" name="payment2"
+                                id="cash2">
+                            <label for="card2">Cartao</label> <input type="radio" name="payment2" value="card2" id="card2">
+                            <label for="none2">Não comprado </label> <input type="radio" value="none2" name="payment2"
+                                id="none2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PS3</td>
+                        <td>
+                            <select name="ps3" id="ps3">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="cash3">Dinheiro </label> <input type="radio" value="cash3" name="payment3"
+                                id="cash3">
+                            <label for="card3">Cartao</label> <input type="radio" name="payment3" value="card3" id="card3">
+                            <label for="none3">Não comprado </label> <input type="radio" value="none3" name="payment3"
+                                id="none3">
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>PSVITA</td>
+                        <td>
+                            <select name="psvita" id="psvita">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="cash4">Dinheiro </label> <input type="radio" value="cash4" name="payment4"
+                                id="cash4">
+                            <label for="card4">Cartao</label> <input type="radio" name="payment4" value="card4" id="card4">
+                            <label for="none4">Não comprado </label> <input type="radio" value="none4" name="payment4"
+                                id="none4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PSP Usado</td>
+                        <td>
+                            <select name="psp" id="psp">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="cash">Dinheiro </label> <input type="radio" value="cash" name="payment"
+                                id="cash">
+                            <label for="card">Cartao</label> <input type="radio" name="payment" value="card" id="card">
+                            <label for="none">Não comprado </label> <input type="radio" value="none" name="payment"
+                                id="none">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit">Enviar Para o checkout</button>
+        </form>
+            
+    </div>
+
+    <div class="footer"> <a href="historicoVendas.html">Histórico de Vendas</a></div>
+</body>
+
+</html>
