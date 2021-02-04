@@ -138,3 +138,6 @@ td button {
 #back-button:hover {
     background-color: #635a3d
 }
+tr>td:nth-of-type(2){
+    text-align: center;
+}
