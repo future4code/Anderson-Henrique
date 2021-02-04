@@ -46,6 +46,12 @@ div>p:first-child {
 div img {
     width: 32px;
 }
+div img:hover {
+    opacity: 0.3;
+}
+div img:active{
+    opacity: initial;
+}
 
 .botao-amarelo {
     background-color: #ffaf43;
