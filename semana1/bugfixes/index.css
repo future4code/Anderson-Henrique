@@ -34,7 +34,6 @@ div>p:first-child {
 }
 
 div img {
-    /* background: black; */
     width: 32px;
 }
 
@@ -58,6 +57,12 @@ div img {
 
 .icone {
     height: 15px;
+}
+td button:hover, comprar-voltar{
+    filter:brightness(0.7)
+}
+td button:active ,comprar-voltar{
+    color: white;
 }
 
 
