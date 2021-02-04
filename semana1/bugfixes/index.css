@@ -88,9 +88,12 @@ div img {
 div div a {
     display: block;
 }
-.container> p:first-of-type{
+.container>p:first-of-type{
   padding-top: 24px;
   display: block;
+}
+.container ul{
+    list-style-type: none;
 }
 
 /**
