@@ -1,0 +1,113 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+div div {
+    border: 1px solid black;
+    /* width: 100vw; */
+    /* padding: 10px; */
+    margin: 4px;
+}
+
+#main-container{
+    display: flex;
+    flex-direction: column;
+   height: 70vh;
+   border: none;
+}
+#main-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+}
+.top-container1{
+    flex-grow: 1;
+}
+.top-container2{
+    flex-grow: 1;
+}
+.black-container{
+    flex-grow: 3;
+
+
+}
+.white-container{
+    flex-grow: 1;
+
+}
+#first-block {
+    background-color: red;
+    flex-grow: 1;
+    margin: 10px 0 0;
+    color: transparent;
+
+}
+
+.blue-block {
+    background-color: blue;
+    flex-grow: 1;
+}
+
+.yellow-block {
+    background-color: yellow;
+    flex-grow: 1;
+}
+
+.green-block {
+    background-color: green;
+    flex-grow: 1;
+}
+
+.black-block {
+    background-color: black;
+    color: white;
+    flex-grow: 1;
+}
+
+.white-block {
+    background-color: white;
+    flex-grow: 1;
+    
+}
+.top-container2,.top-container1,.black-container,.white-container{
+    border: none;
+}
+
+@media screen and (min-width:481px) and (max-width:800px){
+#main-container{
+    height: 100vh;
+}
+
+.white-container,.top-container1,.top-container2{
+    flex-wrap: wrap;
+}
+.white-block{
+    min-width: 40vw;
+}
+
+.blue-block,.yellow-block{
+    min-width:47vw;
+}
+.green-block{
+    min-width: 70vw;
+}
+
+}
+
+@media screen and (max-width:480px){
+    #main-container{
+        height: 100vh;
+    }
+    .white-container,.top-container1,.top-container2,.black-container{
+    flex-wrap: wrap;
+    }
+
+    .black-block,.green-block,.white-block,.yellow-block,.blue-block{
+        min-width: 90vw;
+    }
+}
