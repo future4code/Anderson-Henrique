@@ -10,6 +10,22 @@
  * 
  * 
  */
+
+const splice = function splice(userCards,computerCards){
+   userCards.splice(0,2)
+   computerCards.splice(0,2)
+   sumUser =0
+   sumComputer= 0
+   sumUser = userCards[0].valor + userCards[1].valor
+   sumComputer = computerCards[0].valor + computerCards[1].valor
+   console.log(`Usuário - cartas: ${userCards[0].texto},${userCards[1].texto}, soma: ${sumUser}`)
+   console.log(`Computador - cartas: ${computerCards[0].texto},${computerCards[1].texto}, soma: ${sumComputer}`)
+}
+
+
+
+
+
 let newCards = []
 let userCards = []
 let computerCards = []
@@ -34,16 +50,23 @@ console.log("Bem vindo ao jogo de BlackJack!")
 let isTrue = confirm("Quer iniciar uma nova rodada?")
 console.log(isTrue)
 if (isTrue == true) {
-   console.log("O jogo comeca!")
+   console.log("Valor 0: ",userCards[0].valor)
+   console.log("Valor 1: ",userCards[1].valor)
    sumUser = userCards[0].valor + userCards[1].valor
    sumComputer = computerCards[0].valor + computerCards[1].valor
+   
+   // console.log("Pre-splice: ", userCards)
+  
+   while(sumComputer>21 || sumUser>21){
+      splice(userCards,computerCards)
+   }
+   console.log("O jogo comeca!")
+   finalCards = `${userCards[0].texto} e ${userCards[1].texto}`
    console.log(`Usuário - cartas: ${userCards[0].texto},${userCards[1].texto}, soma: ${sumUser}`)
-   console.log(`Computador - cartas: ${computerCards[0].texto},${computerCards[1].texto}, soma: ${sumComputer}`)
-   console.log("Pre-splice: ", userCards)
+   console.log(`Computador - cartas: ${computerCards[0].texto}.`)
+   // console.log("Pos-splice: ", userCards)
    userCards.splice(0, 2)
    computerCards.splice(0, 2)
-   console.log("Pos-splice: ", userCards)
-
    let buyCard = confirm(
       `Suas cartas são ${finalCards}. A carta revelada do computador é ${computerCards[0].texto}.` +
       "\n" +  // \n faz pular a linha
@@ -52,7 +75,8 @@ if (isTrue == true) {
 
    while (buyCard === true) {
 
-      sumUser += userCards[1].valor
+      sumUser += userCards[1].valor  //PORQUE?????? , não seria usercards[0]????
+      
       userCards.splice(0, 1)
       rounds++
       for (let i = rounds; i <= rounds; i++) {
@@ -70,7 +94,7 @@ if (isTrue == true) {
          let isFalse = true // paradoxal, não? '-'
       } else if (sumUser === 21) {
          console.log(`Suas cartas são ${finalCards}., Sua pontuação é ${sumUser}`)
-         console.log(`As cartas do computador sao ${finalComputerCards}. A Pontuação do computador é ${sumComputer}`)
+         console.log(`As cartas do computador são ${finalComputerCards}. A Pontuação do computador é ${sumComputer}`)
          // console.log(`Suas cartas são ${finalCards}. A carta revelada do computador é ${computerCards[0].texto}.` +
          "\n" +  // \n faz pular a linha
             // + `Soma do jogador:${sumUser}`)
@@ -84,13 +108,17 @@ if (isTrue == true) {
          console.log("Você perdeu!")
          alert(`Você perdeu! Você fez ${sumUser} pontos`)
          buyCard = false
+         
       }
    }
    let isFalse = true // paradoxal, não? '-'
-   if (isFalse) {
+   if (isFalse ) {
       console.log("entrou?")
-
-      while (sumComputer < sumUser && sumComputer < 21) {
+// if(sumComputer>sumUser){
+   
+// }
+      while (sumComputer < sumUser || sumComputer < 21) {
+        
          sumComputer += computerCards[1].valor
          computerCards.splice(0, 1)
          rounds++
@@ -124,3 +152,4 @@ if (sumUser > sumComputer || sumComputer > 21) {
    console.log(`As cartas do computador sao ${finalComputerCards}. A Pontuação do computador é ${sumComputer}`)
    console.log("Empate!")
 }
+
