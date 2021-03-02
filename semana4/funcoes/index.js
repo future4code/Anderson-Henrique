@@ -145,7 +145,6 @@ let evenNumberNinja = () => {
     for (i = 0; i < fullArray.length; i++) {
         finalEvenArray[i] = isEven(fullArray[i])
         // console.log(" array no momento:")
-
         // console.log("haha", isEven())
         if (typeof (finalEvenArray[i]) !== "undefined") {
             totalEven++
