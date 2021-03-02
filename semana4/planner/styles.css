@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    display: flex;
+    justify-content: space-evenly;
+    height: 90vh;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.semana {
+    border: 1px dotted rgb(53, 53, 53);
+    width: 14%;
+    padding: 5px;
+}
+
+#removeAllTasks {
+    background-color: red;
+    color: white;
+    height: 24px;
+    margin-left: 40px;
+    border-radius:5px;
+}
+
+@media screen and (max-width:768px){
+  header{
+      height: 15vh;
+      display: block;
+    align-items: center;
+    /* align-content: center; */
+  }
+  form {
+    width: 100%;
+    text-align: center;
+}
+.semana{
+    width: 100vw;
+    min-height: 30vh;
+    text-align: center;
+} 
+
+
+#removeAllTasks {
+width: 200px;
+display: flex;
+margin: 10px auto;
+justify-content: center;
+/* margin: 10px auto; */
+/* margin-left: auto; */
+}
+
+/* section{
+    display: block;
+} */
+ section {
+    flex-direction: column;
+    width: 100vw;
+    height: 100%;
+    
+} 
+
+}
+
