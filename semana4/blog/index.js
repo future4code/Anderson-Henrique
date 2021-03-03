@@ -1,15 +1,4 @@
-// // 1.
-// let titulo = document.querySelector("#titulo-post")
-// let autor = document.querySelector("#autor-post")
-// let conteudo = document.querySelector("#conteudo-post")
-// let imageLink = document.querySelector("#imagem")
-// let section =document.querySelector("#container-de-posts")
 
-// let post ={
-//     title : titulo.value,
-//     author: autor.value,
-//     content : conteudo.value    
-// }
 let sectionPosts = document.all[20]
 function createPost() {   
 let titulo = document.querySelector("#titulo-post")
@@ -36,8 +25,6 @@ if(imageLink.value!=="" && imageLink.value.includes(".png") || imageLink.value.i
     <img src=${post.image}>
     </div>`
 }else{
-
-
     section.innerHTML+= 
     `<div class="postsss">
     <h2> ${post.title}</h2>
@@ -55,12 +42,3 @@ event.preventDefault()
 
 }}
 
-
-    // function pagePosts(e) {
-        
-    //     let container = document.querySelector("#containerPosts")
-    //     container.innerHTML= sectionPosts
-    //     // e.preventDefault()
-    // }
-
-// localStorage.setItem("allPosts",sectionPosts)
