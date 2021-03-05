@@ -68,7 +68,7 @@ function retornaQuantidadeElementos(array) {
 function retornaExpressoesBooleanas() {
    // implemente sua lógica aqui
 
-   const respostas = [false,false , true,true,true]
+   const respostas = [false, false, true, true, true]
    return respostas
 
 }
@@ -161,17 +161,14 @@ ordenaArray([1, 4, 5, 6, 111, 44, 123, 515])
 function filmeFavorito(nome, ano, diretor, atores) {
    // implemente sua lógica aqui
    console.log(nome, ano, diretor, atores)
-
    let favorito = {
-      nome: nome,
-      ano: ano,
-      diretor: diretor,
-      atores: atores
+      nome: "O Diabo Veste Prada",
+      ano: 2006,
+      diretor: "David Frankel",
+      atores: ["Meryl Streep", "Anne Hathaway", "Emily Blunt", "Stanley Tucci" ]
    }
-   console.log("objeto favorito: ", favorito)
    return favorito
 }
-filmeFavorito("Anderson", 1992, "Akino Mito", ["Acaca", "Muzamba", "mustafá"])
 
 // Exercício 13
 
@@ -341,14 +338,14 @@ function retornaEmailConsulta() {
    ]
    let enviarMensagem = consultas.map(consultas => {
       if (consultas.genero === "masculino") {
-         console.log("consultas masculino",consultas)
+         console.log("consultas masculino", consultas)
          consultas.genero = "Sr"
       } else {
          consultas.genero = "Sra"
       }
-      console.log("depois do 1 IF!!!: ",consultas)
+      console.log("depois do 1 IF!!!: ", consultas)
       if (consultas.cancelada) {
-console.log("vendo se entrou em cancelada: ",consultas)
+         console.log("vendo se entrou em cancelada: ", consultas)
          return `Olá, ${consultas.genero} ${consultas.nome}. Infelizmente, sua consulta marcada para o dia ${consultas.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
       } else {
          if (consultas.genero === "Sr") {
@@ -359,7 +356,7 @@ console.log("vendo se entrou em cancelada: ",consultas)
          return `Olá, ${consultas.genero[0]} ${consultas.nome}. Estamos enviando esta mensagem para ${consultas.genero[1]} da sua consulta no dia ${consultas.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
       }
    })
-   console.log("testando a mutreta: ",enviarMensagem)
+   console.log("testando a mutreta: ", enviarMensagem)
    return enviarMensagem
 }
 
@@ -385,11 +382,18 @@ function atualizaSaldo() {
       { cliente: "Soter", saldoTotal: 1200, compras: [] }
    ]
 
-   
+   // function saldoTotal(...compras) {
+   //    return compras.reduce((total, proximo, saldoInicial) => total + proximo)
+   // }
+   // function comprasTotais(array) {
+   //    return Array.reduce((total, proximo))  total + proximo
+
+   // }
+   contas = contas.map(contas => {
+      saldoTotal(contas.compras), compras.saldoTotal
+   })
 
 
 
-
-   
 
 }
