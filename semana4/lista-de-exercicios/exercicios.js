@@ -9,31 +9,15 @@ function inverteArray(array) {
 
 function retornaNumerosParesElevadosADois(array) {
    // implemente sua lógica aqui
-   let pares = []
-   for (i = 0; i < array.length; i++) {
-      // console.log("imprimindo array: ", array[i])
-      if (array[i] % 2 == 0) {
-         pares.push(array[i] * array[i])
-         // console.log("to no for!!!")
-         // console.log("pares ate o momento: ", pares)
-
-         return pares
+   let soPares = array.filter((array) => {
+      if (array % 2 === 0) {
+         return array
       }
-   }
-   //  pares = array.filter( (array) => {
-   //       // console.log(array)
-   //       // console.log("haha")
-   //       if(array[i]%2===0){
-   //          pares.push(array[i])
-   //          // console.log("eita")
-   //          // console.log(array*array)
-   //          // console.log("pares ate agora: ",pares)
-   //          // console.log("par? :",pares)
-   //          // console.log(pares * pares)
-   //       return  pares*pares
-   //       }
-   //       // value
-   //    })
+   })
+   let elevadoADois = soPares.map( soPares => {
+      return soPares*soPares
+   })
+   return elevadoADois
 }
 let arr = [3, 4, 5, 6, 6, 6, 1, 2]
 
@@ -45,12 +29,13 @@ function retornaNumerosPares(array) {
    // implemente sua lógica aqui
    let soPares = array.filter((array) => {
       if (array % 2 === 0) {
+         // array = array * array
          return array
       }
    })
-   console.log("so pares, testando questao 3: ",soPares)
-return soPares
-   
+   console.log("so pares, testando questao 3: ", soPares)
+   return soPares
+
 
    // })
 
@@ -95,13 +80,13 @@ function retornaNNumerosPares(n) {
    // implemente sua lógica aqui
    let j = 0
    let pares = [0]
-   for(i=0;i<n;i++){
+   for (i = 0; i < n; i++) {
       // console.log("j:" ,j)
-      j+=2
+      j += 2
       pares.push(j)
       // return pares
    }
-   console.log("pares: ",pares)
+   console.log("pares: ", pares)
    return pares
 }
 console.log("exer 7:")
