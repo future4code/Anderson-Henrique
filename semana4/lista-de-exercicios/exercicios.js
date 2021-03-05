@@ -33,33 +33,30 @@ function retornaNumerosPares(array) {
          return array
       }
    })
-   console.log("so pares, testando questao 3: ", soPares)
+   // console.log("so pares, testando questao 3: ", soPares)
    return soPares
 
 
    // })
 
 }
-// retornaNumerosPares(arr)
-// retornaNumerosPares(arr)
 //Exercício 4
 
 function retornaMaiorNumero(array) {
+  
    // implemente sua lógica aqui
-   // array.reduce(maiorNumero,proximo){
-   //    if(maiorNumero>proximo){
-   //       return maiorNumero
-   //    }else{
-   //       proximo= maiorNumero
-   //       return proximo
-   //    }
-   // }
-   let maior = array.reduce(() => {
-
+  
+   let maior = array.reduce((maiorNumero,proximo)=> {
+      if(maiorNumero>proximo){
+         return maiorNumero
+      }else{
+         return proximo
+      }
    })
+   return maior
 }
-
-
+console.log("teste ex4: ")
+retornaMaiorNumero([1,3,4,2])
 //Exercício 5
 
 function retornaQuantidadeElementos(array) {
