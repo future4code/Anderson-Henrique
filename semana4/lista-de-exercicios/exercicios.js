@@ -192,7 +192,7 @@ function criaRetangulo(lado1, lado2) {
 
 function anonimizaPessoa(pessoa) {
    // implemente sua lógica aqui
-   pessoa.nome= "ANÔNIMO"
+   pessoa.nome = "ANÔNIMO"
    return pessoa
 }
 
@@ -209,8 +209,8 @@ const arrayDePessoas = [
 
 function maioresDe18(arrayDePessoas) {
    // implemente sua lógica aqui
-   let maiores = arrayDePessoas.filter( (arrayDePessoas) => {
-        return  arrayDePessoas.idade>=20
+   let maiores = arrayDePessoas.filter((arrayDePessoas) => {
+      return arrayDePessoas.idade >= 20
    })
    return maiores
 }
@@ -218,8 +218,8 @@ function maioresDe18(arrayDePessoas) {
 
 function menoresDe18(arrayDePessoas) {
    // implemente sua lógica aqui
-   let menores = arrayDePessoas.filter( (arrayDePessoas) => {
-        return  arrayDePessoas.idade<20
+   let menores = arrayDePessoas.filter((arrayDePessoas) => {
+      return arrayDePessoas.idade < 20
    })
    return menores
 }
@@ -228,54 +228,107 @@ function menoresDe18(arrayDePessoas) {
 
 function multiplicaArrayPor2(array) {
    // implemente sua lógica aqui
+   let multiplicadoPor2 = array.map((array) => {
+      return array * 2
+   })
+   return multiplicadoPor2
 }
 
 // Exercício 17, letra B
 
 function multiplicaArrayPor2S(array) {
    // implemente sua lógica aqui
+   let mult2String = array.map(array => array * 2).toString()
+   console.log("numero com string do array: ", mult2String)
+   return mult2String
+   // let multiplicadoPor2 = array.map( (array) => {
+   //    return array *2})
+   //    // .toString()
+   // let multiplica2s
+   // //  = multiplicadoPor2.forEach((multiplicadoPor2) => {
+   // //    multiplicadoPor2.toString()
+   // // } )
+   //    // multiplicadoPor2S.push("uhasudhhuads")
+   //    console.log("numero com string do array: ", multiplicadoPor2.toString()     )
+
+   // return multiplicadoPor2S
 }
 
-// Exercício 17, letra C
+multiplicaArrayPor2S([1, 4, 5, 6, 111, 44, 123, 515])
 
+// Exercício 17, letra C
 function verificaParidade(array) {
    // implemente sua lógica aqui
+   let parImpar = array.map((array) => {
+      if (array % 2 === 0) {
+         return `${array} é par`
+      } else {
+         return `${array} é impar`
+      }
+   })
+   console.log("Testando parImpar: ",parImpar)
+   return parImpar
 }
 
 // Exercício 18
 
-const pessoas = [
-   { nome: "Paula", idade: 12, altura: 1.8 },
-   { nome: "João", idade: 20, altura: 1.3 },
-   { nome: "Pedro", idade: 15, altura: 1.9 },
-   { nome: "Luciano", idade: 22, altura: 1.8 },
-   { nome: "Artur", idade: 10, altura: 1.2 },
-   { nome: "Soter", idade: 70, altura: 1.9 }
-]
+// const pessoas = [
+//    { nome: "Paula", idade: 12, altura: 1.8 },
+//    { nome: "João", idade: 20, altura: 1.3 },
+//    { nome: "Pedro", idade: 15, altura: 1.9 },
+//    { nome: "Luciano", idade: 22, altura: 1.8 },
+//    { nome: "Artur", idade: 10, altura: 1.2 },
+//    { nome: "Soter", idade: 70, altura: 1.9 }
+// ]
 
 //Exercício 18, letra A
 
-function retornaPessoasAutorizadas(pessoas) {
+function retornaPessoasAutorizadas() {
    // implemente sua lógica aqui
+
+   const pessoas = [
+      { nome: "Paula", idade: 12, altura: 1.8 },
+      { nome: "João", idade: 20, altura: 1.3 },
+      { nome: "Pedro", idade: 15, altura: 1.9 },
+      { nome: "Luciano", idade: 22, altura: 1.8 },
+      { nome: "Artur", idade: 10, altura: 1.2 },
+      { nome: "Soter", idade: 70, altura: 1.9 }
+   ]
+   let permitidos = pessoas.filter( pessoas => {
+      return (pessoas.idade>14 && pessoas.idade<60 && pessoas.altura>= 1.5 )
+   })
+   return permitidos
 }
 
 
 // Exercício 18, letra B
 
-function retornaPessoasNaoAutorizadas(pessoas) {
+function retornaPessoasNaoAutorizadas() {
    // implemente sua lógica aqui
+   const pessoas = [
+      { nome: "Paula", idade: 12, altura: 1.8 },
+      { nome: "João", idade: 20, altura: 1.3 },
+      { nome: "Pedro", idade: 15, altura: 1.9 },
+      { nome: "Luciano", idade: 22, altura: 1.8 },
+      { nome: "Artur", idade: 10, altura: 1.2 },
+      { nome: "Soter", idade: 70, altura: 1.9 }
+   ]
+   let barrados = pessoas.filter( pessoas => {
+      return (pessoas.idade<=14 || pessoas.idade>=60 || pessoas.altura< 1.5 )
+   })
+   return barrados
 }
 
 //Exercício 19
 
 const consultas = [
-   { nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
-   { nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
-   { nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
-   { nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
-]
+   { nome: "João", genero: "masculino", cancelada: false, dataDaConsulta: "01/10/2019" },
+   { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
+   { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
+   { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
+ ]
 
-function retornaEmailConsulta(consultas) {
+function retornaEmailConsulta() {
    // implemente sua lógica aqui
 }
 
