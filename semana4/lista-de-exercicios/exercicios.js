@@ -68,6 +68,9 @@ function retornaQuantidadeElementos(array) {
 function retornaExpressoesBooleanas() {
    // implemente sua lógica aqui
 
+   const respostas = [false,false , true,true,true]
+   return respostas
+
 }
 
 //Exercício 7
@@ -266,7 +269,7 @@ function verificaParidade(array) {
          return `${array} é impar`
       }
    })
-   console.log("Testando parImpar: ",parImpar)
+   console.log("Testando parImpar: ", parImpar)
    return parImpar
 }
 
@@ -294,8 +297,8 @@ function retornaPessoasAutorizadas() {
       { nome: "Artur", idade: 10, altura: 1.2 },
       { nome: "Soter", idade: 70, altura: 1.9 }
    ]
-   let permitidos = pessoas.filter( pessoas => {
-      return (pessoas.idade>14 && pessoas.idade<60 && pessoas.altura>= 1.5 )
+   let permitidos = pessoas.filter(pessoas => {
+      return (pessoas.idade > 14 && pessoas.idade < 60 && pessoas.altura >= 1.5)
    })
    return permitidos
 }
@@ -313,36 +316,80 @@ function retornaPessoasNaoAutorizadas() {
       { nome: "Artur", idade: 10, altura: 1.2 },
       { nome: "Soter", idade: 70, altura: 1.9 }
    ]
-   let barrados = pessoas.filter( pessoas => {
-      return (pessoas.idade<=14 || pessoas.idade>=60 || pessoas.altura< 1.5 )
+   let barrados = pessoas.filter(pessoas => {
+      return (pessoas.idade <= 14 || pessoas.idade >= 60 || pessoas.altura < 1.5)
    })
    return barrados
 }
 
 //Exercício 19
 
-const consultas = [
-   { nome: "João", genero: "masculino", cancelada: false, dataDaConsulta: "01/10/2019" },
-   { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
-   { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
-   { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
- ]
+// const consultas = [
+//    { nome: "João", genero: "masculino", cancelada: false, dataDaConsulta: "01/10/2019" },
+//    { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
+//    { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
+//    { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
+//  ]
 
 function retornaEmailConsulta() {
    // implemente sua lógica aqui
+   const consultas = [
+      { nome: "João", genero: "masculino", cancelada: false, dataDaConsulta: "01/10/2019" },
+      { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
+      { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
+      { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
+   ]
+   let enviarMensagem = consultas.map(consultas => {
+      if (consultas.genero === "masculino") {
+         console.log("consultas masculino",consultas)
+         consultas.genero = "Sr"
+      } else {
+         consultas.genero = "Sra"
+      }
+      console.log("depois do 1 IF!!!: ",consultas)
+      if (consultas.cancelada) {
+console.log("vendo se entrou em cancelada: ",consultas)
+         return `Olá, ${consultas.genero} ${consultas.nome}. Infelizmente, sua consulta marcada para o dia ${consultas.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+      } else {
+         if (consultas.genero === "Sr") {
+            consultas.genero = ["Sr", "lembrá-lo"]
+         } else {
+            consultas.genero = ["Sra", "lembrá-la"]
+         }
+         return `Olá, ${consultas.genero[0]} ${consultas.nome}. Estamos enviando esta mensagem para ${consultas.genero[1]} da sua consulta no dia ${consultas.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+      }
+   })
+   console.log("testando a mutreta: ",enviarMensagem)
+   return enviarMensagem
 }
 
 //Exercício 20
 
-const contas = [
-   { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
-   { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
-   { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
-   { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
-   { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
-   { cliente: "Soter", saldoTotal: 1200, compras: [] }
-]
+// const contas = [
+//    { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+//    { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+//    { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+//    { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+//    { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+//    { cliente: "Soter", saldoTotal: 1200, compras: [] }
+// ]
 
 function atualizaSaldo() {
    // implemente sua lógica aqui
+   const contas = [
+      { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+      { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+      { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+      { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+      { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+      { cliente: "Soter", saldoTotal: 1200, compras: [] }
+   ]
+
+   
+
+
+
+
+   
+
 }
