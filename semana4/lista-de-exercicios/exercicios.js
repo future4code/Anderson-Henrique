@@ -55,7 +55,6 @@ function retornaMaiorNumero(array) {
    })
    return maior
 }
-console.log("teste ex4: ")
 retornaMaiorNumero([1,3,4,2])
 //Exercício 5
 
@@ -76,18 +75,17 @@ function retornaExpressoesBooleanas() {
 function retornaNNumerosPares(n) {
    // implemente sua lógica aqui
    let j = 0
-   let pares = [0]
+   let pares = []
    for (i = 0; i < n; i++) {
-      // console.log("j:" ,j)
-      j += 2
+      console.log("j:" ,j)
       pares.push(j)
-      // return pares
+      j += 2
    }
    console.log("pares: ", pares)
    return pares
 }
 console.log("exer 7:")
-retornaNNumerosPares(12)
+retornaNNumerosPares(3)
 
 // Exercício 8
 
