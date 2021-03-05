@@ -28,7 +28,22 @@ retornaNumerosParesElevadosADois(arr)
 //Exercício 3
 
 function retornaNumerosPares (array) {
-  
+   // implemente sua lógica aqui
+//  let pares =  array.filter( (array) => {
+//       if(array%2===0){
+//          return pares
+//       }      
+   // })
+   array.forEach( (array) => {
+      // console.log("eita")
+      // console.log(arr)
+      if(array%2===0){
+         console.log(array)
+         return array
+      }
+         
+      
+   })
 
 }
 retornaNumerosPares(arr)
@@ -37,20 +52,22 @@ retornaNumerosPares(arr)
 
 function retornaMaiorNumero(array) {
    // implemente sua lógica aqui
-   array.reduce(maiorNumero,proximo){
-      if(maiorNumero>proximo){
-         return maiorNumero
-      }else{
-         proximo= maiorNumero
-         return proximo
-      }
-   }}
+   // array.reduce(maiorNumero,proximo){
+   //    if(maiorNumero>proximo){
+   //       return maiorNumero
+   //    }else{
+   //       proximo= maiorNumero
+   //       return proximo
+   //    }
+   // }
+}
 
 
 //Exercício 5
 
 function retornaQuantidadeElementos (array) {
    // implemente sua lógica aqui
+   return array.length
 }
 
 //Exercício 6
