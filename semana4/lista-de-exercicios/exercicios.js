@@ -157,7 +157,7 @@ ordenaArray([1,4,5,6,111,44,123,515])
 function filmeFavorito(nome,ano,diretor,atores) {
    // implemente sua lógica aqui
    
-   let favorito = {
+   let favorito = { 
       nome: nome,
       ano: ano,
       diretor: diretor,
