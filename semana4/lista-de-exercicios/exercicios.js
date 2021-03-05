@@ -77,21 +77,25 @@ function retornaNNumerosPares(n) {
    let j = 0
    let pares = []
    for (i = 0; i < n; i++) {
-      console.log("j:" ,j)
       pares.push(j)
       j += 2
    }
-   console.log("pares: ", pares)
    return pares
 }
-console.log("exer 7:")
-retornaNNumerosPares(3)
 
 // Exercício 8
 
 function checaTriangulo(a, b, c) {
    // implemente sua lógica aqui
+if(a===b && a===c){
+   return "Equilátero"
+}else if(a===b || b===c || a===c){
+   return "Isósceles"
+}else if(a!==b!==c){
+   return "Escaleno"
 }
+}
+checaTriangulo(2,3,4)
 
 // Exercício 9
 
