@@ -124,18 +124,37 @@ function comparaDoisNumeros(num1, num2) {
    }
    return resultado
 }
-comparaDoisNumeros(4, 5)
 // Exercício 10
 
 function segundoMaiorEMenor(array) {
    // implemente sua lógica aqui
+      array.sort((a, b) => {
+          if (a > b) {
+              return 1
+          } else {
+              return -1
+          }
+      })
+      console.log("Ordenado: ",array)
+      let i= array.length
+  
+      let maiorMenor = [array[i-2],array[1]]
+console.log("maiorMenor: ",maiorMenor)
+   return maiorMenor
 }
+segundoMaiorEMenor([1,4,5,6,111,44,123,515])
 
 //Exercício 11
 
 function ordenaArray(array) {
    // implemente sua lógica aqui
+//    array.sort((a, b) => {
+//       return a>b
+//   })
+//   console.log("array ordenado: ",array)
+//   return array
 }
+ordenaArray([1,4,5,6,111,44,123,515])
 
 // Exercício 12
 
