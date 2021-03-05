@@ -14,8 +14,8 @@ function retornaNumerosParesElevadosADois(array) {
          return array
       }
    })
-   let elevadoADois = soPares.map( soPares => {
-      return soPares*soPares
+   let elevadoADois = soPares.map(soPares => {
+      return soPares * soPares
    })
    return elevadoADois
 }
@@ -43,19 +43,19 @@ function retornaNumerosPares(array) {
 //Exercício 4
 
 function retornaMaiorNumero(array) {
-  
+
    // implemente sua lógica aqui
-  
-   let maior = array.reduce((maiorNumero,proximo)=> {
-      if(maiorNumero>proximo){
+
+   let maior = array.reduce((maiorNumero, proximo) => {
+      if (maiorNumero > proximo) {
          return maiorNumero
-      }else{
+      } else {
          return proximo
       }
    })
    return maior
 }
-retornaMaiorNumero([1,3,4,2])
+retornaMaiorNumero([1, 3, 4, 2])
 //Exercício 5
 
 function retornaQuantidadeElementos(array) {
@@ -87,22 +87,44 @@ function retornaNNumerosPares(n) {
 
 function checaTriangulo(a, b, c) {
    // implemente sua lógica aqui
-if(a===b && a===c){
-   return "Equilátero"
-}else if(a===b || b===c || a===c){
-   return "Isósceles"
-}else if(a!==b!==c){
-   return "Escaleno"
+   if (a === b && a === c) {
+      return "Equilátero"
+   } else if (a === b || b === c || a === c) {
+      return "Isósceles"
+   } else if (a !== b !== c) {
+      return "Escaleno"
+   }
 }
-}
-checaTriangulo(2,3,4)
-
 // Exercício 9
 
 function comparaDoisNumeros(num1, num2) {
    // implemente sua lógica aqui
+   let resultado = {
+      maiorNumero: 0,
+      maiorDivisivelporMenor: false,
+      diferenca: 0
+   }
+   if (num1 > num2) {
+      resultado.maiorNumero = num1
+      resultado.diferenca = num2 - num1
+      if (num1 % num2 === 0) {
+         resultado.maiorDivisivelporMenor = true
+      } else {
+         resultado.maiorDivisivelporMenor = false
+      }
+   }
+   else {
+      resultado.maiorNumero = num2
+      resultado.diferenca = num2 - num1
+      if (num2 % num1 === 0) {
+         resultado.maiorDivisivelporMenor = true
+      } else {
+         resultado.maiorDivisivelporMenor = false
+      }
+   }
+   return resultado
 }
-
+comparaDoisNumeros(4, 5)
 // Exercício 10
 
 function segundoMaiorEMenor(array) {
