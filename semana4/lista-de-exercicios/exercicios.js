@@ -160,7 +160,6 @@ ordenaArray([1, 4, 5, 6, 111, 44, 123, 515])
 // function filmeFavorito() {
 function filmeFavorito(nome, ano, diretor, atores) {
    // implemente sua lógica aqui
-   console.log(nome, ano, diretor, atores)
    let favorito = {
       nome: "O Diabo Veste Prada",
       ano: 2006,
@@ -174,6 +173,15 @@ function filmeFavorito(nome, ano, diretor, atores) {
 
 function imprimeChamada() {
    // implemente sua lógica aqui
+   let favorito = {
+      nome: "O Diabo Veste Prada",
+      ano: 2006,
+      diretor: "David Frankel",
+      atores: ["Meryl Streep", "Anne Hathaway", "Emily Blunt", "Stanley Tucci" ]
+   }
+console.log(`Venha assistir ao filme ${favorito.nome}, de ${favorito.ano}, dirigido por ${favorito.diretor} e estrelado por ${favorito.atores[0]},${favorito.atores[1]},${favorito.atores[2]} e ${favorito.atores[3]}`)
+   return `Venha assistir ao filme ${favorito.nome}, de ${favorito.ano}, dirigido por ${favorito.diretor} e estrelado por ${favorito.atores[0]},${favorito.atores[1]},${favorito.atores[2]}`
+
 }
 
 // Exercício 14
@@ -238,24 +246,10 @@ function multiplicaArrayPor2(array) {
 
 function multiplicaArrayPor2S(array) {
    // implemente sua lógica aqui
-   let mult2String = array.map(array => array * 2).toString()
-   console.log("numero com string do array: ", mult2String)
+   let mult2String = ""
+   mult2String = array.map(array => (array * 2).toString())
    return mult2String
-   // let multiplicadoPor2 = array.map( (array) => {
-   //    return array *2})
-   //    // .toString()
-   // let multiplica2s
-   // //  = multiplicadoPor2.forEach((multiplicadoPor2) => {
-   // //    multiplicadoPor2.toString()
-   // // } )
-   //    // multiplicadoPor2S.push("uhasudhhuads")
-   //    console.log("numero com string do array: ", multiplicadoPor2.toString()     )
-
-   // return multiplicadoPor2S
 }
-
-multiplicaArrayPor2S([1, 4, 5, 6, 111, 44, 123, 515])
-
 // Exercício 17, letra C
 function verificaParidade(array) {
    // implemente sua lógica aqui
@@ -271,15 +265,6 @@ function verificaParidade(array) {
 }
 
 // Exercício 18
-
-// const pessoas = [
-//    { nome: "Paula", idade: 12, altura: 1.8 },
-//    { nome: "João", idade: 20, altura: 1.3 },
-//    { nome: "Pedro", idade: 15, altura: 1.9 },
-//    { nome: "Luciano", idade: 22, altura: 1.8 },
-//    { nome: "Artur", idade: 10, altura: 1.2 },
-//    { nome: "Soter", idade: 70, altura: 1.9 }
-// ]
 
 //Exercício 18, letra A
 
@@ -321,13 +306,6 @@ function retornaPessoasNaoAutorizadas() {
 
 //Exercício 19
 
-// const consultas = [
-//    { nome: "João", genero: "masculino", cancelada: false, dataDaConsulta: "01/10/2019" },
-//    { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
-//    { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
-//    { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
-//  ]
-
 function retornaEmailConsulta() {
    // implemente sua lógica aqui
    const consultas = [
@@ -339,37 +317,29 @@ function retornaEmailConsulta() {
    let enviarMensagem = consultas.map(consultas => {
       if (consultas.genero === "masculino") {
          console.log("consultas masculino", consultas)
-         consultas.genero = "Sr"
+         consultas.gen = "Sr"
       } else {
-         consultas.genero = "Sra"
+         consultas.gen = "Sra"
       }
       console.log("depois do 1 IF!!!: ", consultas)
       if (consultas.cancelada) {
          console.log("vendo se entrou em cancelada: ", consultas)
-         return `Olá, ${consultas.genero} ${consultas.nome}. Infelizmente, sua consulta marcada para o dia ${consultas.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+         return `Olá, ${consultas.gen} ${consultas.nome}. Infelizmente, sua consulta marcada para o dia ${consultas.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
       } else {
-         if (consultas.genero === "Sr") {
-            consultas.genero = ["Sr", "lembrá-lo"]
+         if (consultas.genero === "masculino") {
+            consultas.gen = ["Sr", "lembrá-lo"]
          } else {
-            consultas.genero = ["Sra", "lembrá-la"]
+            consultas.gen = ["Sra", "lembrá-la"]
          }
-         return `Olá, ${consultas.genero[0]} ${consultas.nome}. Estamos enviando esta mensagem para ${consultas.genero[1]} da sua consulta no dia ${consultas.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+         return `Olá, ${consultas.gen[0]} ${consultas.nome}. Estamos enviando esta mensagem para ${consultas.gen[1]} da sua consulta no dia ${consultas.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
       }
    })
-   console.log("testando a mutreta: ", enviarMensagem)
+   "Bom que está igual e da erro.... vai entender -.-"
    return enviarMensagem
 }
 
 //Exercício 20
 
-// const contas = [
-//    { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
-//    { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
-//    { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
-//    { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
-//    { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
-//    { cliente: "Soter", saldoTotal: 1200, compras: [] }
-// ]
 
 function atualizaSaldo() {
    // implemente sua lógica aqui
@@ -381,17 +351,30 @@ function atualizaSaldo() {
       { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
       { cliente: "Soter", saldoTotal: 1200, compras: [] }
    ]
-
+// conta = contas.map((contas) => {
+//    let totalCompras = contas.compras.reduce((total, proximo)=> total+ proximo)
+//    console.log("total compras: ",totalCompras)
+//    for(i=0;i<contas.compras.length;i++){
+//      let saldoTotal = contas.saldoTotal 
+//      console.log("1a passada saldo total, so jgoando contas.saldoTotal: ",saldoTotal)
+//    //   console.log("contas.compras: ",contas.compras[i])
+//    //   console.log("contas.saldo total: ",contas.saldoTotal)
+//       saldoTotal-=contas.compras
+//       console.log("saldo total: ",saldoTotal)
+//       console.log("Cliente: ",contas.cliente)
+//       console.log("Vendo o q acontece: ",saldoTotal)
+//    }
+// })
    // function saldoTotal(...compras) {
    //    return compras.reduce((total, proximo, saldoInicial) => total + proximo)
    // }
    // function comprasTotais(array) {
-   //    return Array.reduce((total, proximo))  total + proximo
+   //    return array.reduce((total, proximo) => total + proximo)
 
    // }
-   contas = contas.map(contas => {
-      saldoTotal(contas.compras), compras.saldoTotal
-   })
+   // contas = contas.map(contas => {
+   //    // saldoTotal(contas.compras), compras.saldoTotal
+   // })
 
 
 
