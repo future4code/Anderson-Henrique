@@ -135,11 +135,8 @@ function segundoMaiorEMenor(array) {
               return -1
           }
       })
-      console.log("Ordenado: ",array)
       let i= array.length
-  
       let maiorMenor = [array[i-2],array[1]]
-console.log("maiorMenor: ",maiorMenor)
    return maiorMenor
 }
 segundoMaiorEMenor([1,4,5,6,111,44,123,515])
@@ -148,19 +145,28 @@ segundoMaiorEMenor([1,4,5,6,111,44,123,515])
 
 function ordenaArray(array) {
    // implemente sua lógica aqui
-//    array.sort((a, b) => {
-//       return a>b
-//   })
-//   console.log("array ordenado: ",array)
-//   return array
+   array.sort((a, b) => {
+      return a>b
+  })
+  return array
 }
 ordenaArray([1,4,5,6,111,44,123,515])
 
 // Exercício 12
 
-function filmeFavorito() {
+function filmeFavorito(nome,ano,diretor,atores) {
    // implemente sua lógica aqui
+   
+   let favorito = {
+      nome: nome,
+      ano: ano,
+      diretor: diretor,
+      atores: atores
+   }
+   console.log("objeto favorito: ",favorito)
+   return favorito
 }
+filmeFavorito("Anderson",1992,"Akino Mito",["Acaca","Muzamba","mustafá"] )
 
 // Exercício 13
 
@@ -172,8 +178,15 @@ function imprimeChamada() {
 
 function criaRetangulo(lado1, lado2) {
    // implemente sua lógica aqui
+   let objeto = {
+      largura: lado1,
+      altura: lado2,
+      perimetro: (2* (lado1 + lado2)),
+      area: (lado1 * lado2)
+   }
+   return objeto
 }
-
+criaRetangulo(4,6)
 // Exercício 15
 
 function anonimizaPessoa(pessoa) {
