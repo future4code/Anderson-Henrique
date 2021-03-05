@@ -128,45 +128,47 @@ function comparaDoisNumeros(num1, num2) {
 
 function segundoMaiorEMenor(array) {
    // implemente sua lógica aqui
-      array.sort((a, b) => {
-          if (a > b) {
-              return 1
-          } else {
-              return -1
-          }
-      })
-      let i= array.length
-      let maiorMenor = [array[i-2],array[1]]
+   array.sort((a, b) => {
+      if (a > b) {
+         return 1
+      } else {
+         return -1
+      }
+   })
+   let i = array.length
+   let maiorMenor = [array[i - 2], array[1]]
    return maiorMenor
 }
-segundoMaiorEMenor([1,4,5,6,111,44,123,515])
+segundoMaiorEMenor([1, 4, 5, 6, 111, 44, 123, 515])
 
 //Exercício 11
 
 function ordenaArray(array) {
    // implemente sua lógica aqui
    array.sort((a, b) => {
-      return a>b
-  })
-  return array
+      return a > b
+   })
+   return array
 }
-ordenaArray([1,4,5,6,111,44,123,515])
+ordenaArray([1, 4, 5, 6, 111, 44, 123, 515])
 
 // Exercício 12
 
-function filmeFavorito(nome,ano,diretor,atores) {
+// function filmeFavorito() {
+function filmeFavorito(nome, ano, diretor, atores) {
    // implemente sua lógica aqui
-   
-   let favorito = { 
+   console.log(nome, ano, diretor, atores)
+
+   let favorito = {
       nome: nome,
       ano: ano,
       diretor: diretor,
       atores: atores
    }
-   console.log("objeto favorito: ",favorito)
+   console.log("objeto favorito: ", favorito)
    return favorito
 }
-filmeFavorito("Anderson",1992,"Akino Mito",["Acaca","Muzamba","mustafá"] )
+filmeFavorito("Anderson", 1992, "Akino Mito", ["Acaca", "Muzamba", "mustafá"])
 
 // Exercício 13
 
@@ -181,16 +183,17 @@ function criaRetangulo(lado1, lado2) {
    let objeto = {
       largura: lado1,
       altura: lado2,
-      perimetro: (2* (lado1 + lado2)),
+      perimetro: (2 * (lado1 + lado2)),
       area: (lado1 * lado2)
    }
    return objeto
 }
-criaRetangulo(4,6)
 // Exercício 15
 
 function anonimizaPessoa(pessoa) {
    // implemente sua lógica aqui
+   pessoa.nome= "ANÔNIMO"
+   return pessoa
 }
 
 // Exercício 16
