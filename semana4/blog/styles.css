@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#formulario {
+    border: 1px dotted black;
+    padding: 10px;
+    width: 70vw;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+label {
+    width: 10%;
+    text-align: right;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+input, textarea {
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100px;
+    margin: 0 auto;
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px solid rgb(77, 77, 77);
+}
+
+#container-de-posts {
+    margin: 10px;
+    border-top: 3px double rgb(77, 77, 77);
+}
+
+/*                      COMECEI A EDITAR AQUI!!!                        */
+
+h1{
+    text-align: center;
+}
+.imagem {
+    width: 30%;
+    margin: auto;
+}
+
+img {
+    width: 300px;
+}
+#goToPosts {
+    background-color: rgb(127, 163, 163);
+    display: flex;
+    width: 30%;
+    justify-content: center;
+}
+
+#containerPosts  div, #container-de-posts div{
+    width: 50%;
+    margin: auto;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 20px;
+    border: 1px solid black;
+}
