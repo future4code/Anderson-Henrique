@@ -6,7 +6,7 @@ export class SecaoComentario extends Component {
 		valorImput: ""
 	}
 	onChangeComentario = (event) => {
-		this.setState({	valorImput: event.target.value})
+		this.setState({	valorImput: event.target.value})	
 	}
 
 	render() {
