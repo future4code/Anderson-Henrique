@@ -1,0 +1,19 @@
+.cardPequeno {
+    /* height: 500px; */
+    width: 40%;
+}
+
+
+.box {
+    display: flex;
+    border: 1px solid black;
+    height: 60px;
+    width: 100%;
+    /* justify-content: center; */
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.box h2 {
+    margin-bottom: 0;
+}
