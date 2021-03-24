@@ -40,7 +40,7 @@ class AddUsuario extends React.Component {
                     <label for="email">E-mail</label>
                     <input onChange={this.props.email} type="text" />
                     <button onClick={this.props.createNewUser}>Enviar</button>
-
+                    <button onClick={this.props.listaUsers} >Ir para Lista de usuarios</button>
                 </Center>
 
 
