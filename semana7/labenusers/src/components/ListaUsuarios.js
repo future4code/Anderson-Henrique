@@ -21,7 +21,6 @@ text-align:center
 
 class ListaUsuarios extends React.Component {
 
-
     render() {
 
         return (

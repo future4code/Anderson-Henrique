@@ -164,7 +164,7 @@ teste = () => {
       return (<Li key={usuario.id} id={usuario.id}>{usuario.name}
         <button onClick={() => this.detalharUsuario(usuario.id)}>Detalhes</button>
         <Span id={usuario.id} onClick={() => this.deleteUser(usuario.id)}>X</Span></Li>)
-    })
+    }) 
     
     switch (this.state.telaAtual) {
       case 'addUsuario':

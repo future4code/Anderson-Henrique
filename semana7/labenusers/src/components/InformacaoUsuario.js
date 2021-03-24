@@ -15,8 +15,6 @@ class InformacaoUsuario extends React.Component {
             <button onClick={this.props.teste}>{console.log("haha")} button pra testar as coisas</button>
             {/* <button onClick={this.props.editarUsuario}>Editar nome e email</button> */}
             </div>
-
-
         </div>)
     }
 }

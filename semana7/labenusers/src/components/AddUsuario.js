@@ -24,12 +24,6 @@ flex-direction:column;
 
 class AddUsuario extends React.Component {
 
-
-
-
-    state = {
-        bla: []
-    }
     render() {
 
         return (
@@ -43,12 +37,8 @@ class AddUsuario extends React.Component {
                     <button onClick={this.props.listaUsers} >Ir para Lista de usuarios</button>
                 </Center>
 
-
             </Container>)
     }
-
-
-
 
 }
 
