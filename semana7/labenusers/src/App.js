@@ -81,7 +81,7 @@ class App extends React.Component {
   }
 
   deleteUser = (evt) => {
-    const usuarioDeletado = evt.target.className
+    const usuarioDeletado = evt.target.id
     axios.delete(
       `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuarioDeletado}`,
       {
@@ -113,7 +113,7 @@ class App extends React.Component {
 
   render() {
     let allUsers = this.state.usuarios.map((usuario) => {
-      return (<li key={usuario.id} id={usuario.id}>{usuario.name}     <span className={usuario.id} onClick={this.deleteUser}>X</span></li>)
+      return (<Li key={usuario.id} id={usuario.id}>{usuario.name}     <Span id={usuario.id} onClick={this.deleteUser}>X</Span></Li>)
     })
       switch (this.state.telaAtual) {
         case 'addUsuario':
