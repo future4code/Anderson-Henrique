@@ -16,9 +16,9 @@ margin:auto;
 /* display: flex; */
 flex-direction:column;
 width:60%;
-text-align:ce nter
-
+text-align:center
 `
+
 class ListaUsuarios extends React.Component {
 
 
@@ -34,6 +34,7 @@ class ListaUsuarios extends React.Component {
                             {this.props.allUsersBlasting}
                         </ul>
                         <button onClick={this.props.voltarAddUsuario}>Voltar para adicionar usuários</button>
+                        
                     </Center>
                     
                     ) : (
