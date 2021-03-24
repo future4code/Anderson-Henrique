@@ -185,8 +185,7 @@ teste = () => {
         return (
           <div>
             <InformacaoUsuario name={this.state.name} email={this.state.email} 
-            deleteUser={() => this.deleteUser(this.state.id)} telaUsuario={this.allUsersList}
-            teste={this.teste} />
+            deleteUser={() => this.deleteUser(this.state.id)} telaUsuario={this.allUsersList} />
           </div>)
       default:
         return (
