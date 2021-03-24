@@ -50,12 +50,14 @@ class App extends React.Component {
       }
     }
     ).then((res) => {
-      console.log("state usuarios: ", this.state.usuarios)
+      // console.log("state usuarios: ", this.state.usuarios)
+      alert("Usuário criado!")
       this.setState({ name: '',email: '' })
       this.getAllUsers()
 
     })
       .catch((err) => {
+        alert("Erro, tente novamente!")
         console.log("ERROR: ", err.response.data)
       });
   };
@@ -89,10 +91,13 @@ class App extends React.Component {
       }
     )
       .then(
+        alert("Usuario deletado!"),
         this.getAllUsers(),
       )
       .catch((err) => {
-        console.log("ERRO no del: ", err.response.data)
+        alert("ERRO! Usuario não deletado!Tente Novamente",err.response.data)
+
+        // console.log("ERRO no del: ", err.response.data)
       }
       )
   }
