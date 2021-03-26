@@ -14,15 +14,16 @@ let padToThree = (number) => (number <=999  ? `00${number}`.slice(-3): number)
 
 class Pokecard extends React.Component {
     render() {
-let imgSrc=`${pokeAPI}${padToThree(this.props.number)}`
+let imgSrc=`${pokeAPI}${padToThree(this.props.number)}.png`
 
         return(
 
-
+  
             <Card>
                 <h1>{this.props.name}</h1>
                 <img src ={imgSrc}></img>
                 <p>Type: {this.props.type}</p>
+            <p> teste:{this.props.number} </p>
             </Card>
         )
     }
