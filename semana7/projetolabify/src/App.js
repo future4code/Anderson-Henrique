@@ -5,6 +5,25 @@ import Visualizacao from './Components/Visualizacao'
 import Criacao from './Components/Criacao'
 import React from 'react';
 // import Vizualizacao from './Components/Visualizacao';
+
+const Container = styled.div`
+width:100vw;
+height:20vh;
+border-bottom: 1px solid black;
+display:flex;
+justify-content:center;
+align-items:center;
+color: orange;
+background-color: slateblue
+
+
+`
+
+
+
+
+
+
 class App extends React.Component {
 
   state = {
@@ -12,6 +31,7 @@ class App extends React.Component {
     listaPlaylists: [],
     paginaRenderizada: "criacao"
   }
+
 
 
   componentDidMount() {
@@ -178,7 +198,22 @@ else{
       <div className="App">
 
 
+{this.state.paginaRenderizada==='criacao' ?
+        
+        <Container>
+        <button onClick={this.paginaVizualizacao} >Vizualizar Playlists</button>
 
+        </Container>
+:
+
+<Container>
+
+<button onClick={this.paginaCriacao}>Voltar para página Criar Playlist</button>
+
+</Container>
+       
+       
+      }
 
         {renderPage()}
 
@@ -189,14 +224,7 @@ else{
         {/* <Visualizacao/> */}
 
         {/* {visualizarPlaylists} */}
-        {this.state.paginaRenderizada==='criacao' ?
         
-        <button onClick={this.paginaVizualizacao} >Vizualizar Playlists</button>
-:
-<button onClick={this.paginaCriacao}>Voltar para página Criar Playlist</button>
-       
-       
-      }
       </div>
     );
   }
