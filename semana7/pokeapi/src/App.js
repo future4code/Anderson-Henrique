@@ -9,8 +9,7 @@ import styled from 'styled-components'
 const Container = styled.div`
 display:flex;
 flex-wrap: wrap;
-justify-content:space-between;
-/* width:20%; */
+justify-content:space-evenly;
 width:50%;
 margin:auto;
 `
@@ -35,15 +34,21 @@ class App extends React.Component {
   }
 
   generateSixNumbers = () => {
-    let saveNumbers = []
+    let saveNumbers = [] 
     for (let i = 0; i < 6; i++) {
       let random = Math.floor(Math.random() * 386)
       saveNumbers.push(random)
-      this.setState({ randNumbers: saveNumbers }, () => {
-      })
-    }
-  }
+      // this.setState({ randNumbers:saveNumbers }
+        this.setState(state => { return { randNumbers: [...state.randNumbers ,random]} })
+          //  , () => {/
+        // console.log("State randnumbers: ",this.state.randNumbers)  }
+      // )
+      console.log("State randnumbers: ",this.state.randNumbers)  
+          console.log("O random da rodada: ",random)
+    // }
+  }}
   generateArrayRandom = async () => {
+    this.setState({randNumbers: []})
 this.generateSixNumbers()
     let arrayProvisorioDePokes = []
     try {
@@ -67,10 +72,6 @@ this.generateSixNumbers()
       />
 
     })
-
-
-    let i = 0
-
 
     return (
 
