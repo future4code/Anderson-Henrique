@@ -8,9 +8,11 @@ class App extends React.Component {
   state = {
     pokemons: [],
     randNumbers: [],
-    selectedPokemons: [],
-    photoId : [],
-    number: []
+    selectedPokemons: [
+      {photoId:""
+
+      }],
+    // photoId= []
   }
 
   componentDidMount() {
@@ -76,11 +78,10 @@ class App extends React.Component {
       console.log("array provisorio.lenght -1: ",arrayProvisorio.slice(-1)[0][0].url)
     
     // }
-     this.setState({number: this.getInfo(arrayProvisorio.slice(-1)[0][0].url) })
-    //  this.setState({number: }) this.getInfo(arrayProvisorio.slice(-1)[0][0].url)
+      // this.getInfo(arrayProvisorio.slice(-1)[0][0].url)
 
-      this.setState({ selectedPokemons: arrayProvisorio ,})
-      console.log("Array selected pokes: ", this.state.selectedPokemons)
+      // this.setState({ selectedPokemons: arrayProvisorio })
+      // console.log("Array selected pokes: ", this.state.selectedPokemons)
 
       // this.getInfo(arrayProvisorio.length-1)
     }
@@ -89,12 +90,7 @@ class App extends React.Component {
 getInfo = async (url) => {
   const response =await  axios.get(`${url}`)
   console.log("Resposta : ",response.data)
-this.setState({name: response.data.id},() => {
-console.log("dentro do this.state:", this.name)
-return console.log("chakalaka no id: ",response.data.id)
-})
-console.log(this.photoId)
-
+// this.setState({photoId: response.data.id})
 
 }
 
@@ -128,7 +124,17 @@ console.log(this.photoId)
     // return { renderCarros }
     return  "cHAKALAKA"
 
+
+
+
   }
+
+  // renderCards = () => {
+  //   this.select6Pokes
+  //   <Pokecard
+  //   name={this.state.selectedPokemons[0].name}
+  //   type={'Fire'} />
+  // }
 
   render() {
 
@@ -139,13 +145,13 @@ console.log(this.photoId)
         return    <Pokecard
           name={pokemon[0].name}
           type={"ficeeeeeeeeeee"}
-          number={"44"}
+          number={pokemon[0].url}
           // type={this.getInfo(pokemon[0].url)}
           // this.getInfo()
 
         />
     //     ,
-    // console.log("o que o 'pokemon ta vindo: '",this.number)
+    // console.log("o que o 'pokemon ta vindo: '",pokemon[0].url)
 
       }
     //   ,

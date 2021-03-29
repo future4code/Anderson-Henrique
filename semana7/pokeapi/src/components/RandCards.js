@@ -10,7 +10,7 @@ class RandCards extends React.Component {
 
         return(
             <div>
-                
+                 
 
             </div>
         )
