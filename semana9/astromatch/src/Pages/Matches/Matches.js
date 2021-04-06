@@ -12,7 +12,6 @@ const [allMatches,setAllMatches]=useState([])
 
 useEffect( () => {
 getAllMatches()
-// getAllMatches()
 },[])
 
     const getAllMatches = async () => {
@@ -27,9 +26,6 @@ getAllMatches()
         }
       }
 
-      
-
-
       const allLiked = allMatches.map( (person )=> {
           return   <CardMatch 
             image={person.photo}
@@ -38,7 +34,7 @@ getAllMatches()
       } )
 return (
     <Container>
-        haha
+        <button onClick={props.goToHome}>Voltar para HOME</button>
         {allLiked}
     </Container>
 )
