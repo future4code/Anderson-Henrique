@@ -24,16 +24,16 @@ const Home = (props) => {
       }
     }
   
-    const getAllMatches = async () => {
+    // const getAllMatches = async () => {
   
-      try {
-        const response = await axios.get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/anderson-oliveira-cruz/matches")
-        console.log("response no getMatches: ", response.data.matches)
+    //   try {
+    //     const response = await axios.get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/anderson-oliveira-cruz/matches")
+    //     console.log("response no getMatches: ", response.data.matches)
         
-      } catch (error) {
-        console.log("erro no getMatche")
-      }
-    }
+    //   } catch (error) {
+    //     console.log("erro no getMatche")
+    //   }
+    // }
   
     const matchTrue = async (idPerson) => {
       try {
@@ -63,21 +63,10 @@ const Home = (props) => {
       }
     }
   
-    const clearMatches = async () => {
-      const response = await axios.put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/anderson-oliveira-cruz/clear ")
-      console.log("OK + response: ", response)
-    }
-  
-  
-    
-
-
-
-
-
-
-
-
+    // const clearMatches = async () => {
+    //   const response = await axios.put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/anderson-oliveira-cruz/clear ")
+    //   console.log("OK + response: ", response)
+    // }
 
     return ( 
 
