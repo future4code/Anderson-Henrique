@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import { goToHomePage, goToListTripsPage, goToLoginPage } from '../routes/coordinator'
+import { goToApplicationFormPage, goToHomePage, goToListTripsPage, goToLoginPage } from '../routes/coordinator'
 import styled from 'styled-components'
 
 const HomePage = () => {
@@ -11,6 +11,7 @@ const HomePage = () => {
             <P>LabeX</P>
             <FlexContainer>
                 <Button onClick={() => goToListTripsPage(history)}>Ver Viagens</Button>
+                <Button onClick={() => goToApplicationFormPage(history)}>Apllication Form Page</Button>
                 <Button onClick={() => goToLoginPage(history)}>Área Adm</Button>
             </FlexContainer>
         </ContainerBody>
