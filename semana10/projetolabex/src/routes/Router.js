@@ -38,11 +38,13 @@ return (
           </Route>
 
           <Route exact path="/admin/trips/create">
-          <TripsDetailPage/>
+          <CreateTripPage/>
           </Route>
 
           <Route exact path="/admin/trips/:id">
-          <CreateTripPage/>
+          <TripsDetailPage
+          name={"chakalaka"}
+          />
           </Route>
 
           <Route >

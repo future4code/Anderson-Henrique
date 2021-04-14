@@ -1,18 +1,20 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import { goToApplicationFormPage, goToHomePage, goToListTripsPage, goToLoginPage } from '../routes/coordinator'
+import { goToApplicationFormPage, goToHomePage, goToListTripsPage, goToLoginPage, goToAdminHomePage, goToTripsDetailsPage, goToCreateTripPage } from '../routes/coordinator'
 import styled from 'styled-components'
 
 const HomePage = () => {
     const history = useHistory()
     return (
         <ContainerBody>
-
             <P>LabeX</P>
             <FlexContainer>
                 <Button onClick={() => goToListTripsPage(history)}>Ver Viagens</Button>
                 <Button onClick={() => goToApplicationFormPage(history)}>Apllication Form Page</Button>
-                <Button onClick={() => goToLoginPage(history)}>Área Adm</Button>
+                <Button onClick={() => goToLoginPage(history)}>LoginPage</Button>
+                <Button onClick={() => goToAdminHomePage(history)}>AdminHomePage</Button>
+                <Button onClick={() => goToTripsDetailsPage(history)}>TripsDetailPage</Button>
+                <Button onClick={() => goToCreateTripPage(history)}>CreateTripPage</Button>
             </FlexContainer>
         </ContainerBody>
     )
@@ -49,7 +51,7 @@ font-size:2rem;
 height:80px;
 padding: 0 20px;
 border-radius: 30px;
-color:white;
+color:gray;
 width:250px;
 `
 

@@ -27,7 +27,7 @@ const ApplicationFormPage = () => {
     const getCountryNames = async () => {
         try {
             const response = await axios.get("https://restcountries.eu/rest/v2/all")
-            console.log("Resultado do countryNames: ", response.data)
+            // console.log("Resultado do countryNames: ", response.data)
             setCountryNames(response.data)
         } catch (error) {
             console.log("Erro encontrado : ", error)
@@ -44,13 +44,30 @@ const ApplicationFormPage = () => {
         )
     })
 
-    const renderCountries = countryNames.map( (country) => {
+    const renderCountries = countryNames.map((country) => {
         return (
             <option value={country.name}>
                 {country.name}
             </option>
         )
     })
+
+    const email = 'astrodev@gmail.com'
+    const password = '123456'
+
+
+
+//     const createUser = async () => {
+//         const body = {
+//             email, password
+//         }
+// try{
+//     const response = await axios.post( 'https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/signup',body)
+//     console.log("Ver se a response foi boa: ",response)
+// }catch(error){
+//     console.log("ERRO :",error)
+// }
+//          }
 
     return (
         <Container>
@@ -66,13 +83,13 @@ const ApplicationFormPage = () => {
             <Input placeholder="Idade" />
             <Input placeholder="Profissão" />
             <Textarea placeholder="Texto de candidatura" />
-            
+
             <select name="country" id="country">
                 <option value="">Escolha uma país</option>
                 {renderCountries}
             </select>
             {/* <button onClick={countryNames}>Teste countrynames</button> */}
-
+            {/* <button onClick={createUser}>Criar o signup</button> */}
         </Container>
     )
 
