@@ -37,9 +37,15 @@ const AdminHomePage = () => {
         }
     }
 
+    const goToSelectedPage = (id) => {
+        console.log("Id q foi : ",id)
+        history.push(`/admin/trips/${id}`)
+
+    }
+
 
     const renderTrips = trips.map((trip) => {
-        return <div key="trip.id" id="trip.id" >{trip.name} <Details/><Delete />
+        return <div key="trip.id" id="trip.id" >{trip.name} <Details onClick={() => goToSelectedPage(trip.id)}/><Delete />
         <button onClick={() => goToTripsDetailsPage(history)}>Go to details teste</button></div>
     })
 
