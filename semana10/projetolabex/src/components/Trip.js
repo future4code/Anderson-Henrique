@@ -19,9 +19,10 @@ export default Trip
 
 const Container = styled.div`
 border: 1px solid black;
-width:800px;
-margin: 0 auto;
-min-width:400px;
+/* max-width:600px; */
+/* min-width:400px; */
+width: max(75%,375px);
+margin: 29px auto;
 border-radius:8px;
 display:flex;
 flex-direction:column;
@@ -37,11 +38,11 @@ width:80px;
 const P = styled.p`
 font-family:'Roboto';
 width:80%;
-/* background-color:red; */
+/* background-color:grey; */
 /* border: 1px solid black; */
 
 margin:  auto;
-min-height:44px;
+min-height:52px;
 /* padding: 12px 0 0 0; */
 display:flex;
 align-items:center;

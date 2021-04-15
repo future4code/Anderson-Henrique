@@ -137,9 +137,11 @@ border:1px solid black;
 flex-direction:column;
 margin: auto;
 justify-content:center;
+width: max(50%,400px)
+
 `
 const Span = styled.span`
-color:red;
+/* color:red; */
 display:flex;
 align-items:center;
 width:80px;

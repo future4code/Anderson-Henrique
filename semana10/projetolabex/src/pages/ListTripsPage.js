@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import Trip from '../components/Trip'
 import { useProtectedPage } from '../hooks/useProtectedPage'
+import styled from 'styled-components'
 import {Button} from '../components/Button'
 import { goToApplicationFormPage } from '../routes/coordinator'
 const ListTripsPage = () => {
@@ -47,15 +48,45 @@ const ListTripsPage = () => {
     return (
 
 
-        <div>
-            <p>ListTripsPage</p>
-            <button onClick={getTripsList}>Ver o response da API</button>
+        <Container>
+            <H1>ListTripsPage</H1>
+            {/* <button onClick={getTripsList}>Ver o response da API</button> */}
+            
+        { tripsToRender}
+        <ContainerButtons>
             <Button onClick={history.goBack} text={"Voltar"}></Button>
             <Button onClick={()=> goToApplicationFormPage(history)} text={"Inscrever-se"}></Button>
-        { tripsToRender}
-        </div>
+            </ContainerButtons>
+            
+        </Container>
     )
 
 }
 
 export default ListTripsPage
+
+
+const Container = styled.div`
+display:flex;
+/* max-width:800px; */
+width:max(50%,375px);
+flex-direction:column;
+margin: 12px auto;
+/* background-color:red; */
+
+`
+
+const ContainerButtons = styled.div`
+/* max-width: 600px;
+min-width: 400px; */
+width:max(50%,375px);
+
+display:flex;
+justify-content: space-evenly;
+margin: auto;
+
+`
+const H1 = styled.h1`
+width: 200px;
+margin: auto;
+`

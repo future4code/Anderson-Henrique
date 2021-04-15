@@ -12,10 +12,10 @@ return <ButtonTemplate  onClick={props.onClick}>{props.text}</ButtonTemplate>
 
 const ButtonTemplate = styled.button`
 background-color:blue;
-font-size:2rem;
-height:80px;
-padding: 0 20px;
-border-radius: 30px;
+font-size:1.5rem;
+height:50px;
+padding: 0 10px;
+border-radius: 20px;
 color:white;
-width:250px;
+width:200px;
 `
