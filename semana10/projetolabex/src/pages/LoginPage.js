@@ -40,9 +40,13 @@ const body  = {
     return (
         <div>
             <h1>Pagina de Login</h1>
-            <input value={email} onChange={handleEmail} placeholder="E-mail" />
-            <input value={password} onChange={handlePassword} placeholder="Senha" />
-            <button onClick={login}>Enviar </button>
+            <form onSubmit={login}>
+            <input  type ="email" value={email} onChange={handleEmail} pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"} placeholder="E-mail" required />
+            <input  type="password" value={password} onChange={handlePassword} pattern={"(.*[a-z]){3}"}  placeholder="Senha"  required />
+            <button >Enviar </button>
+            </form>
+            
+            {/* pattern={"(.*[a-z]){2}"} */}
         </div>
     )
 

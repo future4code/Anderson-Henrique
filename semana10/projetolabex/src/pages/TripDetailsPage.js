@@ -37,11 +37,13 @@ const TripsDetailPage = () => {
 
     // console.log("trips.candidates:",trips.candidates)
     // console.log("trips.approved:",trips.approved)
+// setTimeout( () => {
+//     const pendingCandidates = trips.candidates.map((candidate) => {
 
-     const pendingCandidates = trips.candidates.map((candidate) => {
-
-        return <h4>{candidate.name}</h4>
-    })
+//         return <h4>{candidate.name}</h4>
+//     })
+// }, 1000)
+     
 //    console.log("trips.approved.lenght:",trips.approved.lenght)
     
 
@@ -104,24 +106,24 @@ const TripsDetailPage = () => {
             {/* <div key={trip.id}> */}
             {/* {console.log("trip: ",trips)} */}
 
-            <div>
+            <Container>
                 {/* {console.log("trip: ",trips)} */}
 
                 {console.log("detailedtrip: ", trips)}
-                <P><Span>Nome</Span> <p>{trips.name}</p></P>
-                <P><Span>Descricao</Span> <p>{trips.description}</p></P>
-                <P><Span>Planeta</Span> <p>{trips.planet}</p></P>
-                <P><Span>Duracao</Span> <p>{trips.durationInDays}</p></P>
-                <P><Span>Data</Span> <p>{trips.date}</p></P>
+                <Div><Span>Nome</Span> <p>{trips.name}</p></Div>
+                <Div><Span>Descricao</Span> <p>{trips.description}</p></Div>
+                <Div><Span>Planeta</Span> <p>{trips.planet}</p></Div>
+                <Div><Span>Duracao</Span> <p>{trips.durationInDays}</p></Div>
+                <Div><Span>Data</Span> <p>{trips.date}</p></Div>
                 
-                <h2>Candidatos Pendentes</h2>
+                <H2>Candidatos Pendentes</H2>
                 {/* {pendingCandidates.lenght && pendingCandidates} */}
                 
-                <h2>Candidatos Aprovados</h2>
+                <H2>Candidatos Aprovados</H2>
                 {/* {approvedCandidates} */}
                 {/* <button onClick={getSelectedTrip}>Testando a requisicao do getSelectedTrip</button> */}
 
-            </div>
+            </Container>
         </div>
     )
 
@@ -131,16 +133,33 @@ export default TripsDetailPage
 
 const Container = styled.div`
 border:1px solid black;
+/* display:flex; */
+flex-direction:column;
+margin: auto;
+justify-content:center;
 `
 const Span = styled.span`
 color:red;
 display:flex;
 align-items:center;
+width:80px;
+padding-left:12px;
+/* font-family:"Roboto" */
 `
 
-const P = styled.p`
+const Div = styled.div`
 display:flex;
-border:1px solid black;
+/* border:1px solid black; */
+max-width:800px;
+min-width:365px;
+margin: 0 auto;
+height:64px;
+margin-bottom:24px;
 
+`
 
+const H2 = styled.h2`
+color:grey;
+display: flex;
+justify-content:center;
 `

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { useForm } from '../hooks/useForm'
 
 
 
@@ -9,6 +10,14 @@ import axios from 'axios'
 const ApplicationFormPage = () => {
     const [trips, setTrips] = useState([])
     const [countryNames, setCountryNames] = useState([])
+    const [id, setId] = useState("")
+
+    const initialForm = {
+        name: "", age: "", profession:"", country: "", applicationText:""
+    }
+
+    const [form, onChange] = useForm(initialForm)
+    console.log("form: ",form)
     useEffect(() => {
         getTripsList()
         getCountryNames()
@@ -35,10 +44,14 @@ const ApplicationFormPage = () => {
 
     }
 
+    const handleId = (event) => {
+        setId(event.target.value)
+        console.log(event.target.value)
+    }
 
-    const options = trips.map((trip) => {
+    const planetOptions = trips.map((trip) => {
         return (
-            <option value={trip.planet}>
+            <option value={trip.id}>
                 {trip.name}
             </option>
         )
@@ -56,38 +69,29 @@ const ApplicationFormPage = () => {
     const password = '123456'
 
 
-
-//     const createUser = async () => {
-//         const body = {
-//             email, password
-//         }
-// try{
-//     const response = await axios.post( 'https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/signup',body)
-//     console.log("Ver se a response foi boa: ",response)
-// }catch(error){
-//     console.log("ERRO :",error)
-// }
-//          }
-
     return (
         <Container>
             <p>ApplicationFormPage</p>
+<form>
 
-            <select name="trip" id="trip">
+            <select name="trip" onChange={handleId} value={id} id="trip">
                 <option value="">Escolha uma viagem</option>
-                {options}
+                {planetOptions}
             </select>
 
 
-            <Input placeholder="Nome" />
-            <Input placeholder="Idade" />
-            <Input placeholder="Profissão" />
-            <Textarea placeholder="Texto de candidatura" />
+            <Input name="name" value={form.name} onChange={onChange} placeholder="Nome" required pattern={"(.*[a-z]){3}"} />
+            <Input name="age" type ="number" value={form.age} onChange={onChange} placeholder="Idade" required  min={18}/>
+            <Input name="profession" value={form.profession} onChange={onChange} placeholder="Profissão" required pattern={"(.*[a-z]){10}"} />
+            <Textarea name="applicationText" value={form.applicationText} onChange={onChange} placeholder="Texto de candidatura" required  pattern={"(.*[a-z]){30}"} />
 
-            <select name="country" id="country">
+            <select name="country" value={form.country} onChange={onChange} id="country"required  >
                 <option value="">Escolha uma país</option>
                 {renderCountries}
             </select>
+        <button>Enviar</button>
+</form>
+
             {/* <button onClick={countryNames}>Teste countrynames</button> */}
             {/* <button onClick={createUser}>Criar o signup</button> */}
         </Container>

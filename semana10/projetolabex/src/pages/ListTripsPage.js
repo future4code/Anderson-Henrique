@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import Trip from '../components/Trip'
 import { useProtectedPage } from '../hooks/useProtectedPage'
-
+import {Button} from '../components/Button'
+import { goToApplicationFormPage } from '../routes/coordinator'
 const ListTripsPage = () => {
     const [trips, setTrips] = useState([])
 
@@ -49,7 +50,8 @@ const ListTripsPage = () => {
         <div>
             <p>ListTripsPage</p>
             <button onClick={getTripsList}>Ver o response da API</button>
-            <button onClick={history.goBack}>Voltar</button>
+            <Button onClick={history.goBack} text={"Voltar"}></Button>
+            <Button onClick={()=> goToApplicationFormPage(history)} text={"Inscrever-se"}></Button>
         { tripsToRender}
         </div>
     )
