@@ -1,16 +1,15 @@
 import React from 'react'
 import Router from './routes/Router'
-const  App= () => {
+import "./App.css"
+const App = () => {
 
 
   return (
+    <div className="App">
 
-    <Router/>
-    // <div className="App">
-      
+      <Router />
 
-    //   {/* <p>Chakalaka</p> */}
-    // </div>
+    </div>
   );
 }
 

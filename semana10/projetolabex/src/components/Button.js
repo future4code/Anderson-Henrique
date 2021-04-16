@@ -1,12 +1,10 @@
 import React from 'react'
-import { useHistory } from 'react-router'
 import styled from 'styled-components'
 
 export const Button = (props) => {
-    const history = useHistory()
 
-return <ButtonTemplate  onClick={props.onClick}>{props.text}</ButtonTemplate>
-    
+    return <ButtonTemplate onClick={props.onClick}>{props.text}</ButtonTemplate>
+
 }
 
 
@@ -18,4 +16,11 @@ padding: 0 10px;
 border-radius: 20px;
 color:white;
 width:200px;
+
+@media(max-width:400px){
+    font-size:1rem;
+    height:40px;
+    padding:0 5px;
+    width:150px;
+}
 `

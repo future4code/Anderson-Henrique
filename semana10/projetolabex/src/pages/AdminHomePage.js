@@ -7,7 +7,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { DeleteOutline } from '@styled-icons/typicons/DeleteOutline'
 import { Error } from '@styled-icons/material-twotone'
-import {Detail} from '@styled-icons/boxicons-regular/Detail'
+import { Detail } from '@styled-icons/boxicons-regular/Detail'
 
 
 
@@ -20,14 +20,14 @@ const AdminHomePage = () => {
     useProtectedPage()
 
     const history = useHistory()
-    
+
     console.log(window.localStorage)
 
     const [trips, setTrips] = useState([])
 
     const getTripsList = async () => {
         try {
-            const response = await axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips ")
+            const response = await axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips")
             console.log("Ver a response: ", response)
             setTrips(response.data.trips)
             console.log("so confirmando mesmo se passou:", trips)
@@ -38,15 +38,23 @@ const AdminHomePage = () => {
     }
 
     const goToSelectedPage = (id) => {
-        console.log("Id q foi : ",id)
+        console.log("Id q foi : ", id)
         history.push(`/admin/trips/${id}`)
 
     }
 
 
     const renderTrips = trips.map((trip) => {
-        return <div key="trip.id" id="trip.id" >{trip.name} <Details onClick={() => goToSelectedPage(trip.id)}/><Delete />
-        <button onClick={() => goToTripsDetailsPage(history)}>Go to details teste</button></div>
+        return (
+        <Div key="trip.id" id="trip.id" >{trip.name} 
+        
+        <ContainerButtons>
+        <Details onClick={() => goToSelectedPage(trip.id)} />
+        <Delete />
+        </ContainerButtons>
+        
+        </Div>
+        )
     })
 
     const deleteTrip = async (id) => {
@@ -54,16 +62,16 @@ const AdminHomePage = () => {
         // {
 
         const token = window.localStorage.getItem("token")
-        try{
+        try {
             const response = await axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips/${id}`,
-            {
-                headers: {
-                    auth:token
-                }
-            })
-            console.log("Resultado da requisição: ",response)
-        }catch(error){
-            console.log("Erro: ",error)
+                {
+                    headers: {
+                        auth: token
+                    }
+                })
+            console.log("Resultado da requisição: ", response)
+        } catch (error) {
+            console.log("Erro: ", error)
         }
     }
     // }
@@ -72,7 +80,6 @@ const AdminHomePage = () => {
     return (
         <div>
             <p>AdminHomePage</p>
-            <button onClick={() => goToLoginPage(history)}>Mandar teste loginPage</button>
             { renderTrips}
         </div>
     )
@@ -81,6 +88,18 @@ const AdminHomePage = () => {
 
 export default AdminHomePage
 
+const Div = styled.div`
+width:max(50%,330px);
+border:1px solid pink;
+border-radius:8px;
+display:flex;
+margin:24px auto;
+min-height:40px;
+align-items:center;
+padding: 0 12px;
+font-size:24px;
+
+`
 
 const Delete = styled(DeleteOutline)`
 color:red;
@@ -90,4 +109,10 @@ width:30px;
 const Details = styled(Detail)`
 width:30px;
 color:blue
+`
+const ContainerButtons = styled.div`
+/* display:fle */
+/* background-color:gray; */
+margin:0 0 0 auto;
+min-width:80px;
 `

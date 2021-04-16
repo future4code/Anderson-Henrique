@@ -49,7 +49,7 @@ const ListTripsPage = () => {
 
 
         <Container>
-            <H1>ListTripsPage</H1>
+            <H1>Lista de Viagens</H1>
             {/* <button onClick={getTripsList}>Ver o response da API</button> */}
             
         { tripsToRender}
@@ -69,7 +69,7 @@ export default ListTripsPage
 const Container = styled.div`
 display:flex;
 /* max-width:800px; */
-width:max(50%,375px);
+width:max(75%,350px);
 flex-direction:column;
 margin: 12px auto;
 /* background-color:red; */
@@ -79,7 +79,7 @@ margin: 12px auto;
 const ContainerButtons = styled.div`
 /* max-width: 600px;
 min-width: 400px; */
-width:max(50%,375px);
+width:max(50%,330px);
 
 display:flex;
 justify-content: space-evenly;
@@ -87,6 +87,8 @@ margin: auto;
 
 `
 const H1 = styled.h1`
-width: 200px;
+width: 250px;
 margin: auto;
+color:gray;
+font-family: 'Roboto'
 `
