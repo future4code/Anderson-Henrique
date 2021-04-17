@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useForm } from '../hooks/useForm'
 import { Button } from "../components/Button"
 import { useHistory } from 'react-router'
+import { Loading } from '../components/Loading'
 
 
 
@@ -25,14 +26,18 @@ const ApplicationFormPage = () => {
         getTripsList()
         getCountryNames()
     }, [])
+    const [loading, setLoading] = useState({})
 
     const getTripsList = async () => {
+        setLoading({display:"flex"})
         try {
             const response = await axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips ")
             setTrips(response.data.trips)
         } catch (error) {
             console.log("erro é ..... : ", error)
         }
+        setLoading({display:"none"})
+
     }
 
 
@@ -72,6 +77,7 @@ const ApplicationFormPage = () => {
         event.preventDefault()
         const body = form
         const id = idTrip
+        setLoading({display:""})
         
             if (idTrip === "") {
                 alert("Preencha o campo 'Escolha uma viagem'")
@@ -88,6 +94,7 @@ const ApplicationFormPage = () => {
 
             }
 
+            setLoading({display:""})
 
         }
 
@@ -99,7 +106,8 @@ const ApplicationFormPage = () => {
 
     return (
         <Container>
-            <p>ApplicationFormPage</p>
+            <Loading style={loading}/>
+            <P>Formulário</P>
             <Form onSubmit={submitCandidate}>
 
                 <Select name="trip" onChange={handleId} value={idTrip} id="trip">
@@ -122,9 +130,6 @@ const ApplicationFormPage = () => {
                 </ContainerButtons>
 
             </Form>
-
-            {/* <button onClick={countryNames}>Teste countrynames</button> */}
-            {/* <button onClick={createUser}>Criar o signup</button> */}
         </Container>
     )
 
@@ -135,13 +140,17 @@ export default ApplicationFormPage
 
 const Container = styled.div`
 display:flex;
-max-width: 800px;
+/* max-width: 800px; */
+width:max(60%,330px);
 flex-direction:column;
 border:1px solid black;
 border-radius:12px;
-margin: auto;
+margin: auto 12px;
 `
-
+const P = styled.p`
+color:gray;
+font-size:2.2rem;
+`
 
 const Form = styled.form`
 /* background-color:red; */

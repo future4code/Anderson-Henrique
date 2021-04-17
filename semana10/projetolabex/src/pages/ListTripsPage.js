@@ -2,93 +2,80 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import Trip from '../components/Trip'
-import { useProtectedPage } from '../hooks/useProtectedPage'
 import styled from 'styled-components'
-import {Button} from '../components/Button'
+import { Button } from '../components/Button'
 import { goToApplicationFormPage } from '../routes/coordinator'
+import { Loading } from '../components/Loading'
 const ListTripsPage = () => {
-    const [trips, setTrips] = useState([])
-
 
     useEffect(() => {
         getTripsList()
     }, [])
 
-    const history= useHistory()
+    const history = useHistory()
+    const [loading, setLoading] = useState({})
+    const [trips, setTrips] = useState([])
 
     const getTripsList = async () => {
+        setLoading({ display: "flex" })
         try {
             const response = await axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips ")
-            // console.log("Ver a response: ", response)
             setTrips(response.data.trips)
-            // console.log("so confirmando mesmo se passou:", trips)
-
         } catch (error) {
             console.log("erro é ..... : ", error)
         }
+        setLoading({ display: "none" })
     }
 
 
-    const tripsToRender = trips.map( (trip) => {
-        return(
-        <Trip
-        key={trip.id}
-        name={trip.name}
-        date={trip.date}
-        description={trip.description}
-        planet={trip.planet}
-        durationInDays={trip.durationInDays}
-        
-        />
-)
-}
+    const tripsToRender = trips.map((trip) => {
+        return (
+            <Trip
+                key={trip.id}
+                name={trip.name}
+                date={trip.date}
+                description={trip.description}
+                planet={trip.planet}
+                durationInDays={trip.durationInDays}
+            />
+        )
+    }
     )
-
-    
     return (
 
-
         <Container>
+            
+            <Loading style={loading} />
             <H1>Lista de Viagens</H1>
-            {/* <button onClick={getTripsList}>Ver o response da API</button> */}
-            
-        { tripsToRender}
-        <ContainerButtons>
-            <Button onClick={history.goBack} text={"Voltar"}></Button>
-            <Button onClick={()=> goToApplicationFormPage(history)} text={"Inscrever-se"}></Button>
+            { tripsToRender}
+            <ContainerButtons>
+                <Button onClick={history.goBack} text={"Voltar"}></Button>
+                <Button onClick={() => goToApplicationFormPage(history)} text={"Inscrever-se"}></Button>
             </ContainerButtons>
-            
+
         </Container>
     )
-
 }
 
 export default ListTripsPage
 
-
 const Container = styled.div`
 display:flex;
-/* max-width:800px; */
-width:max(75%,350px);
+width:max(60%,330px);
 flex-direction:column;
 margin: 12px auto;
-/* background-color:red; */
-
 `
 
 const ContainerButtons = styled.div`
-/* max-width: 600px;
-min-width: 400px; */
-width:max(50%,330px);
-
+width:max(60%,330px);
 display:flex;
 justify-content: space-evenly;
 margin: auto;
-
 `
 const H1 = styled.h1`
 width: 250px;
 margin: auto;
 color:gray;
-font-family: 'Roboto'
+font-family: 'Roboto';
+font-size:2rem;
 `

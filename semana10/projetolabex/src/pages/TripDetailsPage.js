@@ -5,27 +5,26 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { Check } from '@styled-icons/boxicons-regular/Check'
 import { DeleteOutline } from '@styled-icons/typicons/DeleteOutline'
-
+import { Loading } from '../components/Loading'
 const TripsDetailPage = () => {
     useProtectedPage()
     const [trips, setTrips] = useState({})
     const [pendentCandidates, setPendentCandidates] = useState([])
     const [approvedCandidates, setApprovedCandidates] = useState([])
-    const [displayDiv,setDisplayDiv] = useState("none")
+    const [displayDiv, setDisplayDiv] = useState("none")
 
-    const showDiv = event => {
-        event.preventDefault()
+    const showDiv = () => {
+        // event.preventDefault()
         console.log("entrei no show")
         setDisplayDiv("block")
     }
 
-    const hideDiv = event => {
-        // event.preventDefault()
+    const hideDiv = () => {
         console.log("entrei no hide")
-
         setDisplayDiv("none")
     }
 
+    const [loading,setLoading] = useState({})
 
     const history = useHistory()
     const params = useParams()
@@ -34,11 +33,11 @@ const TripsDetailPage = () => {
         getSelectedTrip()
     }, [])
 
-
     const getSelectedTrip = async () => {
+       setLoading({display:'flex'})
+        
         const token = window.localStorage.getItem("token")
         try {
-            // console.log("params:",params.id)
             const response = await axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trip/${params.id}`, {
                 headers: {
                     auth: token
@@ -48,16 +47,19 @@ const TripsDetailPage = () => {
             setTrips(response.data.trip)
             setApprovedCandidates(response.data.trip.approved)
             setPendentCandidates(response.data.trip.candidates)
-            console.log("trips: ", trips)
-            console.log("pendingCand:", pendentCandidates)
-            console.log("approved:", approvedCandidates)
+            // console.log("trips: ", trips)
+            // console.log("pendingCand:", pendentCandidates)
+            // console.log("approved:", approvedCandidates)
+            setLoading({display:'none'})
 
         } catch (error) {
             console.log("error: ", error)
+       setLoading({display:'none'})
         }
     }
 
     const decideAboutCandidate = async (candidate, choice) => {
+        setLoading({display:'flex'})
 
         const body = {
             approve: choice
@@ -75,8 +77,12 @@ const TripsDetailPage = () => {
             } else {
                 alert("Candidato reprovado")
             }
+            setLoading({display:'none'})
+
         } catch (error) {
             console.log("O êro é: ", error)
+            setLoading({display:'none'})
+
         }
 
     }
@@ -86,13 +92,12 @@ const TripsDetailPage = () => {
     const pendingCandidates = pendentCandidates.map((candidate) => {
         return (
             <div>
-                {console.log("chakalaka?", candidate.name)}
-                <ContainerCandidate 
-                 onMouseEnter={event => showDiv(event)}
-                onMouseLeave={ event => hideDiv(event)}>
+                <ContainerCandidate
+                    onMouseEnter={event => showDiv(event)}
+                    onMouseLeave={event => hideDiv(event)}>
                     <H4>{candidate.name}</H4>
-                    <DivCandidate style={{display: displayDiv}}>
-                        {console.log("displayDiv: ",displayDiv)}
+                    <DivCandidate style={{ display: displayDiv }}>
+                        {/* {console.log("displayDiv: ",displayDiv)} */}
                         <p>Idade: {candidate.age}</p>
                         <p>País: {candidate.country}</p>
                         <p>Profissão: {candidate.profession}</p>
@@ -118,13 +123,9 @@ const TripsDetailPage = () => {
 
     return (
         <div>
-            {/* {console.log("detailtrip no inicio do render: ",detailedTrip)} */}
-            <p>TripsDetailPage</p>
-            {/* <div key={trip.id}> */}
-            {/* {console.log("trip: ",trips)} */}
-
+            <p>Detalhes da viagem</p>
             <Container>
-                {/* {console.log("trip: ",trips)} */}
+                <Loading style={loading}/>
                 {console.log("pendingCand:", pendentCandidates)}
 
                 {console.log("detailedtripssss: ", trips)}
@@ -137,8 +138,6 @@ const TripsDetailPage = () => {
 
                 <H2>Candidatos Pendentes</H2>
                 {pendingCandidates.length && pendingCandidates}
-                {/* {pendingCandidates} */}
-
                 <H2Green>Candidatos Aprovados</H2Green>
                 {approvCandidates}
 
@@ -151,8 +150,7 @@ const TripsDetailPage = () => {
 export default TripsDetailPage
 
 const Container = styled.div`
-border:1px solid black;
-/* display:flex; */
+/* border:1px solid black; */
 flex-direction:column;
 margin: auto;
 justify-content:center;
@@ -165,35 +163,23 @@ display:flex;
 align-items:center;
 min-width:85px;
 padding-left:12px;
-/* font-family:"Roboto" */
 `
 
 const Div = styled.div`
 display:flex;
-/* border:1px solid black; */
 width:max(75%,330px);
 margin: 0 auto;
 min-height:64px;
-/* margin-bottom:12px; */
-
 `
 
 const DivCandidate = styled.div`
-/* display:hide; */
-/* opacity:0; */
-/* visibility:hidden; */
 &:hover{
-    color:red;
-    /* opacity:1; */
-    /* display:block; */
+    color:green;
     transition:0.7s;
-
 }
 `
 
-
 const P = styled.p`
-/* background-color:red; */
 width:100%;
 @media(max-width:400px){
 font-size:14px;
@@ -201,7 +187,6 @@ padding-right:8px;
 display:flex;
 align-items:center;
 }
-
 `
 
 const H2 = styled.h2`
@@ -211,11 +196,9 @@ justify-content:center;
 `
 
 const H4 = styled.h4`
-/* background-color:pink; */
 margin: 12px 0 8px;
 `
 const ContainerCandidate = styled.div`
-/* background-color:darkblue; */
 display:flex;
 flex-direction:column;
 width:max(80%,300px);
@@ -226,13 +209,11 @@ margin-bottom:24px;
 `
 
 const ContainerButtons = styled.div`
-
 `
 
 const Approved = styled(Check)`
 color:green;
 width:30px;
-
 `
 
 const Delete = styled(DeleteOutline)`

@@ -1,15 +1,23 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { Button } from '../components/Button'
+import { Loading } from '../components/Loading'
 import { goToAdminHomePage } from '../routes/coordinator'
 
 const LoginPage = () => {
     console.log(window.localStorage)
 
-    const history = useHistory()
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading({ display: "none" })
 
+        }, 400);
+    }, [])
+
+    const history = useHistory()
+    const [loading, setLoading] = useState({})
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -24,6 +32,7 @@ const LoginPage = () => {
 
     const login = async (event) => {
         event.preventDefault()
+        setLoading({ display: "flex" })
         const body = {
             email,
             password
@@ -37,15 +46,18 @@ const LoginPage = () => {
         } catch (error) {
             console.log("O êro é: ", error)
         }
+        setLoading({ display: "none" })
+
     }
 
 
     return (
         <Container>
+            <Loading style={loading} />
             <H1>Pagina de Login</H1>
             <Form onSubmit={login}>
                 <Input type="email" value={email} onChange={handleEmail} pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"} placeholder="E-mail" required />
-                <Input type="password" value={password} onChange={handlePassword} placeholder="Senha" required  pattern={"^.{4,}"}/>
+                <Input type="password" value={password} onChange={handlePassword} placeholder="Senha" required pattern={"^.{4,}"} />
                 <ContainerButtons>
                     <Button text={"Voltar"} onClick={history.goBack} />
                     <Button text={"Entrar"} />
@@ -65,7 +77,7 @@ const Container = styled.div`
 display:flex;
 flex-direction:column;
 background-color:pink;
-max-width:800px;
+width:max(60%,360px);
 margin: auto;
 `
 
