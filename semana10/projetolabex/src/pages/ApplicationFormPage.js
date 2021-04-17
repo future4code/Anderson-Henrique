@@ -11,12 +11,12 @@ import { useHistory } from 'react-router'
 const ApplicationFormPage = () => {
     const [trips, setTrips] = useState([])
     const [countryNames, setCountryNames] = useState([])
-    const [id, setId] = useState("")
+    const [idTrip, setIdTrip] = useState("")
     const history = useHistory()
 
 
     const initialForm = {
-        name: "", age: "", profession: "", country: "", applicationText: ""
+        name: "", age: "", applicationText: "", profession: "", country: ""
     }
 
     const [form, onChange] = useForm(initialForm)
@@ -48,8 +48,8 @@ const ApplicationFormPage = () => {
     }
 
     const handleId = (event) => {
-        setId(event.target.value)
-        console.log(event.target.value)
+        setIdTrip(event.target.value)
+        console.log("idTrip: ", event.target.value)
     }
 
     const planetOptions = trips.map((trip) => {
@@ -68,6 +68,31 @@ const ApplicationFormPage = () => {
         )
     })
 
+    const submitCandidate = async (event) => {
+        event.preventDefault()
+        const body = form
+        const id = idTrip
+        
+            if (idTrip === "") {
+                alert("Preencha o campo 'Escolha uma viagem'")
+            } else {
+                try {
+                    const response = await axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips/${id}/apply`, body)
+                    console.log("response: ",response)
+                    alert("Pedido enviado! Agora é torcer para ser aprovado!")
+                    history.push("/trips/list")
+                } catch (error) {
+                    console.log("O êro é: ", error)
+                }
+
+
+            }
+
+
+        }
+
+    
+
     const email = 'astrodev@gmail.com'
     const password = '123456'
 
@@ -75,9 +100,9 @@ const ApplicationFormPage = () => {
     return (
         <Container>
             <p>ApplicationFormPage</p>
-            <Form>
+            <Form onSubmit={submitCandidate}>
 
-                <Select name="trip" onChange={handleId} value={id} id="trip">
+                <Select name="trip" onChange={handleId} value={idTrip} id="trip">
                     <option value="">Escolha uma viagem</option>
                     {planetOptions}
                 </Select>
@@ -86,14 +111,13 @@ const ApplicationFormPage = () => {
                 <Input name="name" value={form.name} onChange={onChange} placeholder="Nome" required pattern={"(.*[a-z]){3}"} />
                 <Input name="age" type="number" value={form.age} onChange={onChange} placeholder="Idade" required min={18} />
                 <Input name="profession" value={form.profession} onChange={onChange} placeholder="Profissão" required pattern={"(.*[a-z]){10}"} />
-                <Textarea name="applicationText" value={form.applicationText} onChange={onChange} placeholder="Texto de candidatura" required pattern={"(.*[a-z]){30}"}/>
-
+                <Input name="applicationText" value={form.applicationText} onChange={onChange} placeholder="Texto de candidatura" required pattern={"^.{30,}"} />
                 <Select name="country" value={form.country} onChange={onChange} id="country" required  >
                     <option value="">Escolha uma país</option>
                     {renderCountries}
                 </Select>
                 <ContainerButtons>
-                    <Button text="voltar" onClick={history.goBack} />
+                    <Button text="Voltar" onClick={history.goBack} />
                     <Button text="Enviar" />
                 </ContainerButtons>
 
@@ -133,11 +157,12 @@ width:max(75%,300px);
 height:40px;
 /* margin-bottom: 24px; */
 margin: 0 auto 24px;
+box-sizing:border-box;
 `
 
 const Select = styled.select`
 width:max(75%,300px);
-margin: 24px auto;
+margin: 0 auto 24px ;
 height:40px;
 
 
@@ -146,6 +171,8 @@ const Textarea = styled.textarea`
 width:max(75%,300px);
 height:40px;
 margin: auto;
+box-sizing:border-box;
+
 
 `
 

@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router'
 import { useProtectedPage } from '../hooks/useProtectedPage'
 import axios from 'axios'
 import styled from 'styled-components'
-import {Check} from '@styled-icons/boxicons-regular/Check'
+import { Check } from '@styled-icons/boxicons-regular/Check'
 import { DeleteOutline } from '@styled-icons/typicons/DeleteOutline'
 
 const TripsDetailPage = () => {
@@ -11,6 +11,20 @@ const TripsDetailPage = () => {
     const [trips, setTrips] = useState({})
     const [pendentCandidates, setPendentCandidates] = useState([])
     const [approvedCandidates, setApprovedCandidates] = useState([])
+    const [displayDiv,setDisplayDiv] = useState("none")
+
+    const showDiv = event => {
+        event.preventDefault()
+        console.log("entrei no show")
+        setDisplayDiv("block")
+    }
+
+    const hideDiv = event => {
+        // event.preventDefault()
+        console.log("entrei no hide")
+
+        setDisplayDiv("none")
+    }
 
 
     const history = useHistory()
@@ -53,13 +67,14 @@ const TripsDetailPage = () => {
             const response = await axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips/${trips.id}/candidates/${candidate.id}/decide`, body, {
                 headers: {
                     auth: token
-                } })
-                console.log("response:",response)
-                if(choice==="true"){
-                    alert("Candidato aprovado")
-                }else{
-                    alert("Candidato reprovado")
                 }
+            })
+            console.log("response:", response)
+            if (choice === "true") {
+                alert("Candidato aprovado")
+            } else {
+                alert("Candidato reprovado")
+            }
         } catch (error) {
             console.log("O êro é: ", error)
         }
@@ -68,18 +83,25 @@ const TripsDetailPage = () => {
 
 
     console.log("trips.candidates:", trips.candidates)
-    // console.log("trips.approved:",trips.approved)
-    // setTimeout( () => {
     const pendingCandidates = pendentCandidates.map((candidate) => {
         return (
             <div>
                 {console.log("chakalaka?", candidate.name)}
-                <ContainerCandidate>
+                <ContainerCandidate 
+                 onMouseEnter={event => showDiv(event)}
+                onMouseLeave={ event => hideDiv(event)}>
                     <H4>{candidate.name}</H4>
+                    <DivCandidate style={{display: displayDiv}}>
+                        {console.log("displayDiv: ",displayDiv)}
+                        <p>Idade: {candidate.age}</p>
+                        <p>País: {candidate.country}</p>
+                        <p>Profissão: {candidate.profession}</p>
+                        <p>Motivação: {candidate.applicationText}</p>
+                    </DivCandidate>
                     <ContainerButtons>
-                        <Approved title="Aprovar candidato" onClick={() => decideAboutCandidate(candidate, "true")}/>
-                        <Delete   title="Reprovar candidato"onClick={() => decideAboutCandidate(candidate, "false")}/> 
-                        </ContainerButtons>
+                        <Approved title="Aprovar candidato" onClick={() => decideAboutCandidate(candidate, true)} />
+                        <Delete title="Reprovar candidato" onClick={() => decideAboutCandidate(candidate, false)} />
+                    </ContainerButtons>
                 </ContainerCandidate>
             </div>
         )
@@ -88,12 +110,10 @@ const TripsDetailPage = () => {
     const approvCandidates = approvedCandidates.map((candidate) => {
         return (
             <div>
-                {console.log("chakalaka?", candidate.name)}
                 <h4>{candidate.name}</h4>
             </div>
         )
     })
-    // }, 1000)
 
 
     return (
@@ -110,13 +130,14 @@ const TripsDetailPage = () => {
                 {console.log("detailedtripssss: ", trips)}
                 {console.log("approved:", approvedCandidates)}
                 <Div><Span>Nome</Span> <P>{trips.name}</P></Div>
-                <Div><Span>Descricao</Span> <P>{trips.description}</P></Div>
+                <Div><Span>Descrição</Span> <P>{trips.description}</P></Div>
                 <Div><Span>Planeta</Span> <P>{trips.planet}</P></Div>
-                <Div><Span>Duracao</Span> <P>{trips.durationInDays} dias</P></Div>
+                <Div><Span>Duração</Span> <P>{trips.durationInDays} dias</P></Div>
                 <Div><Span>Data</Span> <P>{trips.date}</P></Div>
 
                 <H2>Candidatos Pendentes</H2>
                 {pendingCandidates.length && pendingCandidates}
+                {/* {pendingCandidates} */}
 
                 <H2Green>Candidatos Aprovados</H2Green>
                 {approvCandidates}
@@ -135,7 +156,7 @@ border:1px solid black;
 flex-direction:column;
 margin: auto;
 justify-content:center;
-width: max(75%,330px)
+width: max(60%,330px)
 
 `
 const Span = styled.span`
@@ -156,6 +177,20 @@ min-height:64px;
 /* margin-bottom:12px; */
 
 `
+
+const DivCandidate = styled.div`
+/* display:hide; */
+/* opacity:0; */
+/* visibility:hidden; */
+&:hover{
+    color:red;
+    /* opacity:1; */
+    /* display:block; */
+    transition:0.7s;
+
+}
+`
+
 
 const P = styled.p`
 /* background-color:red; */
@@ -205,6 +240,6 @@ color:red;
 width:30px;
 `
 
-const H2Green= styled(H2)`
+const H2Green = styled(H2)`
     color:green;
     `

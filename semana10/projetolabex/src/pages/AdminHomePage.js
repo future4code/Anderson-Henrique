@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { DeleteOutline } from '@styled-icons/typicons/DeleteOutline'
 import { Error } from '@styled-icons/material-twotone'
 import { Detail } from '@styled-icons/boxicons-regular/Detail'
-
+import { Button } from '../components/Button'
 
 
 const AdminHomePage = () => {
@@ -28,9 +28,9 @@ const AdminHomePage = () => {
     const getTripsList = async () => {
         try {
             const response = await axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips")
-            console.log("Ver a response: ", response)
+            // console.log("Ver a response: ", response)
             setTrips(response.data.trips)
-            console.log("so confirmando mesmo se passou:", trips)
+            // console.log("so confirmando mesmo se passou:", trips)
 
         } catch (error) {
             console.log("erro é ..... : ", error)
@@ -46,20 +46,26 @@ const AdminHomePage = () => {
 
     const renderTrips = trips.map((trip) => {
         return (
-        <Div key="trip.id" id="trip.id" >{trip.name} 
-        
-        <ContainerButtons>
-        <Details onClick={() => goToSelectedPage(trip.id)} />
-        <Delete />
-        </ContainerButtons>
-        
-        </Div>
+            <Div key="trip.id" id="trip.id" >
+                {trip.name}
+
+                <ContainerButtons>
+                    <Details onClick={() => goToSelectedPage(trip.id)} />
+                    <Delete onClick={() => deleteTrip(trip.id)} />
+                </ContainerButtons>
+
+            </Div>
         )
     })
-
+    const logout = () => {
+        window.localStorage.removeItem("token")
+        history.push("/login")
+    }
     const deleteTrip = async (id) => {
         // if(confirm(`Você tem certeza que quer deletar esta viagem?`))
         // {
+
+        
 
         const token = window.localStorage.getItem("token")
         try {
@@ -70,6 +76,8 @@ const AdminHomePage = () => {
                     }
                 })
             console.log("Resultado da requisição: ", response)
+            alert("Viagem deletada")
+            history.push("/admin/trips/list")
         } catch (error) {
             console.log("Erro: ", error)
         }
@@ -79,7 +87,12 @@ const AdminHomePage = () => {
 
     return (
         <div>
-            <p>AdminHomePage</p>
+            <P>AdminHomePage</P>
+            <ContainerButtons>
+                <Button text={"Voltar"}  onClick={history.goBack}/>
+                <Button text={"Criar Viagem"}  onClick={() => history.push("/admin/trips/create")}/>
+                <Button text={"Logout"}  onClick={logout}/>
+            </ContainerButtons>
             { renderTrips}
         </div>
     )
@@ -98,7 +111,12 @@ min-height:40px;
 align-items:center;
 padding: 0 12px;
 font-size:24px;
+color:gray;
 
+`
+
+const P = styled.p`
+/* font-family:'Roboto' */
 `
 
 const Delete = styled(DeleteOutline)`

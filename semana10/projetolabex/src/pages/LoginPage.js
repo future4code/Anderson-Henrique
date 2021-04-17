@@ -45,7 +45,7 @@ const LoginPage = () => {
             <H1>Pagina de Login</H1>
             <Form onSubmit={login}>
                 <Input type="email" value={email} onChange={handleEmail} pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"} placeholder="E-mail" required />
-                <Input type="password" value={password} onChange={handlePassword} placeholder="Senha" required />
+                <Input type="password" value={password} onChange={handlePassword} placeholder="Senha" required  pattern={"^.{4,}"}/>
                 <ContainerButtons>
                     <Button text={"Voltar"} onClick={history.goBack} />
                     <Button text={"Entrar"} />

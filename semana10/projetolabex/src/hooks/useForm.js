@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export const useForm = (initialForm) => {
     const [form,setForm] = useState(initialForm)
@@ -8,7 +8,6 @@ export const useForm = (initialForm) => {
         
         const {name, value} = event.target
         setForm({...form, [name] : value})
-
     }
 
 return [form, onChange]
