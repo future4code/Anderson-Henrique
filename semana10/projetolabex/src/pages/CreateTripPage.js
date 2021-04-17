@@ -13,14 +13,11 @@ const CreateTripPage = () => {
         setTimeout(() => {
             setLoading({ display: 'none' })
         }, 400);
-
-        console.log("loading?", loading)
     }, [])
     useProtectedPage()
     const [loading, setLoading] = useState({})
 
     const history = useHistory()
-    const params = useParams()
     const planetNames = ["Mercúrio", "Vênus", "Terra", "Marte", "Júpiter", "Saturno", "Urano", "Netuno"]
     const renderPlanets = planetNames.map((planet) => {
         return <option value={planet}>{planet}</option>
@@ -37,10 +34,8 @@ const CreateTripPage = () => {
         setLoading({ display: 'flex' })
 
         const body = form
-        console.log("entrei na func?")
         if (body.planet === "" || body.planet === "Escolha um planeta") {
             alert("Preencha o campo do planeta")
-            console.log("body: ", body)
         } else {
             try {
                 const response = await axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips`, body, {
@@ -48,18 +43,13 @@ const CreateTripPage = () => {
                         auth: token
                     }
                 })
-                console.log("Response da requisicao do CreateTripPage: ", response)
                 alert("Viagem criada")
-
             } catch (error) {
                 console.log("Erro: ", error)
             }
-            form = initialForm
             history.push("/trips/list")
         }
-        console.log("body fora if/else: ", body)
         setLoading({ display: 'none' })
-
     }
 
 
@@ -70,7 +60,6 @@ const CreateTripPage = () => {
             <P>Criar Viagem</P>
             <Form onSubmit={createTrip}>
                 <Input name="name" placeholder="Nome da viagem" pattern={"(.*[a-z]){5,}"} required onChange={onChange} />
-                {/* <Input placeholder="Nome do Planeta"  required onChange={onChange}/> */}
                 <Select name="planet" onChange={onChange}>
                     <option >Escolha um planeta</option>
                     {renderPlanets}
@@ -91,7 +80,6 @@ export default CreateTripPage
 const Container = styled.div`
 display:flex;
 flex-direction:column;
-/* background-color:pink; */
 margin: 12px;
 padding:12px;
 width:max(60%,330px);
@@ -104,14 +92,14 @@ font-size:2.2rem;
 `
 
 const Input = styled.input`
-width:max(70%,320px);
+width:max(60%,330px);
 height:40px;
 margin:0 auto 24px;
 box-sizing:border-box;
 `
 
 const Select = styled.select`
-width:max(75%,320px);
+width:max(60%,330px);
 height:40px;
 margin:0 auto 24px;
 `

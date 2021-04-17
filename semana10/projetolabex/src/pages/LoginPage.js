@@ -41,7 +41,6 @@ const LoginPage = () => {
             const response = await axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/login", body)
             console.log("Response: ", response)
             window.localStorage.setItem("token", response.data.token)
-            // history.push('/')
             goToAdminHomePage(history)
         } catch (error) {
             console.log("O êro é: ", error)
@@ -64,8 +63,6 @@ const LoginPage = () => {
                 </ContainerButtons>
 
             </Form>
-
-            {/* pattern={"(.*[a-z]){2}"} */}
         </Container>
     )
 
@@ -82,8 +79,6 @@ margin: auto;
 `
 
 const H1 = styled.h1`
-/* width: 80%;  */
-/* margin: 0 auto; */
 text-align:center;
 `
 
@@ -94,14 +89,11 @@ justify-content:space-between;
 margin:  30px auto;
 `
 
-
 const Form = styled.form`
 display:flex;
 flex-direction:column;
 height:500px;
-/* background-color:red; */
 `
-
 
 const Input = styled.input`
 height:60px;

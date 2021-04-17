@@ -14,28 +14,23 @@ const TripsDetailPage = () => {
     const [displayDiv, setDisplayDiv] = useState("none")
 
     const showDiv = () => {
-        // event.preventDefault()
-        console.log("entrei no show")
         setDisplayDiv("block")
     }
 
     const hideDiv = () => {
-        console.log("entrei no hide")
         setDisplayDiv("none")
     }
 
-    const [loading,setLoading] = useState({})
+    const [loading, setLoading] = useState({})
 
-    const history = useHistory()
     const params = useParams()
-    console.log("params: ", params)
     useEffect(() => {
         getSelectedTrip()
     }, [])
 
     const getSelectedTrip = async () => {
-       setLoading({display:'flex'})
-        
+        setLoading({ display: 'flex' })
+
         const token = window.localStorage.getItem("token")
         try {
             const response = await axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trip/${params.id}`, {
@@ -43,23 +38,19 @@ const TripsDetailPage = () => {
                     auth: token
                 }
             })
-            console.log("response do getSelectedTrip :", response.data)
             setTrips(response.data.trip)
             setApprovedCandidates(response.data.trip.approved)
             setPendentCandidates(response.data.trip.candidates)
-            // console.log("trips: ", trips)
-            // console.log("pendingCand:", pendentCandidates)
-            // console.log("approved:", approvedCandidates)
-            setLoading({display:'none'})
+            setLoading({ display: 'none' })
 
         } catch (error) {
             console.log("error: ", error)
-       setLoading({display:'none'})
+            setLoading({ display: 'none' })
         }
     }
 
     const decideAboutCandidate = async (candidate, choice) => {
-        setLoading({display:'flex'})
+        setLoading({ display: 'flex' })
 
         const body = {
             approve: choice
@@ -71,24 +62,21 @@ const TripsDetailPage = () => {
                     auth: token
                 }
             })
-            console.log("response:", response)
-            if (choice === "true") {
+            if (choice === true) {
                 alert("Candidato aprovado")
             } else {
                 alert("Candidato reprovado")
             }
-            setLoading({display:'none'})
+            setLoading({ display: 'none' })
 
         } catch (error) {
             console.log("O êro é: ", error)
-            setLoading({display:'none'})
-
+            setLoading({ display: 'none' })
         }
-
+        window.location.reload()
     }
 
 
-    console.log("trips.candidates:", trips.candidates)
     const pendingCandidates = pendentCandidates.map((candidate) => {
         return (
             <div>
@@ -97,7 +85,6 @@ const TripsDetailPage = () => {
                     onMouseLeave={event => hideDiv(event)}>
                     <H4>{candidate.name}</H4>
                     <DivCandidate style={{ display: displayDiv }}>
-                        {/* {console.log("displayDiv: ",displayDiv)} */}
                         <p>Idade: {candidate.age}</p>
                         <p>País: {candidate.country}</p>
                         <p>Profissão: {candidate.profession}</p>
@@ -120,16 +107,11 @@ const TripsDetailPage = () => {
         )
     })
 
-
     return (
         <div>
             <p>Detalhes da viagem</p>
             <Container>
-                <Loading style={loading}/>
-                {console.log("pendingCand:", pendentCandidates)}
-
-                {console.log("detailedtripssss: ", trips)}
-                {console.log("approved:", approvedCandidates)}
+                <Loading style={loading} />
                 <Div><Span>Nome</Span> <P>{trips.name}</P></Div>
                 <Div><Span>Descrição</Span> <P>{trips.description}</P></Div>
                 <Div><Span>Planeta</Span> <P>{trips.planet}</P></Div>
@@ -138,6 +120,7 @@ const TripsDetailPage = () => {
 
                 <H2>Candidatos Pendentes</H2>
                 {pendingCandidates.length && pendingCandidates}
+
                 <H2Green>Candidatos Aprovados</H2Green>
                 {approvCandidates}
 
@@ -150,13 +133,12 @@ const TripsDetailPage = () => {
 export default TripsDetailPage
 
 const Container = styled.div`
-/* border:1px solid black; */
 flex-direction:column;
 margin: auto;
 justify-content:center;
 width: max(60%,330px)
-
 `
+
 const Span = styled.span`
 color:blue;
 display:flex;
@@ -214,11 +196,13 @@ const ContainerButtons = styled.div`
 const Approved = styled(Check)`
 color:green;
 width:30px;
+cursor:pointer;
 `
 
 const Delete = styled(DeleteOutline)`
 color:red;
 width:30px;
+cursor:pointer;
 `
 
 const H2Green = styled(H2)`

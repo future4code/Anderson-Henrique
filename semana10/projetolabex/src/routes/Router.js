@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AdminHomePage from '../pages/AdminHomePage';
 import HomePage from '../pages/HomePage';
 import ListTripsPage from '../pages/ListTripsPage'
@@ -11,7 +11,6 @@ import CreateTripPage from '../pages/CreateTripPage'
 
 
 const Router = () => {
-
 
 return (
 
@@ -43,7 +42,6 @@ return (
 
           <Route exact path="/admin/trips/:id">
           <TripsDetailPage
-          name={"chakalaka"}
           />
           </Route>
 

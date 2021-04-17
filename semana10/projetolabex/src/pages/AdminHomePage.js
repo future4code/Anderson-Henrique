@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { useTripsList } from '../hooks/useTripsList'
 import { useProtectedPage } from '../hooks/useProtectedPage'
-import { goToLoginPage, goToTripsDetailsPage } from '../routes/coordinator'
 import axios from 'axios'
 import styled from 'styled-components'
 import { DeleteOutline } from '@styled-icons/typicons/DeleteOutline'
 import { Detail } from '@styled-icons/boxicons-regular/Detail'
-import { Button } from '../components/Button'
 import { Loading } from '../components/Loading'
 
 const AdminHomePage = () => {
@@ -20,7 +17,6 @@ const AdminHomePage = () => {
 
     const history = useHistory()
     const [loading, setLoading] = useState({})
-    console.log(window.localStorage)
 
 
 
@@ -38,7 +34,6 @@ const AdminHomePage = () => {
     }
 
     const goToSelectedPage = (id) => {
-        console.log("Id q foi : ", id)
         history.push(`/admin/trips/${id}`)
     }
 
@@ -63,6 +58,8 @@ const AdminHomePage = () => {
 
     const deleteTrip = async (id) => {
         const token = window.localStorage.getItem("token")
+        setLoading({ display: 'flex' })
+
         try {
             const response = await axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips/${id}`,
                 {
@@ -70,12 +67,13 @@ const AdminHomePage = () => {
                         auth: token
                     }
                 })
-            console.log("Resultado da requisição: ", response)
             alert("Viagem deletada")
             history.push("/admin/trips/list")
         } catch (error) {
             console.log("Erro: ", error)
         }
+        setLoading({ display: 'none' })
+        window.location.reload()
     }
 
 
@@ -115,7 +113,7 @@ display:flex;
 margin:24px auto;
 min-height:40px;
 align-items:center;
-padding: 0 10px 0 0;
+padding: 0 10px 0 5px;
 font-size:24px;
 color:gray;
 `

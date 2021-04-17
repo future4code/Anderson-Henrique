@@ -21,7 +21,6 @@ const ApplicationFormPage = () => {
     }
 
     const [form, onChange] = useForm(initialForm)
-    console.log("form: ", form)
     useEffect(() => {
         getTripsList()
         getCountryNames()
@@ -44,7 +43,6 @@ const ApplicationFormPage = () => {
     const getCountryNames = async () => {
         try {
             const response = await axios.get("https://restcountries.eu/rest/v2/all")
-            // console.log("Resultado do countryNames: ", response.data)
             setCountryNames(response.data)
         } catch (error) {
             console.log("Erro encontrado : ", error)
@@ -54,7 +52,6 @@ const ApplicationFormPage = () => {
 
     const handleId = (event) => {
         setIdTrip(event.target.value)
-        console.log("idTrip: ", event.target.value)
     }
 
     const planetOptions = trips.map((trip) => {
@@ -84,25 +81,14 @@ const ApplicationFormPage = () => {
             } else {
                 try {
                     const response = await axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/trips/${id}/apply`, body)
-                    console.log("response: ",response)
                     alert("Pedido enviado! Agora é torcer para ser aprovado!")
                     history.push("/trips/list")
                 } catch (error) {
                     console.log("O êro é: ", error)
                 }
-
-
             }
-
             setLoading({display:""})
-
         }
-
-    
-
-    const email = 'astrodev@gmail.com'
-    const password = '123456'
-
 
     return (
         <Container>
@@ -140,12 +126,11 @@ export default ApplicationFormPage
 
 const Container = styled.div`
 display:flex;
-/* max-width: 800px; */
 width:max(60%,330px);
 flex-direction:column;
 border:1px solid black;
 border-radius:12px;
-margin: auto 12px;
+margin:  0 auto ;
 `
 const P = styled.p`
 color:gray;
@@ -153,7 +138,6 @@ font-size:2.2rem;
 `
 
 const Form = styled.form`
-/* background-color:red; */
 width:max(75%,330px);
 margin:auto;
 display:flex;
@@ -164,7 +148,6 @@ justify-content:center;
 const Input = styled.input`
 width:max(75%,300px);
 height:40px;
-/* margin-bottom: 24px; */
 margin: 0 auto 24px;
 box-sizing:border-box;
 `
@@ -173,16 +156,6 @@ const Select = styled.select`
 width:max(75%,300px);
 margin: 0 auto 24px ;
 height:40px;
-
-
-`
-const Textarea = styled.textarea`
-width:max(75%,300px);
-height:40px;
-margin: auto;
-box-sizing:border-box;
-
-
 `
 
 const ContainerButtons = styled.div`
