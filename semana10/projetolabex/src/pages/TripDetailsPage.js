@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Check } from '@styled-icons/boxicons-regular/Check'
 import { DeleteOutline } from '@styled-icons/typicons/DeleteOutline'
 import { Loading } from '../components/Loading'
+import { Button } from '../components/Button'
 const TripsDetailPage = () => {
     useProtectedPage()
     const [trips, setTrips] = useState({})
@@ -16,7 +17,7 @@ const TripsDetailPage = () => {
     const showDiv = () => {
         setDisplayDiv("block")
     }
-
+    const history=useHistory()
     const hideDiv = () => {
         setDisplayDiv("none")
     }
@@ -108,10 +109,11 @@ const TripsDetailPage = () => {
     })
 
     return (
-        <div>
-            <p>Detalhes da viagem</p>
+
             <Container>
                 <Loading style={loading} />
+                <Pt>Detalhes da viagem</Pt>
+
                 <Div><Span>Nome</Span> <P>{trips.name}</P></Div>
                 <Div><Span>Descrição</Span> <P>{trips.description}</P></Div>
                 <Div><Span>Planeta</Span> <P>{trips.planet}</P></Div>
@@ -123,9 +125,8 @@ const TripsDetailPage = () => {
 
                 <H2Green>Candidatos Aprovados</H2Green>
                 {approvCandidates}
-
+                    <Button text={"Voltar"} onClick={history.goBack}/>
             </Container>
-        </div>
     )
 
 }
@@ -136,7 +137,13 @@ const Container = styled.div`
 flex-direction:column;
 margin: auto;
 justify-content:center;
-width: max(60%,330px)
+width: max(60%,330px);
+border:1px solid black;
+border-radius:8px;
+`
+const Pt = styled.p`
+font-size:2rem;
+color:gray;
 `
 
 const Span = styled.span`
@@ -163,11 +170,12 @@ const DivCandidate = styled.div`
 
 const P = styled.p`
 width:100%;
+align-items:center;
+display:flex;
+justify-content:center;
 @media(max-width:400px){
 font-size:14px;
 padding-right:8px;
-display:flex;
-align-items:center;
 }
 `
 
