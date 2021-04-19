@@ -73,7 +73,10 @@ const AdminHomePage = () => {
             console.log("Erro: ", error)
         }
         setLoading({ display: 'none' })
-        window.location.reload()
+        // window.location.reload()
+        history.push("/")
+        history.push("/admin/trips/list")
+
     }
 
 

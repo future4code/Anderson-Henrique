@@ -13,6 +13,8 @@ const TripsDetailPage = () => {
     const [pendentCandidates, setPendentCandidates] = useState([])
     const [approvedCandidates, setApprovedCandidates] = useState([])
     const [displayDiv, setDisplayDiv] = useState("none")
+    const [loading, setLoading] = useState({})
+
 
     const showDiv = () => {
         setDisplayDiv("block")
@@ -22,12 +24,11 @@ const TripsDetailPage = () => {
         setDisplayDiv("none")
     }
 
-    const [loading, setLoading] = useState({})
 
     const params = useParams()
     useEffect(() => {
         getSelectedTrip()
-    }, [])
+    }, [pendentCandidates])
 
     const getSelectedTrip = async () => {
         setLoading({ display: 'flex' })
@@ -48,6 +49,8 @@ const TripsDetailPage = () => {
             console.log("error: ", error)
             setLoading({ display: 'none' })
         }
+        setLoading({ display: 'none' })
+
     }
 
     const decideAboutCandidate = async (candidate, choice) => {
@@ -65,16 +68,20 @@ const TripsDetailPage = () => {
             })
             if (choice === true) {
                 alert("Candidato aprovado")
+             history.push('/admin/trips/list')
             } else {
                 alert("Candidato reprovado")
             }
             setLoading({ display: 'none' })
+            // history.push('/admin/trips/list')
 
         } catch (error) {
             console.log("O êro é: ", error)
             setLoading({ display: 'none' })
         }
-        window.location.reload()
+        // window.location.reload()
+        // history.push('/admin/trips/list')
+
     }
 
 

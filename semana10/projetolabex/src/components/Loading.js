@@ -17,7 +17,7 @@ const LoaderContainer = styled.div`
 width:max(60%,333px);
 background-color:white;
 /* background-color:red; */
-height:100vh;
+height:max(100%,120vh);
 position:absolute;
 margin: -1px ; 
 /* opacity:0.3; */

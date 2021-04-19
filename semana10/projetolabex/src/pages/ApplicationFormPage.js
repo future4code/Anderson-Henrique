@@ -104,7 +104,7 @@ const ApplicationFormPage = () => {
 
                 <Input name="name" value={form.name} onChange={onChange} placeholder="Nome" required pattern={"(.*[a-z]){3}"} />
                 <Input name="age" type="number" value={form.age} onChange={onChange} placeholder="Idade" required min={18} />
-                <Input name="profession" value={form.profession} onChange={onChange} placeholder="Profissão" required pattern={"(.*[a-z]){10}"} />
+                <Input name="profession" value={form.profession} onChange={onChange} placeholder="Profissão" required pattern={"^.{10,}"} />
                 <Input name="applicationText" value={form.applicationText} onChange={onChange} placeholder="Texto de candidatura" required pattern={"^.{30,}"} />
                 <Select name="country" value={form.country} onChange={onChange} id="country" required  >
                     <option value="">Escolha uma país</option>

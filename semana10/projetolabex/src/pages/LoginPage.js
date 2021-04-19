@@ -7,7 +7,6 @@ import { Loading } from '../components/Loading'
 import { goToAdminHomePage } from '../routes/coordinator'
 
 const LoginPage = () => {
-    console.log(window.localStorage)
 
     useEffect(() => {
         setTimeout(() => {
@@ -23,11 +22,9 @@ const LoginPage = () => {
 
     const handleEmail = (e) => {
         setEmail(e.target.value)
-        console.log(email)
     }
     const handlePassword = (e) => {
         setPassword(e.target.value)
-        console.log(password)
     }
 
     const login = async (event) => {
@@ -39,7 +36,6 @@ const LoginPage = () => {
         }
         try {
             const response = await axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/anderson-oliveira-cruz/login", body)
-            console.log("Response: ", response)
             window.localStorage.setItem("token", response.data.token)
             goToAdminHomePage(history)
         } catch (error) {
