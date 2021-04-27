@@ -19,7 +19,7 @@ try{
     const response= await axios.post(`${BASE_URL}login`,body)
     console.log("RESPONSE: ",response.data.token)
     const token = response.data.token
-    localStorage.setItem("token", token)
+    window.localStorage.setItem("token", token)
 }catch(error){
     console.log("Erro encontrado: ",error.response.data)
 }
