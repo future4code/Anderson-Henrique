@@ -17,5 +17,7 @@ export const goToPostsPage = (history) => {
 
 
 export const goToDetailedPostPage = (history,id) => {
-    history.push(`/posts/:${id}`)
+    console.log('Haha')
+    console.log("ID: ",id)
+    history.push(`/posts/${id}`)
 }

@@ -20,6 +20,7 @@ const PostCard = (props) => {
                 <VotesArea>
                     <UpArrow onClick={props.onClickUp}/>{props.votesCount}
                     <DownArrow onClick={props.onClickDown}/>
+                    <Button onClick={props.onClickDetails}>Go to Details</Button>
                 </VotesArea>
             </ContainerCommentsVotes>
         </Container>
@@ -83,4 +84,7 @@ const CommentsArea = styled.div`
 `
 
 const VotesArea = styled.div`
+`
+
+const Button = styled.button`
 `

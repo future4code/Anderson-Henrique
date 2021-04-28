@@ -13,6 +13,7 @@ const DetailedPostPage = () => {
 
     useEffect( () => {
 getDetailedPost()
+console.log("Params: ",params)
     },[])
 
     const getDetailedPost = async () => {

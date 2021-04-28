@@ -1,15 +1,17 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import PostCard from '../../components/PostCard'
 import { BASE_URL } from '../../constants/urls'
+import { goToDetailedPostPage } from '../../routes/coordinator'
 
 
 
 const PostsPage = () => {
-
+    const history = useHistory()
 
     useEffect(() => {
-        // getPosts()
+        getPosts()
     }, [])
     const [posts, setPosts] = useState([])
 
@@ -71,16 +73,16 @@ const PostsPage = () => {
 
     const testeFunc = async () => {
         const token = window.localStorage.getItem('token')
-        try{
-            const response = await axios.get(`${BASE_URL}posts/00udQwWI6mDqYeiFRnsQ`,{
+        try {
+            const response = await axios.get(`${BASE_URL}posts/00udQwWI6mDqYeiFRnsQ`, {
                 headers: {
                     Authorization: token
                 }
             })
 
-            console.log("Response do try: ",response.data.post)
-        }catch(error){
-            console.log("Erro encontrado: ",error)
+            console.log("Response do try: ", response.data.post)
+        } catch (error) {
+            console.log("Erro encontrado: ", error)
         }
     }
 
@@ -94,6 +96,7 @@ const PostsPage = () => {
             commentsCount={post.commentsCount}
             onClickUp={() => upVote(post.id)}
             onClickDown={() => downVote(post.id)}
+            onClickDetails={() => goToDetailedPostPage(history, post.id)}
         />
     })
 
