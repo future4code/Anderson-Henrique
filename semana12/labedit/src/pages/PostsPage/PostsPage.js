@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import PostCard from '../../components/PostCard'
 import { BASE_URL } from '../../constants/urls'
 
 
@@ -8,7 +9,7 @@ const PostsPage = () => {
 
 
     useEffect(() => {
-        getPosts()
+        // getPosts()
     }, [])
     const [posts, setPosts] = useState([])
 
@@ -22,26 +23,87 @@ const PostsPage = () => {
                     Authorization: token
                 }
             })
-            console.log("Response: ", response.data)
+            console.log("Response: ", response.data.posts)
             setPosts(response.data.posts)
         } catch (error) {
             console.log("Erro encontrado: ", error)
         }
     }
 
+    const upVote = async (postId) => {
+        const body = { direction: 1 }
+        const token = window.localStorage.getItem('token')
+        try {
+            const response = await axios.put(`${BASE_URL}posts/${postId}/vote`, body,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            )
+            console.log("Response do Up Vote:  ", response)
+        } catch (error) {
+            console.log("Erro encontrado: ", error)
+        }
 
-    const renderPosts = posts.map( (post) => {
-        return <div key={post.id}>
-            <h1>{post.title}</h1>
-        <p>{post.text}</p>
-        <h3>Author: {post.username}</h3>
-        </div>
+    }
+
+
+    const downVote = async (postId) => {
+        const body = { direction: -1 }
+        const token = window.localStorage.getItem('token')
+
+        try {
+            const response = await axios.put(`${BASE_URL}posts/${postId}/vote`, body,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            )
+            console.log("Response do Dwon Vote:  ", response)
+
+        } catch (error) {
+            console.log("Erro encontrado: ", error)
+        }
+
+    }
+
+    const testeFunc = async () => {
+        const token = window.localStorage.getItem('token')
+        try{
+            const response = await axios.get(`${BASE_URL}posts/00udQwWI6mDqYeiFRnsQ`,{
+                headers: {
+                    Authorization: token
+                }
+            })
+
+            console.log("Response do try: ",response.data.post)
+        }catch(error){
+            console.log("Erro encontrado: ",error)
+        }
+    }
+
+
+    const renderPosts = posts.map((post) => {
+        return <PostCard key={post.id}
+            title={post.title}
+            text={post.text}
+            username={post.username}
+            votesCount={post.votesCount}
+            commentsCount={post.commentsCount}
+            onClickUp={() => upVote(post.id)}
+            onClickDown={() => downVote(post.id)}
+        />
     })
 
     return (
         <div>
             <h1>PostPage</h1>
-{renderPosts}
+            <button onClick={testeFunc}> Teste com 1 id especifico</button>
+            {posts.length > 0 && renderPosts}
+
+            <PostCard />
         </div>
     )
 }
