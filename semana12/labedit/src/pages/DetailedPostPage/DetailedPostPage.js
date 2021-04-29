@@ -57,6 +57,42 @@ const [form,onChange, clear] = useForm({text: ""})
 
     }
 
+    const upVoteComment = async (postId,commentId) => {
+        const body = { direction: 1 }
+        const token = window.localStorage.getItem('token')
+        try {
+            const response = await axios.put(`${BASE_URL}posts/${postId}/comment/${commentId}/vote`, body,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            )
+            console.log("Response do Up Vote:  ", response)
+        } catch (error) {
+            console.log("Erro encontrado: ", error)
+        }
+
+    }
+
+    const downVoteComment = async (postId,commentId) => {
+        const body = { direction: -1 }
+        const token = window.localStorage.getItem('token')
+        try {
+            const response = await axios.put(`${BASE_URL}posts/${postId}/comment/${commentId}/vote`, body,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            )
+            console.log("Response do Down Vote:  ", response)
+        } catch (error) {
+            console.log("Erro encontrado: ", error)
+        }
+
+    }
+
 
     const downVote = async (postId) => {
         const body = { direction: -1 }
@@ -85,6 +121,8 @@ const [form,onChange, clear] = useForm({text: ""})
             text={comment.text}
             username={comment.username}
             votesCount={comment.votesCount}
+            onClickUpComment={() =>upVoteComment(detailedPostInfo.id,comment.id)}
+            onClickDownComment={() =>downVoteComment(detailedPostInfo.id,comment.id)}
         />
     })
 

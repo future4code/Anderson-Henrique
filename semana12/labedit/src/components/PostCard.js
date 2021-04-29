@@ -20,7 +20,7 @@ const PostCard = (props) => {
                 <VotesArea>
                     <UpArrow onClick={props.onClickUp}/>{props.votesCount}
                     <DownArrow onClick={props.onClickDown}/>
-                    <Button onClick={props.onClickDetails}>Go to Details</Button>
+                    <Button onClick={props.onClickDetails}>Detalhes</Button>
                 </VotesArea>
             </ContainerCommentsVotes>
         </Container>
@@ -41,17 +41,10 @@ align-items:center;
 margin: 10px 12px;
 `
 
-// const UpArrow = styled(UpArrowAlt)`
-// width:50px;
-// color:blue;
-// `
-// const DownArrow = styled(DownArrowAlt)`
-// color:red;
-// width:50px;
-
 // `
 const H1 = styled.h1`
 font-size:18px;
+margin:4px;
 `
 
 const H2 = styled.h2`
@@ -60,10 +53,16 @@ font-size:16px;
 
 const P = styled.p`
 
+@media(max-width:450px){
+    /* color:orange; */
+    font-size:14px;
+}
 `
 const Text = styled.p`
 background-color:aliceblue;
 font-size:14px;
+padding:4px;
+/* background-color:gray; */
 
 `
 const Span = styled.span`
@@ -71,6 +70,9 @@ background-color:red;
 display:flex;
 width:100%;
 align-items:center;
+margin:0px;
+/* padding:0; */
+line-height:0
 
 `
 
@@ -84,6 +86,10 @@ const CommentsArea = styled.div`
 `
 
 const VotesArea = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+background-color:purple;
 `
 
 const Button = styled.button`
