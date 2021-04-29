@@ -6,8 +6,10 @@ import { BASE_URL } from '../../constants/urls'
 import PostCard from '../../components/PostCard'
 import CommentCard from '../../components/CommentCard'
 import useForm from '../../hooks/useForm'
+import useProtectedPage from '../../hooks/useProtectedPage'
 
 const DetailedPostPage = () => {
+    useProtectedPage()
     const history = useHistory()
     const params = useParams()
     const [detailedPostInfo, setDetailedPostInfo] = useState([])
@@ -159,8 +161,11 @@ const [form,onChange, clear] = useForm({text: ""})
 
 
             <ContainerPostMessage>
-                <Input name='text' value={form.text} type={"text"} placeholder="Comentário" onChange={onChange} />
-                <button onClick={CreateComment}>Enviar</button>
+                <form onSubmit={CreateComment}>
+                <Input name='text' value={form.text} type={"text"} placeholder="Comentário" onChange={onChange} required pattern={"^.{10,}"} title="Mínimo 10 caracteres"/>
+                <button >Enviar</button>
+                </form>
+               
             </ContainerPostMessage>
 
 

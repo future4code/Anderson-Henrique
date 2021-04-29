@@ -12,7 +12,7 @@ export const goToSignUpPage = (history) => {
 
 
 export const goToPostsPage = (history) => {
-    history.push("/posts")
+    history.push("/")
 }
 
 

@@ -6,10 +6,13 @@ import { BASE_URL } from '../../constants/urls'
 import { goToDetailedPostPage } from '../../routes/coordinator'
 import styled from 'styled-components'
 import useForm from '../../hooks/useForm'
+import useProtectedPage from '../../hooks/useProtectedPage'
 // import { Loading} from '../../components/Loading'
 
 
 const PostsPage = () => {
+    useProtectedPage()
+
     const history = useHistory()
     const [form, onChange, clear] = useForm({ text: "", title: "" })
     useEffect(() => {
@@ -107,9 +110,12 @@ const PostsPage = () => {
             {/* <form></form> */}
 {/* <Loading/> */}
             <ContainerPostMessage>
-                <Input name='title' value={form.title} type={"text"} placeholder="Título" onChange={onChange} />
-                <Input name='text' value={form.text} type={"text"} placeholder="Comentário" onChange={onChange} />
-                <button onClick={CreatePost}>Enviar</button>
+                <form onSubmit={CreatePost}>
+                <Input name='title' value={form.title} type={"text"} placeholder="Título" onChange={onChange} required pattern={"^.{4,}"} title="Título precisa ter no mínimo 4 caracteres"/>
+                <Input name='text' value={form.text} type={"text"} placeholder="Comentário" onChange={onChange} required pattern={"^.{10,}"} title="O texto precisa ter no mínimo 19 caracteres"/>
+                <button>Enviar</button>
+                </form>
+                
             </ContainerPostMessage>
 
             <PostCard />
@@ -124,7 +130,6 @@ export default PostsPage
 
 const MainContainer = styled.div`
 width:max(80%,350px);
-background-color:bisque;
 margin:  15px auto;
 
 `

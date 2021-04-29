@@ -61,7 +61,7 @@ const P = styled.p`
 const Text = styled.p`
 background-color:aliceblue;
 font-size:14px;
-padding:4px;
+padding:6px;
 /* background-color:gray; */
 
 `
