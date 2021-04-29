@@ -12,8 +12,12 @@ export default ButtonTemplate
 
 
 const Button = styled.button`
-width:300px;
-background-color:orange; 
+width:max(95%,300px);
+background-color:#44C767; 
+/* margin:   12px ; */
+font-size:24px;
 
-
+margin:12px auto ;
+color:white;
+padding:12px;
 `

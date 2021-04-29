@@ -8,15 +8,15 @@ const CommentCard = props => {
     return (
         <Container>
             <TitleAndVotes>
-                <P>Autor: {props.username}</P>
+                <P> {props.username}:</P>
                 <Span>
                     <UpArrow onClick={props.onClickUpComment} />
                     {props.votesCount}
-                    <DownArrow onClick={props.onClickDownComment}/>
+                    <DownArrow onClick={props.onClickDownComment} />
                 </Span>
             </TitleAndVotes>
             <Text>
-{props.text}
+                {props.text}
             </Text>
         </Container>
     )
@@ -25,24 +25,34 @@ const CommentCard = props => {
 export default CommentCard
 
 const Container = styled.div`
-
+width:max(90vw,350px);
+margin: 15px 0;
+border-radius:8px;
+border:1px solid teal;
 `
 
 const TitleAndVotes = styled.div`
 display:flex;
-background-color:pink;
-justify-content:space-space-between;
+/* background-color:pink; */
+justify-content:space-between;
 
 `
 const Text = styled.div`
-width:100%;
-background-color:orange;
+width:max(90vw,300px);
+/* background-color:orange; */
+padding:10px;
+color:darkgreen;
 `
 const P = styled.p`
-
+color:#004369;
+padding-left:10px;
+margin-bottom:6px;
 `
 
 const Span = styled.span`
+display:flex; 
+align-items:center;
+justify-content:space-around;
 
 `
 

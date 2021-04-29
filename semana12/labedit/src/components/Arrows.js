@@ -5,7 +5,9 @@ import styled from 'styled-components'
 
 
 export const UpArrow = styled(UpArrowAlt)`
-width:50px;
+width:40px;
+height:30px;
+
 color:blue;
 @media(max-width:450px){
     /* color:orange; */
@@ -14,7 +16,9 @@ color:blue;
 `
 export const DownArrow = styled(DownArrowAlt)`
 color:red;
-width:50px;
+width:40px;
+height:30px;
+
 @media(max-width:450px){
     /* color:orange; */
     width:30px;

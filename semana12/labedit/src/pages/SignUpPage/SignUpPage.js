@@ -5,6 +5,8 @@ import ButtonTemplate from '../../components/ButtonTemplate'
 import { useHistory } from 'react-router-dom'
 import { goToPostsPage, goToSignUpPage } from '../../routes/coordinator'
 import { BASE_URL } from '../../constants/urls'
+import { Container,BodyContainer,Form,Input} from './styled'
+
 import axios from 'axios'
 
 
@@ -34,9 +36,10 @@ const SignUpPage = () => {
 
 
     return (
-        <div>
+        <Container>
+            <BodyContainer>
             <h1>SignUpPage</h1>
-            <form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit}>
 
             <Input value={form.username} type={"text"} name='username' placeholder="Nome do usuário" onChange={onChange}  required pattern={"^.{4,}"} title="Usuário precisa ter no mínimo 4 caracteres"/>
             <Input value={form.email} type={"email"} name='email' placeholder="E-mail" onChange={onChange} required   pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"} title="Formato incorreto, preencha novamente" />
@@ -45,24 +48,16 @@ const SignUpPage = () => {
                 text={"Enviar"}
                 // onClick={onSubmit}
             />
-            </form>
-
-            {/* <ButtonTemplate
-                text={"Cadastre-se"}
-                onClick={onSubmit}
-            /> */}
+            </Form>
+            </BodyContainer>
+            
 
 
-        </div>
+
+        </Container>
     )
 }
 
 export default SignUpPage
 
 
-const Input = styled.input`
-background-color:pink;
-
-
-
-`

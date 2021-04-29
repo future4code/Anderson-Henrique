@@ -5,6 +5,8 @@ import { useHistory, useParams } from 'react-router'
 import { BASE_URL } from '../../constants/urls'
 import PostCard from '../../components/PostCard'
 import CommentCard from '../../components/CommentCard'
+import { Container,ContainerPostMessage,Input,Form,Button} from './styled'
+
 import useForm from '../../hooks/useForm'
 import useProtectedPage from '../../hooks/useProtectedPage'
 
@@ -146,7 +148,7 @@ const [form,onChange, clear] = useForm({text: ""})
 
 
     return (
-        <div>
+        <Container>
             <h1>DetailedPostPage</h1>
             <PostCard key={detailedPostInfo.id}
                 title={detailedPostInfo.title}
@@ -161,10 +163,10 @@ const [form,onChange, clear] = useForm({text: ""})
 
 
             <ContainerPostMessage>
-                <form onSubmit={CreateComment}>
+                <Form onSubmit={CreateComment}>
                 <Input name='text' value={form.text} type={"text"} placeholder="Comentário" onChange={onChange} required pattern={"^.{10,}"} title="Mínimo 10 caracteres"/>
-                <button >Enviar</button>
-                </form>
+                <Button >Enviar</Button>
+                </Form>
                
             </ContainerPostMessage>
 
@@ -172,17 +174,9 @@ const [form,onChange, clear] = useForm({text: ""})
             {renderComents.length > 0 && renderComents}
 
 
-        </div>
+        </Container>
     )
 }
 
 export default DetailedPostPage
 
-
-
-const ContainerPostMessage = styled.div`
-
-`
-const Input = styled.input`
-
-`
