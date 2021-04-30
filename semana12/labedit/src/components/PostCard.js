@@ -70,7 +70,8 @@ const Text = styled.p`
 /* background-color:aliceblue; */
 font-size:14px;
 padding:0 6px ;
-width:max(95%,300px)
+width:max(95%,300px);
+text-align:center;
 /* background-color:#E5DDC8; */
 
 `
@@ -104,7 +105,8 @@ align-items:center;
 /* background-color:purple; */
 `
 
-const Button = styled.button`box-shadow:inset 0px 1px 0px 0px #ffffff;
+const Button = styled.button`
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
 	background-color:#ffffff;
 	border-radius:6px;
@@ -131,4 +133,3 @@ const Button = styled.button`box-shadow:inset 0px 1px 0px 0px #ffffff;
 
 
 
-        

@@ -14,12 +14,12 @@ export const Loading = (props) => {
 
 
 const LoaderContainer = styled.div`
-width:max(60%,333px);
-background-color:white;
+width:max(90%,333px);
+background-color:#E1E1E1;
 /* background-color:red; */
 height:max(100%,120vh);
 position:absolute;
-margin: -1px ; 
+/* margin: -1px ;  */
 /* opacity:0.3; */
 `
 
