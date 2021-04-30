@@ -10,17 +10,11 @@ export const Loading = (props) => {
     </LoaderContainer>)
 }
 
-
-
-
 const LoaderContainer = styled.div`
 width:max(90%,333px);
 background-color:#E1E1E1;
-/* background-color:red; */
-height:max(100%,120vh);
+height:100vh;
 position:absolute;
-/* margin: -1px ;  */
-/* opacity:0.3; */
 `
 
 
