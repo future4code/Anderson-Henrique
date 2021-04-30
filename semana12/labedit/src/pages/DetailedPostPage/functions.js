@@ -1,10 +1,6 @@
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 
-
-
-
-
 export const upVote = async (postId) => {
     const body = { direction: 1 }
     const token = window.localStorage.getItem('token')

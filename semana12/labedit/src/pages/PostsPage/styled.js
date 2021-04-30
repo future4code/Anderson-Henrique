@@ -14,6 +14,8 @@ export const Input = styled.input`
 `
 
 export const Form = styled.form`
+text-align:center;
+margin: 12px 0;
 `
 export const Button = styled.button`
 `

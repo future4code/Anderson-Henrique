@@ -21,7 +21,7 @@ const PostCard = (props) => {
                     <DownArrow onClick={props.onClickDown} />
                     {props.votesCount}
                     <UpArrow onClick={props.onClickUp} />
-                    <Button onClick={props.onClickDetails}>Detalhes</Button>
+                    <Button onClick={props.onClickDetails} title={props.buttonTitle}>Detalhes</Button>
                 </VotesArea>
             </ContainerCommentsVotes>
         </Container>

@@ -25,11 +25,9 @@ setTimeout(() => {
 
     const onSubmit = async (evt) => {
         evt.preventDefault()
-        console.log("FORM: ", form)
         const body = form
         try {
             const response = await axios.post(`${BASE_URL}login`, body)
-            console.log("RESPONSE: ", response.data.token)
             const token = response.data.token
             window.localStorage.setItem("token", token)
             alert("Logado com sucesso.")

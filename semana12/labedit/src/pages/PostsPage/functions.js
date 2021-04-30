@@ -43,4 +43,5 @@ export const upVote = async (postId) => {
     } catch (error) {
         console.log("Erro encontrado: ", error)
     }
+    
 }

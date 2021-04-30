@@ -21,10 +21,10 @@ const DetailedPostPage = () => {
     const [comments, setComments] = useState([])
     const [form, onChange, clear] = useForm({ text: "" })
     const [display,setDisplay] = useState('block')
+    const [style,setStyle] = useState({display:'block',opacity:'1'})
 
     useEffect(() => {
         getDetailedPost()
-        console.log("Params: ", params)
     }, [])
 
     const getDetailedPost = async () => {
@@ -35,8 +35,6 @@ const DetailedPostPage = () => {
                     Authorization: token
                 }
             })
-            console.log("Response do response: ", response.data.post.comments)
-            console.log("data.post: ", response.data.post)
 
             setDetailedPostInfo(response.data.post)
                     setComments(response.data.post.comments)
@@ -44,7 +42,7 @@ const DetailedPostPage = () => {
         } catch (error) {
             console.log("Erro encontrado: ", error)
         }
-        setDisplay('none')
+        setStyle({display:'none'})
     }
 
     const CreateComment = async (evt) => {
@@ -57,7 +55,6 @@ const DetailedPostPage = () => {
                     Authorization: token
                 }
             })
-            console.log("Response do CreateComment: ", response.data)
         } catch (error) {
             console.log("Erro encontrado: ", error)
         }
@@ -72,12 +69,14 @@ const DetailedPostPage = () => {
             votesCount={comment.votesCount}
             onClickUpComment={() => upVoteComment(detailedPostInfo.id, comment.id)}
             onClickDownComment={() => downVoteComment(detailedPostInfo.id, comment.id)}
+            title={'Ir para detalhes'}
         />
     })
 
     return (
         <Container>
-            <Loading style={{display: `${display}`}}/>
+            {/* <Loading style={{display: `${display}`,backgroundColor:'red'}}/> */}
+            <Loading style={style}/>
             <Header />
 
             <PostCard key={detailedPostInfo.id} 

@@ -21,7 +21,7 @@ const PostsPage = () => {
 
     useEffect(() => {
         getPosts()
-    }, [])
+    },[])
 
     const getPosts = async () => {
         setDisplay('block')
@@ -32,7 +32,6 @@ const PostsPage = () => {
                     Authorization: token
                 }
             })
-            console.log("Response: ", response.data.posts)
             setPosts(response.data.posts)
         } catch (error) {
             console.log("Erro encontrado: ", error)
@@ -47,6 +46,7 @@ const PostsPage = () => {
             username={post.username}
             votesCount={post.votesCount}
             commentsCount={post.commentsCount}
+            buttonTitle={'Detalhes deste post'}
             onClickUp={() => upVote(post.id)}
             onClickDown={() => downVote(post.id)}
             onClickDetails={() => goToDetailedPostPage(history, post.id)}
@@ -63,8 +63,8 @@ const PostsPage = () => {
                     Authorization: token
                 }
             })
-            console.log("Response do CreatePost: ", response.data)
             alert("Post criado!")
+            getPosts()
         } catch (error) {
             console.log("Erro encontrado: ", error)
         }
@@ -78,7 +78,7 @@ const PostsPage = () => {
                 <Form onSubmit={CreatePost}>
                     <Input name='title' value={form.title} type={"text"} placeholder="Título" onChange={onChange} required pattern={"^.{4,}"} title="Título precisa ter no mínimo 4 caracteres" />
                     <Input name='text' value={form.text} type={"text"} placeholder="Comentário" onChange={onChange} required pattern={"^.{10,}"} title="O texto precisa ter no mínimo 19 caracteres" />
-                    <ButtonForm>Enviar</ButtonForm>
+                    <ButtonForm title={"Enviar Comentario"}>Enviar</ButtonForm>
                 </Form>
             </ContainerPostMessage>
             {posts.length > 0 && renderPosts}
