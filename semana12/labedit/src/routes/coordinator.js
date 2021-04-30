@@ -7,7 +7,6 @@ export const goToLoginPage = (history) => {
 
 export const goToSignUpPage = (history) => {
     history.push("/signup")
-    console.log("Cha-la, head cha la")
 }
 
 
@@ -17,7 +16,5 @@ export const goToPostsPage = (history) => {
 
 
 export const goToDetailedPostPage = (history,id) => {
-    console.log('Haha')
-    console.log("ID: ",id)
     history.push(`/posts/${id}`)
 }

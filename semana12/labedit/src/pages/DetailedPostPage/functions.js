@@ -12,7 +12,6 @@ export const upVote = async (postId) => {
                 }
             }
         )
-        console.log("Response do Up Vote:  ", response)
         alert('IUUP!')
     } catch (error) {
         console.log("Erro encontrado: ", error)
@@ -31,7 +30,6 @@ export const upVoteComment = async (postId, commentId) => {
                 }
             }
         )
-        console.log("Response do Up Vote:  ", response)
         // alert('Up neste')
 
     } catch (error) {
@@ -51,7 +49,6 @@ export const downVoteComment = async (postId, commentId) => {
                 }
             }
         )
-        console.log("Response do Down Vote:  ", response)
     } catch (error) {
         console.log("Erro encontrado: ", error)
     }
@@ -70,7 +67,6 @@ export const downVoteComment = async (postId, commentId) => {
                 }
             }
         )
-        console.log("Response do Down Vote:  ", response)
 
     } catch (error) {
         console.log("Erro encontrado: ", error)
