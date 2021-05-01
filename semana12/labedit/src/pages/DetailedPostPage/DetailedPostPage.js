@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useHistory, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { BASE_URL } from '../../constants/urls'
 import PostCard from '../../components/PostCard'
 import CommentCard from '../../components/CommentCard'
-import { Container, ContainerPostMessage, Input, Form, DetailedPostCard, DetailedCommentCard, IconSearch, SearchContainer } from './styled'
+import { Container, ContainerPostMessage, Input, Form, IconSearch, SearchContainer } from './styled'
 import useForm from '../../hooks/useForm'
 import useProtectedPage from '../../hooks/useProtectedPage'
 import Header from '../../components/Header'
@@ -27,7 +27,6 @@ const DetailedPostPage = () => {
     }, [isLoading])
 
     const getDetailedPost = async () => {
-        // setIsLoading(true)
         setStyle({ display: 'block' })
         const token = window.localStorage.getItem('token')
         try {
@@ -40,12 +39,10 @@ const DetailedPostPage = () => {
             setDetailedPostInfo(response.data.post)
             setComments(response.data.post.comments)
             setShowComments(response.data.post.comments)
-            console.log("Detalhes: ", response.data.post)
         } catch (error) {
             console.log("Erro encontrado: ", error)
         }
         setStyle({ display: 'none' })
-        // setIsLoading(false)
 
     }
 
@@ -64,6 +61,7 @@ const DetailedPostPage = () => {
         }
         clear()
     }
+
     const filteredComments = showComments.map((comment) => {
         return <CommentCard
             key={comment.id}
@@ -75,8 +73,6 @@ const DetailedPostPage = () => {
             title={'Ir para detalhes'}
         />
     })
-
-
 
     const filterComments = (event) => {
         const letter = event.target.value
@@ -115,8 +111,6 @@ const DetailedPostPage = () => {
                     </ContainerPostMessage>
                     {comments && filteredComments.length > 0 && filteredComments}
                 </div>}
-
-            {/* {console.log("comments: ",comments)} */}
         </Container>
     )
 }

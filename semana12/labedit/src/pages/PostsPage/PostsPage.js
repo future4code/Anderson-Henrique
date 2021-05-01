@@ -14,7 +14,6 @@ import { CreatePost, downVote, upVote } from './functions'
 
 const PostsPage = () => {
     useProtectedPage()
-    const [display, setDisplay] = useState('block')
     const history = useHistory()
     const [form, onChange, clear] = useForm({ text: "", title: "" })
     const [posts, setPosts] = useState([])
@@ -27,7 +26,7 @@ const PostsPage = () => {
     }, [isLoading])
 
     const getPosts = async () => {
-        setStyle({display: 'block'})
+        setStyle({ display: 'block' })
         const token = window.localStorage.getItem('token')
         try {
             const response = await axios.get(`${BASE_URL}posts`, {
@@ -37,16 +36,14 @@ const PostsPage = () => {
             })
             setPosts(response.data.posts)
             setShowPosts(response.data.posts)
-            console.log(response.data.posts)
         } catch (error) {
             console.log("Erro encontrado: ", error)
         }
-        setStyle({display: 'none'})
+        setStyle({ display: 'none' })
     }
 
     const filterPosts = (event) => {
         const letter = event.target.value.toLowerCase()
-        console.log("LETTER: ", letter)
         const filtereds = posts.filter((comment) => comment.text.toLowerCase().indexOf(letter) >= 0 || comment.title.toLowerCase().indexOf(letter) >= 0 || comment.username.toLowerCase().indexOf(letter) >= 0)
         setShowPosts(filtereds)
     }
@@ -67,9 +64,9 @@ const PostsPage = () => {
 
     return (
         <MainContainer>
-            {isLoading ?<Loading style={{ display: 'block' }} /> :
+            {isLoading ? <Loading style={{ display: 'block' }} /> :
                 <div>
-                     <Loading style={style} />
+                    <Loading style={style} />
                     <Header />
                     <InputContainer>
                         <input onChange={filterPosts} placeholder="Busque por Título/Usuário/Texto" />

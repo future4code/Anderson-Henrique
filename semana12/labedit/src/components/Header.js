@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import styled from 'styled-components'
 import { LetterL } from './LetterL'
 import { LogOut } from '@styled-icons/boxicons-solid/LogOut'
@@ -17,7 +16,6 @@ const Header = () => {
     })
     const logOut = () => {
         let confirmLogout = window.confirm("Tem certeza que quer deslogar?")
-        console.log("Confirm: ", confirmLogout)
         if (confirmLogout) {
             window.localStorage.removeItem('token')
             goToLoginPage(history)

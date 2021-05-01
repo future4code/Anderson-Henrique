@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import { useHistory } from 'react-router'
 import { goToLoginPage } from '../routes/coordinator'
 
-
 const useUnprotectedPage = () => {
 
     const history = useHistory()

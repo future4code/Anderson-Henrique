@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const MainContainer = styled.div`
 width:max(80%,350px);
 margin:  15px auto;
-
 `
 
 export const ContainerPostMessage = styled.div`

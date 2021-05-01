@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 
-
 export const Container = styled.div`
 width:max(80%,350px);
 height:100vh;
@@ -10,7 +9,7 @@ background-color:#E1E1E1;
 margin-top:10vh;
 `
 
-export const BodyContainer= styled.div`
+export const BodyContainer = styled.div`
 width:max(50vw,350px);
 background-color:white;
 margin:auto;

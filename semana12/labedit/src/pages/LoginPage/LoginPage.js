@@ -12,14 +12,14 @@ import { Loading } from '../../components/Loading'
 
 const LoginPage = () => {
     const [form, onChange, clear] = useForm({ email: "", password: "" })
-    const [display,setDisplay] = useState('block')
+    const [display, setDisplay] = useState('block')
     const history = useHistory()
 
-useEffect( () => {
-setTimeout(() => {
-    setDisplay('none')
-}, 1000);
-},[])
+    useEffect(() => {
+        setTimeout(() => {
+            setDisplay('none')
+        }, 1000);
+    }, [])
 
 
     const onSubmit = async (evt) => {
@@ -43,7 +43,7 @@ setTimeout(() => {
 
     return (
         <Container>
-            <Loading style={{display: `${display}`}}/>
+            <Loading style={{ display: `${display}` }} />
             <BodyContainer>
                 <LetterL />
                 <Form onSubmit={onSubmit}>
@@ -51,17 +51,12 @@ setTimeout(() => {
                     <Input value={form.password} type={"password"} name='password' placeholder="password" onChange={onChange} required pattern={"^.{4,}"} title="Mínimo 4 caracteres" />
                     <ButtonTemplate
                         text={"Enviar"}
-                    // onClick={onSubmit}
                     />
                 </Form>
-
-
                 <ButtonTemplate
                     text={"Cadastre-se"}
                     onClick={() => goToSignUpPage(history)}
                 />
-
-
             </BodyContainer>
 
         </Container>

@@ -1,7 +1,5 @@
-
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
-
 
 export const downVote = async (postId,setIsLoading) => {
     setIsLoading(true)
@@ -15,9 +13,7 @@ export const downVote = async (postId,setIsLoading) => {
                     Authorization: token
                 }
             })
-        alert("Down neste Comentario!")
-
-
+        alert("Down!")
     } catch (error) {
         console.log("Erro encontrado: ", error)
     }
@@ -37,7 +33,7 @@ export const upVote = async (postId,setIsLoading) => {
                 }
             }
         )
-        alert("Up neste Comentario!")
+        alert("Up!")
     } catch (error) {
         console.log("Erro encontrado: ", error)
     }

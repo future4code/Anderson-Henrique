@@ -5,10 +5,6 @@ import LoginPage from '../pages/LoginPage/LoginPage'
 import PostsPage from '../pages/PostsPage/PostsPage'
 import SignUpPage from '../pages/SignUpPage/SignUpPage'
 
-
-
-
-
 const Router = () => {
     return (
         <BrowserRouter>
@@ -28,7 +24,6 @@ const Router = () => {
                 <Route >
                     <div>Error Page</div>
                 </Route>
-
             </Switch>
         </BrowserRouter>
 

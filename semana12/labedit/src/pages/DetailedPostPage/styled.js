@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Search } from '@styled-icons/boxicons-regular/Search' 
-
+import { Search } from '@styled-icons/boxicons-regular/Search'
 
 export const Container = styled.div`
 width:max(90vw,350px);
@@ -21,14 +20,6 @@ export const Input = styled.input`
 padding-left:10px;
 background-position:10px 10px;
 box-sizing:border-box;
-&:focus{
-    /* background-color:lightblue;  */
-    /* border:3px solid #555; */
-    border:none;
-    border-bottom:1px solid red;
-    transition:2s;
-}
-
 `
 
 export const Form = styled.form`

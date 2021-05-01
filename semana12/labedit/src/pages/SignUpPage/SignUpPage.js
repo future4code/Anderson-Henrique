@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useForm from '../../hooks/useForm'
 import ButtonTemplate from '../../components/ButtonTemplate'
 import { useHistory } from 'react-router-dom'
-import { goToPostsPage} from '../../routes/coordinator'
+import { goToPostsPage } from '../../routes/coordinator'
 import { BASE_URL } from '../../constants/urls'
 import { Container, BodyContainer, Form, Input } from './styled'
 import axios from 'axios'
@@ -11,7 +11,7 @@ import { Loading } from '../../components/Loading'
 
 const SignUpPage = () => {
     const [form, onChange, clear] = useForm({ email: "", password: "", username: "" })
-    const [display,setDisplay]= useState('block')
+    const [display, setDisplay] = useState('block')
     const history = useHistory()
     useEffect(() => {
         setTimeout(() => {
@@ -25,7 +25,7 @@ const SignUpPage = () => {
         try {
             const response = await axios.post(`${BASE_URL}signup`, body)
             const token = response.data.token
-            window.localStorage.setItem('token',token)
+            window.localStorage.setItem('token', token)
             alert("Usuario criado.Realizando Login...")
             goToPostsPage(history)
         } catch (error) {

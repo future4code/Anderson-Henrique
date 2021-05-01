@@ -1,9 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { DownArrow, UpArrow } from './Arrows'
-// import { UpArrowAlt } from '@styled-icons/boxicons-regular/UpArrowAlt'
-// import { DownArrowAlt } from '@styled-icons/boxicons-regular/DownArrowAlt'
-
 
 const PostCard = (props) => {
 
@@ -33,7 +30,6 @@ const PostCard = (props) => {
 
 export default PostCard
 
-
 const Container = styled.div`
 border:1px solid black;
 display:flex;
@@ -45,40 +41,32 @@ border-radius:12px;
 box-shadow: 2px 1px 17px 0 rgba(0,0,0,0.3);
 `
 
-// `
 const H1 = styled.h1`
 font-size:18px;
 margin:12px 4px 0;
 color:#01949A;
-/* background-color:orange; */
 margin-top:8px;
 `
 
 const H2 = styled.h2`
 font-size:16px;
-/* color:#004369; */
 margin-left:4px;
 `
 
 const P = styled.p`
     margin:6px;
-
 @media(max-width:450px){
-    /* color:orange; */
     font-size:14px;
 }
 `
 const Text = styled.p`
-/* background-color:aliceblue; */
 font-size:14px;
 padding:0 6px ;
 width:max(95%,300px);
 text-align:center;
-/* background-color:#E5DDC8; */
-
 `
+
 const Span = styled.span`
-/* background-color:red; */
 display:flex;
 width:100%;
 align-items:center;
@@ -86,12 +74,9 @@ margin:0px;
 padding-left:5vw;
 line-height:0;
 color:#004369;
-
-
 `
 
 const ContainerCommentsVotes = styled.div`
-/* background-color:pink; */
 display:flex;
 width:90%;
 justify-content:space-between;
@@ -99,12 +84,10 @@ padding: 0 12px;
 `
 const CommentsArea = styled.div`
 `
-
 const VotesArea = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
-/* background-color:purple; */
 `
 
 const Button = styled.button`
