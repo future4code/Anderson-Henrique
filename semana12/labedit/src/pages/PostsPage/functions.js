@@ -1,12 +1,10 @@
 
-import React from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 
 
-
-
-export const downVote = async (postId) => {
+export const downVote = async (postId,setIsLoading) => {
+    setIsLoading(true)
     const body = { direction: -1 }
     const token = window.localStorage.getItem('token')
 
@@ -17,17 +15,18 @@ export const downVote = async (postId) => {
                     Authorization: token
                 }
             })
-        console.log("Response do Down Vote:  ", response)
         alert("Down neste Comentario!")
 
 
     } catch (error) {
         console.log("Erro encontrado: ", error)
     }
-
+    setIsLoading(false)
 }
 
-export const upVote = async (postId) => {
+export const upVote = async (postId,setIsLoading) => {
+    setIsLoading(true)
+
     const body = { direction: 1 }
     const token = window.localStorage.getItem('token')
     try {
@@ -38,10 +37,27 @@ export const upVote = async (postId) => {
                 }
             }
         )
-        console.log("Response do Up Vote:  ", response)
         alert("Up neste Comentario!")
     } catch (error) {
         console.log("Erro encontrado: ", error)
     }
-    
+    setIsLoading(false)
+
+}
+export const CreatePost = async (form,clear,setIsLoading) => {
+    setIsLoading(true)
+    const token = window.localStorage.getItem('token')
+    const body = form
+    try {
+        const response = await axios.post(`${BASE_URL}posts`, body, {
+            headers: {
+                Authorization: token
+            }
+        })
+        alert("Post criado!")
+        clear()
+    } catch (error) {
+        console.log("Erro encontrado: ", error)
+    }
+    setIsLoading(false)
 }

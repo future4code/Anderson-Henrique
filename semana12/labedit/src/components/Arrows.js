@@ -9,6 +9,9 @@ width:40px;
 height:30px;
 
 color:blue;
+&:hover{
+    cursor: pointer;
+}
 @media(max-width:450px){
     /* color:orange; */
     width:30px;
@@ -18,7 +21,9 @@ export const DownArrow = styled(DownArrowAlt)`
 color:red;
 width:40px;
 height:30px;
-
+&:hover{
+    cursor: pointer;
+}
 @media(max-width:450px){
     /* color:orange; */
     width:30px;

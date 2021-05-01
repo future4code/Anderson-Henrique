@@ -7,7 +7,6 @@ import { Container, BodyContainer, Form, Input } from './styled'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { LetterL } from '../../components/LetterL'
-import Header from '../../components/Header'
 import { Loading } from '../../components/Loading'
 
 
@@ -37,6 +36,8 @@ setTimeout(() => {
             console.log('error', error.response)
             alert(error.response.data.message)
         }
+        clear()
+
     }
 
 

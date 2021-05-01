@@ -31,6 +31,7 @@ const SignUpPage = () => {
         } catch (error) {
             alert(error.response.data.message)
         }
+        clear()
     }
 
     return (
@@ -41,7 +42,7 @@ const SignUpPage = () => {
                 <Form onSubmit={onSubmit} >
                     <Input value={form.username} type={"text"} name='username' placeholder="Nome do usuário" onChange={onChange} required pattern={"^.{4,}"} title="Usuário precisa ter no mínimo 4 caracteres" />
                     <Input value={form.email} type={"email"} name='email' placeholder="E-mail" onChange={onChange} required pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"} title="Formato incorreto, preencha novamente" />
-                    <Input value={form.password} type={"password"} name='password' placeholder="Password" onChange={onChange} required required pattern={"^.{4,}"} title="Mínimo 4 caracteres" />
+                    <Input value={form.password} type={"password"} name='password' placeholder="Password" onChange={onChange} required pattern={"^.{4,}"} title="Mínimo 4 caracteres" />
                     <ButtonTemplate
                         text={"Enviar"}
                     />

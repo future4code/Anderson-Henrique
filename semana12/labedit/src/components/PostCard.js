@@ -8,7 +8,7 @@ import { DownArrow, UpArrow } from './Arrows'
 const PostCard = (props) => {
 
     return (
-        <Container>
+        <Container style={props.style}>
             <H1>{props.title}</H1>
             <Text>{props.text}</Text>
             <Span> Postado por: <H2>{props.username}</H2></Span>
@@ -41,6 +41,8 @@ flex-direction:column;
 align-items:center;
 margin: 10px 12px;
 border-radius:12px;
+-webkit-box-shadow: 2px 1px 17px 8px rgba(0,0,0,0.3); 
+box-shadow: 2px 1px 17px 0 rgba(0,0,0,0.3);
 `
 
 // `

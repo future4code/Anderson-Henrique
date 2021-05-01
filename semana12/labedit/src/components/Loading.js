@@ -11,7 +11,7 @@ export const Loading = (props) => {
 }
 
 const LoaderContainer = styled.div`
-width:max(90%,333px);
+width:max(95%,360px);
 background-color:#E1E1E1;
 height:100vh;
 position:absolute;

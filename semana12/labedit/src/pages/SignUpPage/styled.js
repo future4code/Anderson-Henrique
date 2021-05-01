@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
 /* width:max(90vw,350px); */
+width:100%;
 height:100vh;
 margin: 0 auto;
 /* border:1px solid teal; */
@@ -13,14 +14,15 @@ background-color:#E1E1E1;
 
 
 export const BodyContainer= styled.div`
-width:max(50vw,350px);
+width:max(50vw,360px);
 background-color:white;
-margin:auto;
-padding-top:10vh;
+margin:10vh auto auto;
+/* margin-top:10vh; */
 display:flex;
 flex-direction:column;
 justify-content:center;
 /* margin-top:30px; */
+padding-top:4vh;
 `
 
 
