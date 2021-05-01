@@ -8,9 +8,11 @@ import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { LetterL } from '../../components/LetterL'
 import { Loading } from '../../components/Loading'
+import useUnprotectedPage from '../../hooks/useUnprotectedPage'
 
 
 const LoginPage = () => {
+    useUnprotectedPage()
     const [form, onChange, clear] = useForm({ email: "", password: "" })
     const [display, setDisplay] = useState('block')
     const history = useHistory()

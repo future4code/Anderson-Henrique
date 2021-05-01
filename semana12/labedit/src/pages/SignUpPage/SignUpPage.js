@@ -8,8 +8,10 @@ import { Container, BodyContainer, Form, Input } from './styled'
 import axios from 'axios'
 import { LetterL } from '../../components/LetterL'
 import { Loading } from '../../components/Loading'
+import useUnprotectedPage from '../../hooks/useUnprotectedPage'
 
 const SignUpPage = () => {
+    useUnprotectedPage()
     const [form, onChange, clear] = useForm({ email: "", password: "", username: "" })
     const [display, setDisplay] = useState('block')
     const history = useHistory()
@@ -36,7 +38,7 @@ const SignUpPage = () => {
 
     return (
         <Container >
-            <Loading style={{ display: `${display}` }} />
+            <Loading style={{ display: `${display}`,width:'100%' }} />
             <BodyContainer>
                 <LetterL />
                 <Form onSubmit={onSubmit} >
