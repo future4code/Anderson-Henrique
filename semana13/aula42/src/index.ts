@@ -128,6 +128,6 @@ function buscarPostsPorAutor(posts:post[], autorInformado:string) {
       (post) => {
         return post.autor === autorInformado
       }
-    )
+    ) 
   }
 
