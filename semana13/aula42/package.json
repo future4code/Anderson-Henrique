@@ -1,0 +1,12 @@
+{
+  "name": "aula42",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exercicio1.js",
+  "scripts": {
+    "start": "clear && tsc && node ./build/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
