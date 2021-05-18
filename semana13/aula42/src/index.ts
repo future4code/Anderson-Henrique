@@ -90,7 +90,7 @@ console.log(teste)
 //     obterEstatisticas: ()
 // }
 
-//3
+//3.a
 
 type post = {
     autor:string,
@@ -121,4 +121,13 @@ const posts:post[] = [
   }
 ]
 
-console.table(posts)
+//3b Entradas:  um array de posts e um autor informado. Saída : Todos os posts pertencentes ao autor buscado
+
+function buscarPostsPorAutor(posts:post[], autorInformado:string) {
+    return posts.filter(
+      (post) => {
+        return post.autor === autorInformado
+      }
+    )
+  }
+
