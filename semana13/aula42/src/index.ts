@@ -8,7 +8,6 @@ let meuNumero:number | string =137 //Para aceitar strings alem de números, usam
 
 //c  + d
 
-
 enum CORES {
     VERMELHO = 'vermelho',
     LARANJA  ='laranja',
@@ -19,8 +18,6 @@ enum CORES {
     VIOLETA = 'violeta'
 
 }
-
-
 
 type pessoa = {
     nome:string,
@@ -49,5 +46,79 @@ let  pessoa4:pessoa = {
     corFavorita:CORES.AMARELO
 }
 
+//2
+//a    
+//Entradas: um array de números, saidas: maior número, menor número e a media dos números dentro do array. 
 
-console.log(pessoa1)
+//b
+//numerosOrdenados:array de números: number[] 
+//soma,maior,menor,media: número
+
+function obterEstatisticas(numeros:number[])  {
+
+    const numerosOrdenados:number[] = numeros.sort(
+        (a:number, b:number) => a - b
+    )
+
+    let soma:number = 0
+
+    for (let num of numeros) {
+        soma += num
+    }
+  type stats = {
+      maior:number,
+      menor:number,
+      media:number
+  }  
+
+    const estatisticas:stats = {
+        maior: numerosOrdenados[numeros.length - 1],
+        menor: numerosOrdenados[0],
+        media: soma / numeros.length
+    }
+
+    return estatisticas
+}
+
+const teste = obterEstatisticas([1,2,7,76,77,11,10,1,2,21])
+console.log(teste)
+
+//c
+
+// type amostraDeDados = {
+//     numeros: number[],
+//     obterEstatisticas: ()
+// }
+
+//3
+
+type post = {
+    autor:string,
+    texto:string
+}
+
+
+const posts:post[] = [
+  {
+    autor: "Alvo Dumbledore",
+    texto: "Não vale a pena viver sonhando e se esquecer de viver"
+  },
+  {
+    autor: "Severo Snape",
+    texto: "Menos 10 pontos para Grifinória!"
+  },
+  {
+    autor: "Hermione Granger",
+    texto: "É levi-ô-sa, não levio-sá!"
+  },
+  {
+    autor: "Dobby",
+    texto: "Dobby é um elfo livre!"
+  },
+  {
+    autor: "Lord Voldemort",
+    texto: "Avada Kedavra!"
+  }
+]
+
+console.table(posts)
