@@ -1,0 +1,15 @@
+{
+  "name": "aula42",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exercicio1.js",
+  "scripts": {
+    "start": "clear && tsc "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^15.3.0"
+  }
+}
