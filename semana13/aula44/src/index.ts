@@ -150,20 +150,56 @@ app.post('/users', (req: Request, res: Response) => {
 })
 
 app.put('/users/:changeLastUserName', (req: Request, res: Response) => {
-  
   try {
-
     const newName = req.params.changeLastUserName
-    //  const result = users.filter(user => user.id === id)
-    console.log('newName: ',newName)
-    users[users.length - 1].name = newName +"-ALTERADO"
+    users[users.length - 1].name = newName + "-ALTERADO"
     const lastUser = users[users.length - 1]
-
-    // console.log('lastUser: ', lastUser)
-    // lastUser.name =
     res.status(200).send({
       message: "Nome do último usuário alterado com sucesso ",
-      user:lastUser 
+      user: lastUser
+    })
+  } catch (error) {
+    res.status(400).send({
+      message: error.message
+    })
+  }
+})
+
+//Fiz por body nesta, estou tentando variar 
+
+app.patch('/users', (req: Request, res: Response) => {
+  try {
+    const renewName = req.body.name
+    users[users.length - 1].name = renewName + "-REALTERADO"
+    const lastUser = users[users.length - 1]
+    res.status(200).send({
+      message: 'nome do usuário alterado com o método patch',
+      user: lastUser
+    })
+  } catch (error) {
+    res.status(400).send({
+      message: error.message
+    })
+  }
+})
+
+
+app.delete('/users/:id', (req: Request, res: Response) => {
+  try {
+    const selectedUser = Number(req.params.id)
+    if (isNaN(selectedUser)) {
+      throw new Error("Passe um ID numérico")
+    }
+
+    let result = users.filter(user => user.id !== selectedUser)
+    if (users.length === result.length) { // checagem estranha, mas se o length dos 2 é igual, então nada foi removido
+      throw new Error('ID não encontrado')
+    }
+    users = result
+    // users.splice()
+    res.status(200).send({
+      message: 'Usuário deletado.',
+      user: users
     })
   } catch (error) {
     res.status(400).send({
@@ -172,8 +208,6 @@ app.put('/users/:changeLastUserName', (req: Request, res: Response) => {
   }
 
 })
-
-
 
 // Para testar se o servidor está tratando os endpoints corretamente
 app.get("/ping", (req: Request, res: Response) => {
