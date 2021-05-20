@@ -113,7 +113,7 @@ app.get('/users/:name', (req: Request, res: Response) => {
     if (!result.length) {
       throw new Error('Nenhum usuário encontrado.')
     }
-    res.status(200).send(result)
+    res.status(200).send('ok')
   } catch (error) {
     res.status(400).send({
       message: error.message
@@ -123,30 +123,54 @@ app.get('/users/:name', (req: Request, res: Response) => {
 
 //4.a Aparemente a mesma coisa, ambos criaram vários usuários iguais todas as vezes que as requests foram feitas
 // 4.b Não, pois o método put foi feito para atualizar/inserir dados sem muitas verificações, sendo mais pontual o seu uso.
-app.post('/users',(req: Request, res: Response) => {
-try{
-const {id,name,email,type,age} = req.body
-if (type !== UserType.NORMAL && type !== UserType.ADMIN) {
-  throw new Error('Types aceitos para criação de novo usuário: NORMAL e ADMIN')
-}
+app.post('/users', (req: Request, res: Response) => {
+  try {
+    const { id, name, email, type, age } = req.body
+    if (type !== UserType.NORMAL && type !== UserType.ADMIN) {
+      throw new Error('Types aceitos para criação de novo usuário: NORMAL e ADMIN')
+    }
 
-const body = req.body
-console.log('body: ',body)
+    const body = req.body
+    console.log('body: ', body)
 
-const newUser:User = {
-  id,name,email,type,age
-}
-users.push(newUser)
+    const newUser: User = {
+      id, name, email, type, age
+    }
+    users.push(newUser)
 
-res.status(200).send({
-  message: 'usuário criado',
-  user:newUser
+    res.status(200).send({
+      message: 'usuário criado',
+      user: newUser
+    })
+  } catch (error) {
+    res.status(400).send({
+      message: error.message
+    })
+  }
 })
-}catch(error){
-  res.status(400).send({
-    message: error.message
-  })
-}
+
+app.put('/users/:changeLastUserName', (req: Request, res: Response) => {
+  
+  try {
+
+    const newName = req.params.changeLastUserName
+    //  const result = users.filter(user => user.id === id)
+    console.log('newName: ',newName)
+    users[users.length - 1].name = newName +"-ALTERADO"
+    const lastUser = users[users.length - 1]
+
+    // console.log('lastUser: ', lastUser)
+    // lastUser.name =
+    res.status(200).send({
+      message: "Nome do último usuário alterado com sucesso ",
+      user:lastUser 
+    })
+  } catch (error) {
+    res.status(400).send({
+      message: error.message
+    })
+  }
+
 })
 
 
@@ -155,6 +179,8 @@ res.status(200).send({
 app.get("/ping", (req: Request, res: Response) => {
   res.status(200).send("pong!")
 })
+
+
 
 app.listen(3003, () => {
   console.log('Server is running at port 3003')
