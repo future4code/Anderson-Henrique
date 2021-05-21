@@ -250,7 +250,7 @@ app.put('/addBalance', (req: Request, res: Response) => {
             type: Operation.WITHDRAWALL
         })
 
-
+ 
         res.status(200).send({
             message: 'Saldo adicionado com sucesso',
             lastBalance: `Saldo anterior: ${lastBalance.toFixed(2)}`,
