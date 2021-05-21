@@ -9,38 +9,82 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-type Statement = {
-    value:number,
-    date:string,
-    description:string
-}
+
 
 type User = {
-    name:string,
-    cpf:number,
-    bornDate:string,
-    balance?:number,
-    statement?:Statement[]
+    name: string,
+    cpf: number,
+    bornDate: string,
+    balance?: number,
+    statement?: Statement[]
 }
 
-
-
-
-app.get('/ping', (req:Request,res:Response) => {
-try{
-res.status(200).send('pong')
-}catch(error){
-    res.status(400).send({
-        message:error.message
-    })
+type Statement = {
+    value: number,
+    date: string,
+    description: string
 }
+
+let users: User[] = [
+    {
+        name: 'Anderson Oliveira',
+        cpf: 12345678911,
+        bornDate: '20/02/1992',
+        balance: 1379.99,
+        statement: [
+            {
+                date: '21/01/2021',
+                description: 'Compra de uma geladeira',
+                value: 799.99
+            }, 
+            {
+                date:'20/02/2021',
+                description:' Compra de um mi stick',
+                value:165.99
+            }
+        ]
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get('/ping', (req: Request, res: Response) => {
+    try {
+        res.status(200).send('pong')
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
 
 })
+
+
 const server = app.listen(process.env.PORT || 3003, () => {
     if (server) {
-       const address = server.address() as AddressInfo;
-       console.log(`Server is running in http://localhost: ${address.port}`);
+        const address = server.address() as AddressInfo;
+        console.log(`Server is running in http://localhost: ${address.port}`);
     } else {
-       console.error(`Failure upon starting server.`);
+        console.error(`Failure upon starting server.`);
     }
 });
