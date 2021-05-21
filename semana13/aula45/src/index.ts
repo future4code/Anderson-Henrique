@@ -9,6 +9,19 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+type Statement = {
+    value:number,
+    date:string,
+    description:string
+}
+
+type User = {
+    name:string,
+    cpf:number,
+    bornDate:string,
+    balance?:number,
+    statement?:Statement[]
+}
 
 
 
