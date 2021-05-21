@@ -216,7 +216,7 @@ app.post('/transferBalance', (req: Request, res: Response) => {
         console.log(receiver[0])
         // if (sender[0].balance < valueToSend) {
         //     throw new Error('Usuário que enviará o transferência não foi encontrado.')
-        // }
+        // } 
         // if (receiver.balance < valueToSend) { }
 
         res.status(200).send({
