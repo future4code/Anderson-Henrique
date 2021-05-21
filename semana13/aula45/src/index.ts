@@ -259,7 +259,7 @@ app.post('/transferBalance', (req: Request, res: Response) => {
                 description: 'Recibo de dinheiro por transferência',
                 date: newDate.toString(),
                 type: Operation.DEPOSIT
-            })
+            }) 
         }
 
         res.status(200).send({
