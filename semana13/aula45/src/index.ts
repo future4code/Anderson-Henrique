@@ -17,6 +17,7 @@ type User = {
     bornDate: string,
     balance?: number,
     statement?: Statement[]
+    transactions?: []
 }
 
 type Statement = {
@@ -36,11 +37,11 @@ let users: User[] = [
                 date: '21/01/2021',
                 description: 'Compra de uma geladeira',
                 value: 799.99
-            }, 
+            },
             {
-                date:'20/02/2021',
-                description:' Compra de um mi stick',
-                value:165.99
+                date: '20/02/2021',
+                description: ' Compra de um mi stick',
+                value: 165.99
             }
         ]
     }
@@ -48,8 +49,49 @@ let users: User[] = [
 
 
 
+app.get('/getBalance', (req: Request, res: Response) => {
+    try {
 
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
 
+})
+
+app.post('/addBalance', (req: Request, res: Response) => {
+    try {
+
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+})
+
+app.post('/payBill', (req: Request, res: Response) => {
+    try {
+
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+})
+
+app.post('/transferBallance', (req: Request, res: Response) => {
+    try {
+
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+})
 
 
 
