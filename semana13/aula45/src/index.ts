@@ -49,6 +49,16 @@ let users: User[] = [
 
 
 
+app.get('/users',(req:Request,res:Response) => {
+    try{
+res.status(200).send(users)
+    }catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
 app.get('/getBalance', (req: Request, res: Response) => {
     try {
         const name = req.body.name
@@ -72,9 +82,33 @@ app.get('/getBalance', (req: Request, res: Response) => {
 
 })
 
-app.post('/addBalance', (req: Request, res: Response) => {
+app.put('/addBalance', (req: Request, res: Response) => {
     try {
-        res.status(200).send()
+        const body = req.body
+        const name = req.body.name
+        const cpf = Number(req.body.cpf)
+        const addBalance = Number(req.body.addBalance)
+        if (!name || !cpf || !addBalance) {
+            throw new Error('Falta o preenchimento de algum dado ( CPF, nome ou addBalance(saldo a adicionar )')
+        }
+        if (isNaN(cpf || addBalance)) {
+            throw new Error('CPF deve conter apenas números')
+        }
+        const result = users.find(user => user.cpf === cpf && user.name === name)
+        if (!result) {
+            throw new Error('Nenhum usuário encontrado')
+        }
+        // let balance = result.balance
+        if (!result.balance)
+            // result.balance  = result.balance + addBalance
+            // balance + addBalance
+            // console.log('result: ',result)
+            console.log('result.balance: ', result.balance)
+        console.log('addBalance: ', addBalance)
+
+
+        console.log('body: ', body)
+        res.status(200).send(body)
 
     } catch (error) {
         res.status(400).send({
@@ -106,6 +140,47 @@ app.post('/transferBallance', (req: Request, res: Response) => {
         })
     }
 
+})
+
+app.post('/createNewUser', (req: Request, res: Response) => {
+    try {
+        const body = req.body
+        const name = req.body.name
+        const cpf = Number(req.body.cpf)
+        const bornDate = req.body.bornDate
+        // console.log('body', body)
+        console.log('cpf.length: ',cpf.toString().length)
+        if (!name || !cpf || !bornDate) {
+            throw new Error('Falta o preenchimento de algum dado ( CPF, nome ou bornDate(Data de nascimento )')
+        }
+        if(cpf.toString().length!==11){
+            throw new Error('CPFs contém 11 números, preencha novamente')
+        }
+
+        const checkCPF = users.find( user => user.cpf === cpf)
+        if(checkCPF){
+            throw new Error('Já existe um usuário com este CPF')
+        }
+        const newUser:User = {
+            name : name,
+            cpf:cpf,
+            bornDate:bornDate,
+            balance:0,
+            statement: [],
+            transactions: []
+        }
+users.push(newUser)
+
+        res.status(200).send({
+            message:'Usuário criado',
+            user:newUser
+        })
+
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
 })
 
 
