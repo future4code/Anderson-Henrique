@@ -28,8 +28,8 @@ type Statement = {
 }
 
 enum Operation {
-    WITHDRAWALL = 'withdrawall',
-    DEPOSIT = 'desposit'
+    WITHDRAWALL = 'saque',
+    DEPOSIT = 'despósito'
 }
 let users: User[] = [
     {
@@ -143,8 +143,37 @@ app.put('/addBalance', (req: Request, res: Response) => {
 
 app.post('/payBill', (req: Request, res: Response) => {
     try {
-        res.status(200).send()
+        const body = req.body
+        let cpf = Number(req.body.cpf)
+        let date = req.body.date
+        let description = req.body.description
+        let value = Number(req.body.value)
+        if (!cpf || !description || !value) {
+            throw new Error('Dados faltando, preencha com cpf,  description e valor , ( date é opcional )')
+        }
+        if (isNaN(cpf || value)) {
+            throw new Error('CPF deve conter apenas números')
+        }
+        const result = users.find(user => user.cpf === cpf)
+        if (!result) {
+            throw new Error('Nenhum usuário encontrado, cpf inválido.')
+        }
+        if (!date) {
+            date = new Date()
+        }
+        console.log('o q ta vindo: ', result)
+        result?.statement?.push({
+            date,
+            description,
+            type: Operation.WITHDRAWALL,
+            value
+        })
+        console.log('body:', body)
 
+        res.status(200).send({
+            message: 'Confirmado o pagamento da conta',
+            result: result
+        })
     } catch (error) {
         res.status(400).send({
             message: error.message
@@ -153,10 +182,46 @@ app.post('/payBill', (req: Request, res: Response) => {
 
 })
 
-app.post('/transferBallance', (req: Request, res: Response) => {
+app.put('/transferBalance', (req: Request, res: Response) => {
     try {
-        res.status(200).send()
+        const body = req.body
+        console.log('body: ', body)
+        const senderCPF = Number(req.body.senderCPF)
+        const senderName = req.body.senderName
+        const receiverCPF = Number(req.body.receiverCPF)
+        const receiverName = req.body.receiverName
+        const valueToSend = Number(req.body.valueToSend)
+        console.log('receiverCpf: ', receiverCPF)
+        console.log('Number(receiverCpf): ', Number(receiverCPF))
+        if (isNaN(senderCPF) || isNaN(receiverCPF)) {
+            throw new Error('CPFs devem conter apenas números.')
+        }
+        if (isNaN(valueToSend)) {
+            throw new Error('O valor a ser enviado é numérico')
+        }
+        if (senderCPF.toString().length !== 11 || receiverCPF.toString().length !== 11) {
+            throw new Error('CPFs contém 11 números, preencha novamente')
+        }
+        if (!senderCPF || !senderName || !receiverCPF || !receiverName || !valueToSend) {
+            throw new Error('Um ou mais dados faltando preenchimento')
+        }
+        let sender = users.find(user => user.name === senderName && user.cpf === senderCPF)
+//         if(sender===undefined){
+// sender= users[0]
+//         }
+        const receiver = users.find(user => user.name === receiverName && user.cpf === receiverCPF)
+        if (!sender || !receiver) {
+            throw new Error('Algum dado digitado incorretamente: Nome do recebedor / quem enviou, ou CPF dos mesmos.')
+        }
+        if (sender.balance <valueToSend) {
+            throw new Error('Usuário que enviará o transferência não foi encontrado.')
+        }
+        if (sender.balance < valueToSend) { }
 
+        res.status(200).send({
+            message: 'ok',
+            body: body
+        })
     } catch (error) {
         res.status(400).send({
             message: error.message
