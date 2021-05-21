@@ -246,18 +246,28 @@ app.post('/transferBalance', (req: Request, res: Response) => {
             sender.balance -= valueToSend
             receiver.balance += valueToSend
         }
-        let newDate = new Date()
+        let date = new Date()
+        let day = date.getDate()
+        let month = date.getMonth()
+        let year = date.getFullYear()
+        let fullDate
+        fullDate = `${day}/${month}/${year}}`
+        if(month.toString().length===1){
+            fullDate = `${day}/${'0' +month}/${year}}`
+        }
+         
+        console.log('fullDate: ',fullDate)
         if (sender.statement && receiver.statement) {
             sender.statement.push({
                 value: valueToSend,
                 description: 'Envio de dinheiro por transferência',
-                date: newDate.toString(),
+                date: fullDate,
                 type: Operation.WITHDRAWALL
             })
             receiver.statement.push({
                 value: valueToSend,
                 description: 'Recibo de dinheiro por transferência',
-                date: newDate.toString(),
+                date: fullDate,
                 type: Operation.DEPOSIT
             }) 
         }
