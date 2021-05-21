@@ -186,10 +186,10 @@ app.post('/payBill', (req: Request, res: Response) => {
         if (result && result.balance && result.balance < value) {
             throw new Error("Saldo insuficiente")
         }
-        if(result && result.balance) {
-            result.balance -=  value
+        if (result && result.balance) {
+            result.balance -= value
         }
-        console.log('novo balance: ',result)
+        console.log('novo balance: ', result)
         result?.statement?.push({
             date,
             description,
@@ -242,9 +242,30 @@ app.post('/transferBalance', (req: Request, res: Response) => {
             throw new Error("Saldo insuficiente")
         }
 
+        if (sender.balance && receiver.balance) {
+            sender.balance -= valueToSend
+            receiver.balance += valueToSend
+        }
+        let newDate = new Date()
+        if (sender.statement && receiver.statement) {
+            sender.statement.push({
+                value: valueToSend,
+                description: 'Envio de dinheiro por transferência',
+                date: newDate.toString(),
+                type: Operation.WITHDRAWALL
+            })
+            receiver.statement.push({
+                value: valueToSend,
+                description: 'Recibo de dinheiro por transferência',
+                date: newDate.toString(),
+                type: Operation.DEPOSIT
+            })
+        }
+
         res.status(200).send({
             message: 'ok',
-            body: body
+            receiver: receiver,
+            sender: sender
         })
     } catch (error) {
         res.status(400).send({
