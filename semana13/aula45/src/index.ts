@@ -31,7 +31,7 @@ enum Operation {
     WITHDRAWALL = 'saque',
     DEPOSIT = 'despósito'
 }
-let users: User[] = [
+let users: User[]  = [
     {
         name: 'Anderson Oliveira',
         cpf: 12345678911,
@@ -107,7 +107,7 @@ app.put('/addBalance', (req: Request, res: Response) => {
             throw new Error('Nenhum usuário encontrado')
         }
         if (result.balance === undefined) {
-            result.balance = 999999
+            result.balance = 0
         }
         let lastBalance = result.balance
         result.balance = result.balance + addBalance
@@ -182,17 +182,15 @@ app.post('/payBill', (req: Request, res: Response) => {
 
 })
 
-app.put('/transferBalance', (req: Request, res: Response) => {
+app.post('/transferBalance', (req: Request, res: Response) => {
     try {
         const body = req.body
-        console.log('body: ', body)
+        // console.log('body: ', body)
         const senderCPF = Number(req.body.senderCPF)
         const senderName = req.body.senderName
         const receiverCPF = Number(req.body.receiverCPF)
         const receiverName = req.body.receiverName
         const valueToSend = Number(req.body.valueToSend)
-        console.log('receiverCpf: ', receiverCPF)
-        console.log('Number(receiverCpf): ', Number(receiverCPF))
         if (isNaN(senderCPF) || isNaN(receiverCPF)) {
             throw new Error('CPFs devem conter apenas números.')
         }
@@ -205,18 +203,21 @@ app.put('/transferBalance', (req: Request, res: Response) => {
         if (!senderCPF || !senderName || !receiverCPF || !receiverName || !valueToSend) {
             throw new Error('Um ou mais dados faltando preenchimento')
         }
-        let sender = users.find(user => user.name === senderName && user.cpf === senderCPF)
-//         if(sender===undefined){
-// sender= users[0]
-//         }
-        const receiver = users.find(user => user.name === receiverName && user.cpf === receiverCPF)
-        if (!sender || !receiver) {
+        let sender = users.filter(user => user.name === senderName && user.cpf === senderCPF)
+        // if (sender === undefined) {
+        //     sender = users
+        // }
+        
+        const receiver = users.filter(user => user.name === receiverName && user.cpf === receiverCPF)
+        if (!sender.length || !receiver.length) {
             throw new Error('Algum dado digitado incorretamente: Nome do recebedor / quem enviou, ou CPF dos mesmos.')
         }
-        if (sender.balance <valueToSend) {
-            throw new Error('Usuário que enviará o transferência não foi encontrado.')
-        }
-        if (sender.balance < valueToSend) { }
+        console.log('sender: ',sender[0])
+        console.log(receiver[0])
+        // if (sender[0].balance < valueToSend) {
+        //     throw new Error('Usuário que enviará o transferência não foi encontrado.')
+        // }
+        // if (receiver.balance < valueToSend) { }
 
         res.status(200).send({
             message: 'ok',
