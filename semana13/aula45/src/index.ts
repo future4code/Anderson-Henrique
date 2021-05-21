@@ -51,7 +51,19 @@ let users: User[] = [
 
 app.get('/getBalance', (req: Request, res: Response) => {
     try {
-
+        const name = req.body.name
+        const cpf = Number(req.body.cpf)
+        if (isNaN(cpf)) {
+            throw new Error('CPF deve conter apenas números')
+        }
+        const result = users.find(user => user.cpf === cpf && user.name === name)
+        if (!result) {
+            throw new Error('Nenhum usuário encontrado')
+        }
+        res.status(200).send({
+            message: 'usuario encontrado',
+            user: `Saldo : ${result.balance}`
+        })
     } catch (error) {
         res.status(400).send({
             message: error.message
@@ -62,6 +74,7 @@ app.get('/getBalance', (req: Request, res: Response) => {
 
 app.post('/addBalance', (req: Request, res: Response) => {
     try {
+        res.status(200).send()
 
     } catch (error) {
         res.status(400).send({
@@ -73,6 +86,7 @@ app.post('/addBalance', (req: Request, res: Response) => {
 
 app.post('/payBill', (req: Request, res: Response) => {
     try {
+        res.status(200).send()
 
     } catch (error) {
         res.status(400).send({
@@ -84,6 +98,7 @@ app.post('/payBill', (req: Request, res: Response) => {
 
 app.post('/transferBallance', (req: Request, res: Response) => {
     try {
+        res.status(200).send()
 
     } catch (error) {
         res.status(400).send({
