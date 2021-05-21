@@ -31,7 +31,7 @@ enum Operation {
     WITHDRAWALL = 'saque',
     DEPOSIT = 'despósito'
 }
-let users: User[]  = [
+let users: User[] = [
     {
         name: 'Anderson Oliveira',
         cpf: 12345678911,
@@ -47,6 +47,27 @@ let users: User[]  = [
             {
                 date: '20/02/2021',
                 description: ' Compra de um mi stick',
+                value: 165.99,
+                type: Operation.WITHDRAWALL
+
+            }
+        ]
+    },
+    {
+        name: 'Anderson Aquino',
+        cpf: 12345678910,
+        bornDate: '20/02/1999',
+        balance: 2372.02,
+        statement: [
+            {
+                date: '21/01/2020',
+                description: 'Compra de um smarthphone',
+                value: 799.99,
+                type: Operation.WITHDRAWALL
+            },
+            {
+                date: '12/03/2021',
+                description: ' Compra de um mi band 6',
                 value: 165.99,
                 type: Operation.WITHDRAWALL
 
@@ -162,6 +183,13 @@ app.post('/payBill', (req: Request, res: Response) => {
             date = new Date()
         }
         console.log('o q ta vindo: ', result)
+        if (result && result.balance && result.balance < value) {
+            throw new Error("Saldo insuficiente")
+        }
+        if(result && result.balance) {
+            result.balance -=  value
+        }
+        console.log('novo balance: ',result)
         result?.statement?.push({
             date,
             description,
@@ -203,21 +231,16 @@ app.post('/transferBalance', (req: Request, res: Response) => {
         if (!senderCPF || !senderName || !receiverCPF || !receiverName || !valueToSend) {
             throw new Error('Um ou mais dados faltando preenchimento')
         }
-        let sender = users.filter(user => user.name === senderName && user.cpf === senderCPF)
-        // if (sender === undefined) {
-        //     sender = users
-        // }
-        
-        const receiver = users.filter(user => user.name === receiverName && user.cpf === receiverCPF)
-        if (!sender.length || !receiver.length) {
+        let sender = users.find(user => user.name === senderName && user.cpf === senderCPF)
+        let receiver = users.find(user => user.name === receiverName && user.cpf === receiverCPF)
+        console.log('receiver: ', receiver)
+        console.log('sender: ', sender)
+        if (!sender || !receiver) {
             throw new Error('Algum dado digitado incorretamente: Nome do recebedor / quem enviou, ou CPF dos mesmos.')
         }
-        console.log('sender: ',sender[0])
-        console.log(receiver[0])
-        // if (sender[0].balance < valueToSend) {
-        //     throw new Error('Usuário que enviará o transferência não foi encontrado.')
-        // }
-        // if (receiver.balance < valueToSend) { }
+        if (sender && sender.balance && sender.balance < valueToSend) {
+            throw new Error("Saldo insuficiente")
+        }
 
         res.status(200).send({
             message: 'ok',
