@@ -1,4 +1,3 @@
-// no index.ts:
 
 import express, { Request, Response } from "express";
 import cors from "cors";
@@ -8,7 +7,6 @@ import { AddressInfo } from "net";
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 
 
 type User = {
@@ -148,7 +146,7 @@ app.post('/transferBalance', (req: Request, res: Response) => {
         let month = date.getMonth()
         let year = date.getFullYear()
         let fullDate
-        fullDate = `${day}/${month}/${year}}`
+        fullDate = `${day}/${month}/${year}`
         if (month.toString().length === 1) {
             fullDate = `${day}/${'0' + month}/${year}}`
         }
@@ -255,8 +253,8 @@ app.put('/addBalance', (req: Request, res: Response) => {
 
         res.status(200).send({
             message: 'Saldo adicionado com sucesso',
-            lastBalance: `Saldo anterior: ${lastBalance}`,
-            atualBalance: `Saldo atual: ${result.balance}`
+            lastBalance: `Saldo anterior: ${lastBalance.toFixed(2)}`,
+            atualBalance: `Saldo atual: ${result.balance.toFixed(2)}`
 
         })
 
@@ -290,56 +288,59 @@ app.post('/payBill', (req: Request, res: Response) => {
         let day = dateToday.getDate()
         let month = dateToday.getMonth()
         let year = dateToday.getFullYear()
+        let stringMonth
+        let compareDate
+        if (month.toString().length === 1) {
+            stringMonth = '0' + month
+            compareDate = `${day}/${stringMonth}/${year}`
+        } else {
+            compareDate = `${day}/${'0' + month}/${year}`
+        }
         let fullDate = `${day}/${month}/${year}}`
-        let compareDate = `${day}/${'0'+month}/${year}}`
         console.log('compareDate: ', compareDate)
-        
         if (date) {
             let billDay = date.slice(0, 2)
             let billMonth = date.slice(3, 5)
-            let billYear = date.slice(6, 10)
-            
+            let billYear: number = date.slice(6, 10)
             if (billYear < year) {
                 throw new Error('Ano de preenchimento incorreto. Ano do pagamento inferior ao ano atual.')
-            } else if (billYear === year) {
-                if (billMonth < '0' +month) {
-                    throw new Error('Mês de preenchimento incorreto. Mês do pagamento inferior ao mês atual.')
+            } else if (billYear == year) {
+                if (stringMonth) {
+                    if (billMonth < stringMonth) {
+                        console.log('huhu')
+                        throw new Error('Mês de preenchimento incorreto. Mês do pagamento inferior ao mês atual.')
+                    }
                 }
-                if (billMonth === month) {
+                if (billMonth == stringMonth) {
                     if (billDay < day) {
                         throw new Error('Dia de preenchimento incorreto. Dia do pagamento inferior ao dia atual.')
                     }
                 }
             }
             fullDate = `${billDay}/${billMonth}/${billYear}`
-            if(billMonth.toString().length===1){
-                fullDate = `${day}/${'0' +month}/${year}}`
+            if (billMonth.toString().length === 1) {
+                fullDate = `${day}/${'0' + month}/${year}}`
             }
         }
-        // if (!date) {
-        //     let date = new Date()
-        //     let day = date.getDate()
-        //     let month = date.getMonth()
-        //     let year = date.getFullYear()
-        //     let fullDate
-        //     fullDate = `${day}/${month}/${year}}`
-        //     if(month.toString().length===1){
-        //         fullDate = `${day}/${'0' +month}/${year}}`
-        //     }
-
-        // }
         if (result && result.balance && result.balance < value) {
             throw new Error("Saldo insuficiente")
         }
-        if (result && result.balance) {
+        if (result && result.balance && !date) {
+            result.balance -= value
+
+        }
+        if (result && result.balance && fullDate == compareDate) {
             result.balance -= value
         }
+
+        console.log('fullDate: ', fullDate)
         result?.statement?.push({
             date: fullDate,
             description,
             type: Operation.WITHDRAWALL,
             value
         })
+
 
         res.status(200).send({
             message: 'Confirmado o pagamento da conta',
