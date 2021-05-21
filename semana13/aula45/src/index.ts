@@ -111,109 +111,8 @@ app.get('/getBalance', (req: Request, res: Response) => {
 
 })
 
-app.put('/addBalance', (req: Request, res: Response) => {
-    try {
-        const body = req.body
-        const name = req.body.name
-        const cpf = Number(req.body.cpf)
-        const addBalance = Number(req.body.addBalance)
-        if (!name || !cpf || !addBalance) {
-            throw new Error('Falta o preenchimento de algum dado ( CPF, nome ou addBalance(saldo a adicionar )')
-        }
-        if (isNaN(cpf || addBalance)) {
-            throw new Error('CPF deve conter apenas números')
-        }
-        const result = users.find(user => user.cpf === cpf && user.name === name)
-        if (!result) {
-            throw new Error('Nenhum usuário encontrado')
-        }
-        if (result.balance === undefined) {
-            result.balance = 0
-        }
-        let lastBalance = result.balance
-        result.balance = result.balance + addBalance
-        let newDate = new Date()
-        if (!result.statement) {
-            result.statement = []
-        }
-        result.statement.push({
-            value: addBalance,
-            description: 'Adicinado saldo',
-            date: newDate.toString(),
-            type: Operation.WITHDRAWALL
-        })
-        console.log('result.balance: ', result.balance)
-        console.log('addBalance: ', addBalance)
-
-
-        console.log('body: ', body)
-        res.status(200).send({
-            message: 'Saldo adicionado com sucesso',
-            lastBalance: `Saldo anterior: ${lastBalance}`,
-            atualBalance: `Saldo atual: ${result.balance}`
-
-        })
-
-    } catch (error) {
-        res.status(400).send({
-            message: error.message
-        })
-    }
-
-})
-
-app.post('/payBill', (req: Request, res: Response) => {
-    try {
-        const body = req.body
-        let cpf = Number(req.body.cpf)
-        let date = req.body.date
-        let description = req.body.description
-        let value = Number(req.body.value)
-        if (!cpf || !description || !value) {
-            throw new Error('Dados faltando, preencha com cpf,  description e valor , ( date é opcional )')
-        }
-        if (isNaN(cpf || value)) {
-            throw new Error('CPF deve conter apenas números')
-        }
-        const result = users.find(user => user.cpf === cpf)
-        if (!result) {
-            throw new Error('Nenhum usuário encontrado, cpf inválido.')
-        }
-        if (!date) {
-            date = new Date()
-        }
-        console.log('o q ta vindo: ', result)
-        if (result && result.balance && result.balance < value) {
-            throw new Error("Saldo insuficiente")
-        }
-        if (result && result.balance) {
-            result.balance -= value
-        }
-        console.log('novo balance: ', result)
-        result?.statement?.push({
-            date,
-            description,
-            type: Operation.WITHDRAWALL,
-            value
-        })
-        console.log('body:', body)
-
-        res.status(200).send({
-            message: 'Confirmado o pagamento da conta',
-            result: result
-        })
-    } catch (error) {
-        res.status(400).send({
-            message: error.message
-        })
-    }
-
-})
-
 app.post('/transferBalance', (req: Request, res: Response) => {
     try {
-        const body = req.body
-        // console.log('body: ', body)
         const senderCPF = Number(req.body.senderCPF)
         const senderName = req.body.senderName
         const receiverCPF = Number(req.body.receiverCPF)
@@ -233,8 +132,6 @@ app.post('/transferBalance', (req: Request, res: Response) => {
         }
         let sender = users.find(user => user.name === senderName && user.cpf === senderCPF)
         let receiver = users.find(user => user.name === receiverName && user.cpf === receiverCPF)
-        console.log('receiver: ', receiver)
-        console.log('sender: ', sender)
         if (!sender || !receiver) {
             throw new Error('Algum dado digitado incorretamente: Nome do recebedor / quem enviou, ou CPF dos mesmos.')
         }
@@ -252,11 +149,10 @@ app.post('/transferBalance', (req: Request, res: Response) => {
         let year = date.getFullYear()
         let fullDate
         fullDate = `${day}/${month}/${year}}`
-        if(month.toString().length===1){
-            fullDate = `${day}/${'0' +month}/${year}}`
+        if (month.toString().length === 1) {
+            fullDate = `${day}/${'0' + month}/${year}}`
         }
-         
-        console.log('fullDate: ',fullDate)
+
         if (sender.statement && receiver.statement) {
             sender.statement.push({
                 value: valueToSend,
@@ -269,7 +165,7 @@ app.post('/transferBalance', (req: Request, res: Response) => {
                 description: 'Recibo de dinheiro por transferência',
                 date: fullDate,
                 type: Operation.DEPOSIT
-            }) 
+            })
         }
 
         res.status(200).send({
@@ -323,6 +219,139 @@ app.post('/createNewUser', (req: Request, res: Response) => {
     }
 })
 
+
+app.put('/addBalance', (req: Request, res: Response) => {
+    try {
+        const body = req.body
+        const name = req.body.name
+        const cpf = Number(req.body.cpf)
+        const addBalance = Number(req.body.addBalance)
+        if (!name || !cpf || !addBalance) {
+            throw new Error('Falta o preenchimento de algum dado ( CPF, nome ou addBalance(saldo a adicionar )')
+        }
+        if (isNaN(cpf || addBalance)) {
+            throw new Error('CPF deve conter apenas números')
+        }
+        const result = users.find(user => user.cpf === cpf && user.name === name)
+        if (!result) {
+            throw new Error('Nenhum usuário encontrado')
+        }
+        if (result.balance === undefined) {
+            result.balance = 0
+        }
+        let lastBalance = result.balance
+        result.balance = result.balance + addBalance
+        let newDate = new Date()
+        if (!result.statement) {
+            result.statement = []
+        }
+        result.statement.push({
+            value: addBalance,
+            description: 'Adicinado saldo',
+            date: newDate.toString(),
+            type: Operation.WITHDRAWALL
+        })
+
+
+        res.status(200).send({
+            message: 'Saldo adicionado com sucesso',
+            lastBalance: `Saldo anterior: ${lastBalance}`,
+            atualBalance: `Saldo atual: ${result.balance}`
+
+        })
+
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+})
+
+app.post('/payBill', (req: Request, res: Response) => {
+    try {
+        let cpf = Number(req.body.cpf)
+        let date = req.body.date
+        let description = req.body.description
+        let value = Number(req.body.value)
+
+        if (!cpf || !description || !value) {
+            throw new Error('Dados faltando, preencha com cpf,  description e valor ')
+        }
+        if (isNaN(cpf || value)) {
+            throw new Error('CPF deve conter apenas números')
+        }
+        const result = users.find(user => user.cpf === cpf)
+        if (!result) {
+            throw new Error('Nenhum usuário encontrado, cpf inválido.')
+        }
+
+        let dateToday = new Date()
+        let day = dateToday.getDate()
+        let month = dateToday.getMonth()
+        let year = dateToday.getFullYear()
+        let fullDate = `${day}/${month}/${year}}`
+        let compareDate = `${day}/${'0'+month}/${year}}`
+        console.log('compareDate: ', compareDate)
+        
+        if (date) {
+            let billDay = date.slice(0, 2)
+            let billMonth = date.slice(3, 5)
+            let billYear = date.slice(6, 10)
+            
+            if (billYear < year) {
+                throw new Error('Ano de preenchimento incorreto. Ano do pagamento inferior ao ano atual.')
+            } else if (billYear === year) {
+                if (billMonth < '0' +month) {
+                    throw new Error('Mês de preenchimento incorreto. Mês do pagamento inferior ao mês atual.')
+                }
+                if (billMonth === month) {
+                    if (billDay < day) {
+                        throw new Error('Dia de preenchimento incorreto. Dia do pagamento inferior ao dia atual.')
+                    }
+                }
+            }
+            fullDate = `${billDay}/${billMonth}/${billYear}`
+            if(billMonth.toString().length===1){
+                fullDate = `${day}/${'0' +month}/${year}}`
+            }
+        }
+        // if (!date) {
+        //     let date = new Date()
+        //     let day = date.getDate()
+        //     let month = date.getMonth()
+        //     let year = date.getFullYear()
+        //     let fullDate
+        //     fullDate = `${day}/${month}/${year}}`
+        //     if(month.toString().length===1){
+        //         fullDate = `${day}/${'0' +month}/${year}}`
+        //     }
+
+        // }
+        if (result && result.balance && result.balance < value) {
+            throw new Error("Saldo insuficiente")
+        }
+        if (result && result.balance) {
+            result.balance -= value
+        }
+        result?.statement?.push({
+            date: fullDate,
+            description,
+            type: Operation.WITHDRAWALL,
+            value
+        })
+
+        res.status(200).send({
+            message: 'Confirmado o pagamento da conta',
+            result: result
+        })
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+})
 
 
 
