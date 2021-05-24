@@ -225,4 +225,4 @@ select * from Filme where(data_de_lancamento< '2021-05-24');
 
 ### 7d
 
-select * from Filme where(data_de_lancamento< '2021-05-24') and (nome like '%vida%' or sinopse like '%vida%') and avaliacao>7;
+select * from Filme where(data_de_lancamento< '2021-05-24') and (nome like '%vida%' or sinopse like '%vida%') and avaliacao>7; 
