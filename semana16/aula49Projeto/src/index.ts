@@ -23,10 +23,16 @@ app.get('/users/:id', async (req: Request, res: Response) => {
     try {
         const id = req.params.id
         const [result] = await connection.raw(
-            `SELECT name,nickname FROM USER
+            `SELECT name,id FROM USER
             WHERE id =${id}`
         )
-
+        const [result2] = await connection('USER')
+        .select()
+        .where("id",id)
+        console.log('result: ', result)
+        if(!result.length){
+            throw new Error('nenhum usuário encontrado.')
+        }
         res.send(result)
     } catch (error) {
         res.status(400).send({
@@ -59,6 +65,28 @@ app.put('/user', async (req: Request, res: Response) => {
             message: "New User Created",
             user: USER
         })
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+
+app.post('/users/edit/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const name= req.body.name
+        const nickname = req.body.nickname
+        const updateUser = {
+            name,nickname
+        }
+
+        const result = await connection('USER')
+        .update(updateUser)
+        .where({id})
+        console.log('result: ', result)
+        res.status(200).send({message: "Updated"})
     } catch (error) {
         res.status(400).send({
             message: error.message
