@@ -81,11 +81,19 @@ app.post('/users/edit/:id', async (req: Request, res: Response) => {
         const updateUser = {
             name,nickname
         }
-
+        if(!name){
+            throw new Error('name is Empty, try again.')
+        }
+        if(!nickname){
+            throw new Error('nickame is Empty, try again.')
+        }
         const result = await connection('USER')
         .update(updateUser)
         .where({id})
         console.log('result: ', result)
+        if(!result){
+            throw new Error('user not found.')
+        }
         res.status(200).send({message: "Updated"})
     } catch (error) {
         res.status(400).send({
