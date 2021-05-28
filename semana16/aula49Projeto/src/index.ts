@@ -31,17 +31,17 @@ app.get('/user/:id', async (req: Request, res: Response) => {
 })
 
 
-// app.get('/user', async (req: Request, res: Response) => {
-//     try {
-//         const [result] = await connection.raw(
-//             `SELECT * FROM USER`
-//         )
-//         console.log('result GET ALL: ', result)
-//         res.send(result)
-//     } catch (error) {
-//         res.status(500).send('An unexpected Error ocurred')
-//     }
-// })
+app.get('/user', async (req: Request, res: Response) => {
+    try {
+        const [result] = await connection.raw(
+            `SELECT * FROM USER`
+        )
+        console.log('result GET ALL: ', result)
+        res.send(result)
+    } catch (error) {
+        res.status(500).send('An unexpected Error ocurred')
+    }
+})
 
 app.get('/user', async (req: Request, res: Response) => {
     try {
@@ -51,9 +51,9 @@ app.get('/user', async (req: Request, res: Response) => {
             WHERE ( name LIKE '%${query}' OR  name LIKE '%${query}%' OR name LIKE '${query}%' )
             OR (nickname LIKE '%${query}' OR nickname LIKE '%${query}%' OR  nickname LIKE '${query}%')  ;`
         )
-        if (!result.length) {
-            throw new Error('nenhum usuário encontrado.')
-        }
+        // if (!result.length) {
+        //     throw new Error('nenhum usuário encontrado.')
+        // }
         res.status(200).send(result)
     } catch (error) {
         res.status(400).send({
@@ -214,4 +214,35 @@ app.post('/users/edit/:id', async (req: Request, res: Response) => {
             message: error.message
         })
     }
+})
+
+app.post('/task/responsible',async (req: Request, res: Response) => {
+try {
+    const task_id = req.body.task_id
+    const responsible_user_id = req.body.responsible_user_id
+    console.log('responsible_user_id: ',responsible_user_id)
+    console.log('task_id',task_id)
+    if(!task_id.length){
+        throw new Error('task_id is empty, try again.')
+    }
+    if(!responsible_user_id.length){
+        console.log('resp.length: ',responsible_user_id.length)
+        throw new Error('responsible_user_id is empty, try again.')
+    }
+    const addTask = {
+        task_id,
+        responsible_user_id
+    }
+    const result = await connection.insert(addTask).into("RESPONSIBLE")
+    // res.status(200).send('testando excessoes')
+    res.status(200).send({
+        message:"Responsible added."
+    })
+} catch (error) {
+    res.status(400).send({
+        message: error.message
+    })
+}
+
+
 })
