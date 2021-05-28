@@ -6,20 +6,9 @@ import connection from './connection'
 app.get('/', (req, res) => { res.send('Hello, Ping Ping!!!') })
 
 
-app.get('/users', async (req: Request, res: Response) => {
-    try {
-        const [result] = await connection.raw(
-            `SELECT * FROM USER`
-        )
-        console.log('result: ', result)
-        res.send(result)
-    } catch (error) {
-        res.status(500).send('An unexpected Error ocurred')
-    }
-})
 
 
-app.get('/users/:id', async (req: Request, res: Response) => {
+app.get('/user/:id', async (req: Request, res: Response) => {
     try {
         const id = req.params.id
         const [result] = await connection.raw(
@@ -42,19 +31,54 @@ app.get('/users/:id', async (req: Request, res: Response) => {
 })
 
 
+// app.get('/user', async (req: Request, res: Response) => {
+//     try {
+//         const [result] = await connection.raw(
+//             `SELECT * FROM USER`
+//         )
+//         console.log('result GET ALL: ', result)
+//         res.send(result)
+//     } catch (error) {
+//         res.status(500).send('An unexpected Error ocurred')
+//     }
+// })
+
+app.get('/user', async (req: Request, res: Response) => {
+    try {
+        const query = req.query.searchQuery
+        const [result] = await connection.raw(
+            `SELECT * FROM USER
+            WHERE ( name LIKE '%${query}' OR  name LIKE '%${query}%' OR name LIKE '${query}%' )
+            OR (nickname LIKE '%${query}' OR nickname LIKE '%${query}%' OR  nickname LIKE '${query}%')  ;`
+        )
+        if (!result.length) {
+            throw new Error('nenhum usuário encontrado.')
+        }
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+
+
+
+
 app.get('/tasks', async (req: Request, res: Response) => {
     try {
         const creatorUserId = Number(req.query.creatorUserId)
-        console.log('creator; ',creatorUserId)
-        console.log('creator; ',isNaN(Number(creatorUserId)))
-        if(!creatorUserId){
+        console.log('creator; ', creatorUserId)
+        console.log('creator; ', isNaN(Number(creatorUserId)))
+        if (!creatorUserId) {
             throw new Error('id is empty, try again.')
         }
         // const [result] = await connection.select().into("TASK").join('USER').where("creatorUserId",creatorUserId)
-        if(isNaN(creatorUserId)===true){
+        if (isNaN(creatorUserId) === true) {
             throw new Error('ID is a number, try again.')
         }
-        const [resulto] = await connection.raw(`
+        const [result] = await connection.raw(`
        SELECT TASK.id,title,description,
        LEFT(limitDate,10),creatorUserId,
        status,nickname as 'creatorUserNickname' FROM TASK
@@ -62,20 +86,17 @@ app.get('/tasks', async (req: Request, res: Response) => {
        ON creatorUserId = USER.id
        WHERE creatorUserId =${creatorUserId};
         `)
-        console.log('resultoooooo: ', resulto)
-
-        
-        if(!resulto.length){
-           throw new Error('Not found a task by this id.')
+        if (!result.length) {
+            throw new Error('Not found a task by this id.')
         }
         res.status(200).send({
             message: "ok",
-            result: resulto
+            result: result
         })
     } catch (error) {
         res.status(400).send({
             message: error.message
-        })  
+        })
     }
 })
 
@@ -89,7 +110,7 @@ app.get('/task', async (req: Request, res: Response) => {
     } catch (error) {
         res.status(400).send({
             message: error.message
-        })  
+        })
     }
 })
 
@@ -97,17 +118,18 @@ app.get('/task/:id', async (req: Request, res: Response) => {
 
     try {
         const id = req.params.id
-        const [result] = await connection.select().into("TASK").where("id",id)
+        const [result] = await connection.select().into("TASK").where("id", id)
         console.log('result: ', result)
-        if(!result){
-           throw new Error('Nof found a task by this id.')
+        if (!result) {
+            throw new Error('Nof found a task by this id.')
         }
         res.status(200).send({
-            result: result})
+            result: result
+        })
     } catch (error) {
         res.status(400).send({
             message: error.message
-        })  
+        })
     }
 })
 
@@ -155,7 +177,7 @@ app.put('/task', async (req: Request, res: Response) => {
         res.status(200).send({
             message: "Task created.",
             task: TASK,
-            result:result
+            result: result
         })
     } catch (error) {
         res.status(400).send({
