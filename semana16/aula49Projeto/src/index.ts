@@ -41,6 +41,19 @@ app.get('/users/:id', async (req: Request, res: Response) => {
     }
 })
 
+app.get('/task', async (req: Request, res: Response) => {
+
+    try {
+        const [result] = await connection.select().into("TASK")
+        console.log('result: ', result)
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })  
+    }
+})
+
 app.put('/user', async (req: Request, res: Response) => {
     try {
         const { name, nickname, email } = req.body
