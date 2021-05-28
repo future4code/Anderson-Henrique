@@ -80,7 +80,7 @@ app.get('/tasks', async (req: Request, res: Response) => {
         }
         const [result] = await connection.raw(`
        SELECT TASK.id,title,description,
-       LEFT(limitDate,10),creatorUserId,
+       LEFT(limitDate,10) as 'limitDate',creatorUserId,
        status,nickname as 'creatorUserNickname' FROM TASK
        JOIN USER
        ON creatorUserId = USER.id
@@ -105,6 +105,49 @@ app.get('/task', async (req: Request, res: Response) => {
 
     try {
         const result = await connection.select().into("TASK")
+        console.log('RESULT: ', result)
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+app.get('/task', async (req: Request, res: Response) => { //Exercicio 13
+
+    try {
+        const status = req.query.status
+
+        const [result] = await connection.raw(`
+       SELECT TASK.id,title,description,
+       LEFT(limitDate,10) as 'limitDate',creatorUserId,
+       nickname as 'creatorUserNickname' FROM TASK
+       JOIN USER
+       ON creatorUserId = USER.id
+       WHERE status =${status};
+        `)
+        console.log('RESULT: ', result)
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+app.get('/task/delayed', async (req: Request, res: Response) => { //Exercicio 13
+
+    try {
+
+        const [result] = await connection.raw(`
+       SELECT TASK.id as'taskId' ,title,description,
+       LEFT(limitDate,10) as 'limitDate' ,creatorUserId,
+       nickname as 'creatorUserNickname' FROM TASK
+       JOIN USER
+       ON creatorUserId = USER.id
+       WHERE status = "delayed";
+        `)
         console.log('RESULT: ', result)
         res.status(200).send(result)
     } catch (error) {
@@ -169,9 +212,9 @@ app.put('/task', async (req: Request, res: Response) => {
         console.log('body date: ', req.body.limitDate)
         // const title:string = 'ha'
         // const limitDate:Date =req.body.limitDate
-        const { title, description, limitDate, CreatorUserId } = req.body
+        const { title, description, limitDate, CreatorUserId,status } = req.body
         const TASK = {
-            title, description, limitDate, CreatorUserId
+            title, description, limitDate, CreatorUserId,status
         }
         const [result] = await connection.insert(TASK).into("TASK")
         res.status(200).send({
