@@ -101,18 +101,18 @@ app.get('/tasks', async (req: Request, res: Response) => {
 })
 
 
-app.get('/task', async (req: Request, res: Response) => {
+// app.get('/task', async (req: Request, res: Response) => {
 
-    try {
-        const result = await connection.select().into("TASK")
-        console.log('RESULT: ', result)
-        res.status(200).send(result)
-    } catch (error) {
-        res.status(400).send({
-            message: error.message
-        })
-    }
-})
+//     try {
+//         const result = await connection.select().into("TASK")
+//         console.log('RESULT: ', result)
+//         res.status(200).send(result)
+//     } catch (error) {
+//         res.status(400).send({
+//             message: error.message
+//         })
+//     }
+// })
 
 app.get('/task', async (req: Request, res: Response) => { //Exercicio 13
 
@@ -125,8 +125,11 @@ app.get('/task', async (req: Request, res: Response) => { //Exercicio 13
        nickname as 'creatorUserNickname' FROM TASK
        JOIN USER
        ON creatorUserId = USER.id
-       WHERE status =${status};
+       WHERE status ="${status}";
         `)
+        if(!status){
+            throw new Error('status is empty, try again')
+        }
         console.log('RESULT: ', result)
         res.status(200).send(result)
     } catch (error) {
@@ -136,7 +139,7 @@ app.get('/task', async (req: Request, res: Response) => { //Exercicio 13
     }
 })
 
-app.get('/task/delayed', async (req: Request, res: Response) => { //Exercicio 13
+app.get('/task/delayed', async (req: Request, res: Response) => { //Exercicio 14
 
     try {
 
