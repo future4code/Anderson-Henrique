@@ -41,11 +41,40 @@ app.get('/users/:id', async (req: Request, res: Response) => {
     }
 })
 
+
+app.get('/tasks', async (req: Request, res: Response) => {
+    try {
+        const creatorUserId = req.query.creatorUserId
+        console.log('creator; ',creatorUserId)
+        // const [result] = await connection.select().into("TASK").join('USER').where("creatorUserId",creatorUserId)
+        const [resulto] = await connection.raw(`
+       SELECT * FROM TASK
+       JOIN USER
+       ON creatorUserId = USER.id
+       WHERE creatorUserId =${creatorUserId};
+        `)
+        console.log('resultoooooo: ', resulto)
+
+        // if(!resulto){
+        //    throw new Error('Not found a task by this id.')
+        // }
+        res.status(200).send({
+            message: "ok",
+            result: resulto
+        })
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })  
+    }
+})
+
+
 app.get('/task', async (req: Request, res: Response) => {
 
     try {
-        const [result] = await connection.select().into("TASK")
-        console.log('result: ', result)
+        const result = await connection.select().into("TASK")
+        console.log('RESULT: ', result)
         res.status(200).send(result)
     } catch (error) {
         res.status(400).send({
@@ -53,6 +82,26 @@ app.get('/task', async (req: Request, res: Response) => {
         })  
     }
 })
+
+app.get('/task/:id', async (req: Request, res: Response) => {
+
+    try {
+        const id = req.params.id
+        const [result] = await connection.select().into("TASK").where("id",id)
+        console.log('result: ', result)
+        if(!result){
+           throw new Error('Nof found a task by this id.')
+        }
+        res.status(200).send({
+            result: result})
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })  
+    }
+})
+
+
 
 app.put('/user', async (req: Request, res: Response) => {
     try {
