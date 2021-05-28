@@ -44,20 +44,30 @@ app.get('/users/:id', async (req: Request, res: Response) => {
 
 app.get('/tasks', async (req: Request, res: Response) => {
     try {
-        const creatorUserId = req.query.creatorUserId
+        const creatorUserId = Number(req.query.creatorUserId)
         console.log('creator; ',creatorUserId)
+        console.log('creator; ',isNaN(Number(creatorUserId)))
+        if(!creatorUserId){
+            throw new Error('id is empty, try again.')
+        }
         // const [result] = await connection.select().into("TASK").join('USER').where("creatorUserId",creatorUserId)
+        if(isNaN(creatorUserId)===true){
+            throw new Error('ID is a number, try again.')
+        }
         const [resulto] = await connection.raw(`
-       SELECT * FROM TASK
+       SELECT TASK.id,title,description,
+       LEFT(limitDate,10),creatorUserId,
+       status,nickname as 'creatorUserNickname' FROM TASK
        JOIN USER
        ON creatorUserId = USER.id
        WHERE creatorUserId =${creatorUserId};
         `)
         console.log('resultoooooo: ', resulto)
 
-        // if(!resulto){
-        //    throw new Error('Not found a task by this id.')
-        // }
+        
+        if(!resulto.length){
+           throw new Error('Not found a task by this id.')
+        }
         res.status(200).send({
             message: "ok",
             result: resulto
