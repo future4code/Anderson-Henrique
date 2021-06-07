@@ -20,7 +20,6 @@ export default async function createUser(
       if (password.length < 6) {
          throw new Error("Senha muito curta, mínimo 6 digitos")
       }
-      console.log('email: ', email)
       const [user] = await connection.raw(`
       SELECT * FROM USER 
       WHERE email = "${email}"`)
