@@ -40,10 +40,3 @@ export const getTokenData = (
    }
 }
 
-
-// console.log(
-//    jwt.verify(
-//       myToken,
-//       "hklsdf9347583945yfgdfiguydifgdgdf"
-//    )
-// )

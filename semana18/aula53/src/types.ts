@@ -1,8 +1,21 @@
 export type addresInfo = {
-   street:string
+   street: string
    neighborhood: string
-   city:string
-   state:string
+   city: string
+   state: string
+}
+
+export type completeAddressTable = {
+   id: string,
+   CEP: string,
+   logradouro: string,
+   numero: number,
+   complemento?: string,
+   bairro: string,
+   cidade: string,
+   estado: string,
+   userID: string
+
 }
 
 
@@ -26,4 +39,11 @@ export enum userRole {
    NORMAL = "NORMAL"
 }
 
-export type user = {id: string, email: string, name: string, nickname: string, password: string, role: userRole}
+export type user = {
+   id: string,
+   email: string,
+   name: string,
+   nickname: string,
+   password: string,
+   role: userRole
+}
