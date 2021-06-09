@@ -11,8 +11,6 @@ export const getAddressInfo = async (cep: string): Promise<[addresInfo, {}] | nu
             city: response.data.localidade,
             state: response.data.uf
         }
-        // console.log('response.data: ', response.data)
-        console.log({ data })
         return [data, response]
     } catch (error) {
         return null
@@ -26,8 +24,6 @@ export const getFullAddressInfo =
 
             const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
             const id: string = generateId()
-            console.log("id of USERRRRRRRR:", idOfUser)
-            console.log('id criado aqui MESMO: ', id)
             let number = Number(numero)
             let data: completeAddressTable
             if (!complemento) {
@@ -54,7 +50,6 @@ export const getFullAddressInfo =
                     userID: idOfUser
                 }
             }
-            console.log({ data })
             return data
         } catch (error) {
             throw new Error('deu ruim')
