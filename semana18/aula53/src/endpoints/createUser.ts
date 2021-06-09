@@ -39,12 +39,10 @@ export default async function createUser(
 
       const cypherText = await hash(password);
       const newUser: user = { id, email, name, nickname, password: cypherText, role }
-      console.log("NEW USER: ", newUser)
       await connection('to_do_list_users')
          .insert(newUser)
       await connection('userAddressInfos')
          .insert(result)
-      console.log("teste DEPOIS DE TUDOOOOOO: ")
       const token: string = generateToken({ id, role })
       res.status(201).send({ token })
    } catch (error) {
