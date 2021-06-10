@@ -5,6 +5,7 @@ import { signUp } from "./endpoints/signup";
 import { login } from "./endpoints/login";
 import { getProfile } from "./endpoints/getProfile";
 import { getBuddyProfile } from "./endpoints/getBuddyProfile";
+import { createRecipe } from "./endpoints/createRecipe";
 
 
 
@@ -27,3 +28,4 @@ app.get('/user/profile',getProfile)
 app.get('/user/:id',getBuddyProfile)
 app.post('/signup',signUp)
 app.post('/login',login)
+app.post('/recipe',createRecipe)
