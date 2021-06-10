@@ -65,9 +65,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       )
 
       res.send({
-         user,
-         token
-
+         accessToken: token
       })
    } catch (err) {
 
@@ -76,3 +74,5 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       })
    }
 }
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3NTIwZjkyLTBjY2MtNDVkOC05NTM1LTI4ODg1NjBiZmMxNyIsImlhdCI6MTYyMzM0NzIzNywiZXhwIjoxNjIzMzgzMjM3fQ.zM5ZXFh5frJ_kFShbHdAr4S9WQF4boYPH9z3_OoxXHI

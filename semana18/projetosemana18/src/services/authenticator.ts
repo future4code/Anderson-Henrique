@@ -24,10 +24,10 @@ export function generateToken(id: string): string {
 
 
 
-export function getTokenData(token: string): string {
-    const result: string = jwt.verify(
+export function getTokenData(token: string): authenticationData {
+    const result = jwt.verify(
         token,
         process.env.JWT_KEY!
-    ) as string
+    ) as authenticationData
     return result
 }
