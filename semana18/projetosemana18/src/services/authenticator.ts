@@ -11,10 +11,23 @@ export type authenticationData = {
 export function generateToken(id: string): string {
 
     return jwt.sign(
-        id,
-        process.env.JWT_KEY as string,
+        {
+            id
+        }
+        ,
+        process.env.JWT_KEY!,
         {
             expiresIn: "10h"
         }
     )
+}
+
+
+
+export function getTokenData(token: string): string {
+    const result: string = jwt.verify(
+        token,
+        process.env.JWT_KEY!
+    ) as string
+    return result
 }
