@@ -73,7 +73,7 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
 
       const id = generateId()
 
-      const newUser: user = {
+      const newUser: user = { 
          id,
          name,
          email,

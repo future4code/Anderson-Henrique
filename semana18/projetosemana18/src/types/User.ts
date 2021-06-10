@@ -1,14 +1,11 @@
-import { Recipe } from "./Recipe"
-
-export type User = {
+export type user = {
    id: string,
    name: string,
    email: string,
-   recipes: Recipe[],
    password: string
 }
 
-export type SignupInput = {
+export type newUser = {
    name: string,
    email: string,
    password: string

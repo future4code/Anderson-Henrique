@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express"
 import cors from "cors"
 import { AddressInfo } from "net"
+import { signUp } from "./endpoints/signup";
 
 
 
@@ -19,3 +20,5 @@ const server = app.listen(process.env.PORT || 3003, () => {
 });
 
 app.get('/', (req, res) => { res.send('Hello, Ping Ping!!!') })
+
+app.post('/signup',signUp)
