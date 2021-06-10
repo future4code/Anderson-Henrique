@@ -2,6 +2,7 @@
 // import selectUserByEmail from "../data/selectUserByEmail";
 // import { User } from "../types/User";
 
+import { compareSync } from "bcryptjs"
 import { Request, Response } from "express"
 import connection from "../connection"
 import { checkEmail } from "../helpFunctions/checkEmail"
@@ -52,11 +53,15 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       checkEmail(req, res)
       const [user] = await connection("USER").where({ email })
 
+     const checkPassword =  compareSync(password,user.password)
+      if(!checkPassword){
+         throw new Error("password is incorrect")
+      }
       if (!user) {
          throw new Error("email not found.")
       }
-     const token =  generateToken(
-       user.id
+      const token = generateToken(
+         user.id
       )
 
       res.send({
