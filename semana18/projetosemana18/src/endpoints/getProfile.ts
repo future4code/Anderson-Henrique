@@ -35,7 +35,7 @@ import { getTokenData } from "../services/authenticator";
 //    }
 // }
 
-export async function getProfile(req: Request, res: Response) {
+export async function getProfile(req: Request, res: Response): Promise<void> {
    try {
       const authorization = req.headers.authorization as string
       if (!authorization) {
@@ -43,11 +43,10 @@ export async function getProfile(req: Request, res: Response) {
       }
       const token = getTokenData(authorization)
       const [user] = await connection("USER").where("id", token.id)
-      console.log('user: ', user)
       res.status(200).send({
          "id": user.id,
          "name": user.name,
-         "email": user.email 
+         "email": user.email
       })
    } catch (err) {
       if (err.message.includes("invalid signature")) {
