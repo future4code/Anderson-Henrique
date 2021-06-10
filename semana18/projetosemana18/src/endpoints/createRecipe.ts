@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import connection from "../connection";
+import { formatedDate } from "../helpFunctions/formatedDate";
 import { getTokenData } from "../services/authenticator";
 import { generateId } from "../services/idGenerator";
 import { Recipe } from "../types/Recipe";
@@ -21,7 +22,8 @@ export async function createRecipe(req: Request, res: Response): Promise<void> {
 
         const id = generateId()
         const recipeCreatorId = getTokenData(authorization)
-        const createdAt:Date = new Date()
+        // const createdAt:Date = new Date()
+       const createdAt:string =  formatedDate()
         const newRecipe: Recipe = {
             id,
             title,
@@ -32,9 +34,11 @@ export async function createRecipe(req: Request, res: Response): Promise<void> {
         const checkCreatedRecipe = await connection("RECIPE").insert(newRecipe)
 
         res.status(200).send({
-            recipeCreatorId,
+            message:"Recipe created",
+            checkCreatedRecipe,
             newRecipe,
-            checkCreatedRecipe
+            recipeCreatorId
+
         })
     } catch (err) {
         if (err.message.includes("invalid signature")) {
