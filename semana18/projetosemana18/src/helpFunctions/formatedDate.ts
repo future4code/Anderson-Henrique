@@ -1,6 +1,6 @@
 export const getNewDate = () => {
     const date = new Date()
-    let month = '' + date.getMonth() + 1
+    let month = '' + (date.getMonth() + 1)
     let day = '' + date.getDay()
     let year: string = String(date.getFullYear())
     if (month.length<2) {
