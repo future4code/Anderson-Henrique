@@ -21,8 +21,8 @@ export async function createRecipe(req: Request, res: Response): Promise<void> {
         }
 
         const id = generateId()
-        const recipeCreatorId:authenticationData = getTokenData(authorization)
-       const createdAt:string =  getNewDate()
+        const recipeCreatorId: authenticationData = getTokenData(authorization)
+        const createdAt: string = getNewDate()
         const newRecipe: Recipe = {
             id,
             title,
@@ -33,11 +33,8 @@ export async function createRecipe(req: Request, res: Response): Promise<void> {
         const checkCreatedRecipe = await connection("RECIPE").insert(newRecipe)
 
         res.status(200).send({
-            message:"Recipe created",
-            checkCreatedRecipe,
+            message: "Recipe created",
             newRecipe,
-            recipeCreatorId
-
         })
     } catch (err) {
         if (err.message.includes("invalid signature")) {
