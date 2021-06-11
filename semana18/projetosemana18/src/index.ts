@@ -6,6 +6,7 @@ import { login } from "./endpoints/login";
 import { getProfile } from "./endpoints/getProfile";
 import { getBuddyProfile } from "./endpoints/getBuddyProfile";
 import { createRecipe } from "./endpoints/createRecipe";
+import { getRecipe } from "./endpoints/getRecipe";
 
 
 
@@ -25,6 +26,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
 
 app.get('/', (req, res) => { res.send('Hello, Ping Ping!!!') })
 app.get('/user/profile',getProfile)
+app.get('/recipe/:recipe_id',getRecipe)
 app.get('/user/:id',getBuddyProfile)
 app.post('/signup',signUp)
 app.post('/login',login)

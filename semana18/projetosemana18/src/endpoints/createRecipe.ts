@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import connection from "../connection";
-import { formatedDate } from "../helpFunctions/formatedDate";
-import { getTokenData } from "../services/authenticator";
+import { getNewDate } from "../helpFunctions/formatedDate";
+import { authenticationData, getTokenData } from "../services/authenticator";
 import { generateId } from "../services/idGenerator";
 import { Recipe } from "../types/Recipe";
 
@@ -21,9 +21,8 @@ export async function createRecipe(req: Request, res: Response): Promise<void> {
         }
 
         const id = generateId()
-        const recipeCreatorId = getTokenData(authorization)
-        // const createdAt:Date = new Date()
-       const createdAt:string =  formatedDate()
+        const recipeCreatorId:authenticationData = getTokenData(authorization)
+       const createdAt:string =  getNewDate()
         const newRecipe: Recipe = {
             id,
             title,
@@ -47,7 +46,7 @@ export async function createRecipe(req: Request, res: Response): Promise<void> {
         if (err.message.includes("jwt malformed")) {
             res.status(400).send("The authorization token is malformed, try another token.");
         }
-        res.send({
+        res.status(400).send({
             message: err.message || err.sqlMessage
         })
     }

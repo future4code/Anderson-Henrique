@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import connection from "../connection";
 import { checkEmail } from "../helpFunctions/checkEmail";
-import { authenticationData, generateToken } from "../services/authenticator";
+import { generateToken } from "../services/authenticator";
 import { createHash } from "../services/hashManager";
 import { generateId } from "../services/idGenerator";
 import { user } from "../types/User";
@@ -40,7 +40,7 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
       await connection('USER')
          .insert(newUser)
 
-      const token: string = generateToken( id )
+      const token: string = generateToken(id)
 
 
       res.status(201).send({
