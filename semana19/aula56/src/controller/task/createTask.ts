@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createTaskBusiness } from "../../business/task/createTaskBusiness";
+import { taskDataDTO } from "../../model/task";
 
 export const createTask = async (
    req: Request,
@@ -7,7 +8,7 @@ export const createTask = async (
 ) => {
    try {
 
-      const { title, description, deadline, authorId } = req.body
+      const { title, description, deadline, authorId }:taskDataDTO = req.body
 
       await createTaskBusiness({
          title, description, deadline, authorId

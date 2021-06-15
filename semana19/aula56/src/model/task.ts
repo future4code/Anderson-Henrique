@@ -6,3 +6,5 @@ export type taskData = {
 }
 
 export type task = taskData & { id: string }
+
+export type taskDataDTO = taskData
