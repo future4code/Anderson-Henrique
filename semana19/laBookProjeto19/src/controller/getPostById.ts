@@ -2,15 +2,16 @@ import { Request, Response } from "express"
 import { connection } from "../data/connection"
 import { post } from "../model/post"
 
-const getPostById = async (req: Request, res: Response) => {
+export const getPostById = async (req: Request, res: Response) => {
     try {
         let message = "Success!"
 
-        const { id } = req.params
+        const { post_id } = req.params
+        console.log("post_id: ",post_id)
 
         const queryResult: any = await connection("labook_posts")
             .select("*")
-            .where({ id })
+            .where({ post_id })
 
         if (!queryResult[0]) {
             res.statusCode = 404
@@ -19,12 +20,12 @@ const getPostById = async (req: Request, res: Response) => {
         }
 
         const post: post = {
-            id: queryResult[0].id,
-            photo: queryResult[0].photo,
+            id: queryResult[0].post_id,
+            photo: queryResult[0].photo_link,
             description: queryResult[0].description,
-            type: queryResult[0].type,
-            createdAt: queryResult[0].created_at,
-            authorId: queryResult[0].author_id,
+            type: queryResult[0].post_type,
+            createdAt: queryResult[0].createdAt,
+            authorId: queryResult[0].post_reference_id,
         }
 
         res.status(200).send({ message, post })

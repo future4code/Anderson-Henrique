@@ -8,7 +8,7 @@ import { hash } from "../services/hashManager";
 import { generateToken } from "../services/authenticator";
 import { connection } from "../data/connection";
 
-export const login = async (req: Request, res: Response) => {
+export const signup = async (req: Request, res: Response) => {
     try {
         const { name, email, password } = req.body
         if (!name || !email || !password) {
@@ -18,7 +18,7 @@ export const login = async (req: Request, res: Response) => {
             throw new Error("Password have to be at least 6 characters")
         }
         checkEmail(email)
-
+console.log('cheguei aqui!')
         const id = generateId()
 
         const cypherPassword = await hash(password)
@@ -29,9 +29,12 @@ export const login = async (req: Request, res: Response) => {
                 email,
                 password: cypherPassword
             })
+console.log('cheguei aqui2222!')
+
         const token: string = generateToken({ id })
         res.status(200).send({
-            token, cypherPassword, password, id
+            message:"User created.",
+            token
         })
     } catch (error) {
         res.status(400).send({
