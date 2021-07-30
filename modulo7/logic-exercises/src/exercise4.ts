@@ -4,14 +4,14 @@
 
 // Caso não exista um prefixo comum, retorne uma string vazia (`""`)
 
-let maiorPrefixoComum = (array) => {
-    let menorString = 999
+let maiorPrefixoComum = (array : Array<string>) : string => {
+    let menorString:number = 999
     for (let i = 0; i < array.length; i++) {
         if (array[i].length < menorString) {
             menorString = array[i].length
         }
     }
-    let prefixoComum = []
+    let prefixoComum:Array<string> = []
     for (let j = 0; j < array.length - 1; j++) {
 
         for (let k = 0; k < menorString; k++) {
